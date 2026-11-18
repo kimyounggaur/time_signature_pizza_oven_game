@@ -16,6 +16,7 @@
       <strong id="dayname" class="hud-title"></strong>
       <div id="dots" class="dots" role="img" aria-label="주문 진행"></div>
       <button id="sound" class="chipbtn sound" type="button">소리 켜기</button>
+      <button id="openRulebook" class="chipbtn book-trigger" type="button" aria-haspopup="dialog" aria-controls="rulebookDialog" aria-label="게임 룰북 열기">룰북</button>
       <button id="settings" class="chipbtn" type="button" aria-haspopup="dialog" aria-controls="settingsDialog">설정</button>
     </header>
     <section id="card" class="card" aria-label="오늘의 주문">
@@ -50,6 +51,10 @@
     </div>
   </main>
   <section id="screen" class="screen" lang="ko" tabindex="-1" aria-label="박자표 피자 화덕"></section>
+  <dialog id="rulebookDialog" class="rulebook-dialog" aria-labelledby="rulebookTitle">
+    <div class="rulebook-top"><div><span class="rulebook-kicker">PIZZA OVEN GUIDE</span><h2 id="rulebookTitle">피자 화덕 룰북</h2></div><button id="closeRulebook" type="button" aria-label="룰북 닫기">닫기</button></div>
+    <div id="rulebookBody"></div>
+  </dialog>
   <dialog id="settingsDialog" aria-labelledby="settingsTitle">
     <div class="dialog-head"><h2 id="settingsTitle">화덕 설정</h2><button id="closeSettings" class="icon-btn" type="button" aria-label="설정 닫기"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div id="settingsBody"></div>
