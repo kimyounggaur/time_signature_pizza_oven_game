@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1e6">
+  <meta name="description" content="같은 길이, 다른 묶음. 피자 조각을 올리고 소리로 구우며 박자표를 배워요.">
+  <title>박자표 피자 화덕 · 똑딱 화덕</title>
+  <style>/*__STYLE__*/</style>
+</head>
+<body>
+  <a class="skip-link" href="#screen">본문으로 건너뛰기</a>
+  <main id="app" lang="ko" data-mode="basic" hidden>
+    <header class="hud">
+      <button id="back" class="icon-btn" type="button" aria-label="영업일 지도"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <strong id="dayname" class="hud-title"></strong>
+      <div id="dots" class="dots" role="img" aria-label="주문 진행"></div>
+      <button id="sound" class="chipbtn sound" type="button">소리 켜기</button>
+      <button id="settings" class="chipbtn" type="button" aria-haspopup="dialog" aria-controls="settingsDialog">설정</button>
+    </header>
+    <section id="card" class="card" aria-label="오늘의 주문">
+      <span id="tag" class="tag"></span>
+      <div class="cardrow"><p id="order" class="ask"></p><div id="scoreCard" class="side"></div></div>
+    </section>
+    <div id="boardbox" class="boardbox"><div id="boardwrap" class="boardwrap"></div></div>
+    <p id="readout" class="readout" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="dock" class="dock">
+      <div id="tray" class="tray" role="group" aria-label="조각 쟁반" hidden>
+        <button class="piece" type="button" data-key="1" data-note="1" aria-label="온음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="2." data-note="2." aria-label="점2분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="2" data-note="2" aria-label="2분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="4." data-note="4." aria-label="점4분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="4" data-note="4" aria-label="4분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="8" data-note="8" aria-label="8분음표 조각 올리기"></button>
+      </div>
+      <div id="choices" class="choices" role="group" aria-label="보기" hidden>
+        <button class="choice" type="button" data-choice="0" aria-pressed="false"></button>
+        <button class="choice" type="button" data-choice="1" aria-pressed="false"></button>
+        <button class="choice" type="button" data-choice="2" aria-pressed="false"></button>
+        <button class="choice" type="button" data-choice="3" aria-pressed="false"></button>
+      </div>
+      <div id="stripbox" class="stripbox" hidden></div>
+    </div>
+    <div id="actions" class="actions">
+      <div id="act-build" class="a3" hidden><button id="undo" type="button">하나 빼기</button><button id="clear" type="button">비우기</button><button id="bake" type="button" class="primary">굽기</button></div>
+      <div id="act-pick" class="a2" hidden><button id="hear" type="button" hidden>주문 듣기</button><button id="confirm" type="button" class="primary">확정</button></div>
+      <div id="act-bake" class="a1" hidden><button id="stop" type="button">멈추기</button></div>
+      <div id="act-serve" class="a3" hidden><button id="again" type="button">다시 듣기</button><button id="other" type="button">다른 조합</button><button id="next" type="button" class="primary">다음 주문</button></div>
+      <div id="act-scene" class="a2" hidden><button id="sceneHear" type="button">들어 보기</button><button id="sceneNext" type="button" class="primary">알겠어요</button></div>
+    </div>
+  </main>
+  <section id="screen" class="screen" lang="ko" tabindex="-1" aria-label="박자표 피자 화덕"></section>
+  <dialog id="settingsDialog" aria-labelledby="settingsTitle">
+    <div class="dialog-head"><h2 id="settingsTitle">화덕 설정</h2><button id="closeSettings" class="icon-btn" type="button" aria-label="설정 닫기"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+    <div id="settingsBody"></div>
+  </dialog>
+  <dialog id="tipDialog" class="tip-dialog" aria-label="소리 확인"><div id="tipBody"></div><button id="tipNext" class="primary" type="button">알겠어요</button></dialog>
+  <div id="rotate" class="rotate" role="alert" hidden><svg viewBox="0 0 80 80" width="80" height="80" aria-hidden="true"><rect x="24" y="8" width="32" height="62" rx="7" fill="none" stroke="currentColor" stroke-width="3"/><path d="M7 36c0-12 7-21 16-25M7 36l-3-9m3 9 8-5M73 42c0 12-7 21-16 25m16-25 3 9m-3-9-8 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><h2>화면이 낮아요</h2><p>세로로 돌려 주세요.</p></div>
+  <div id="fatal" class="fatal" role="alert" hidden><h2>문제가 생겼어요</h2><p>새로고침하고 다시 시작해 주세요.</p><button type="button" onclick="location.reload()">새로고침</button></div>
+  <script>/*__SCRIPT__*/</script>
+</body>
+</html>

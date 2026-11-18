@@ -1,0 +1,1895 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1e6">
+  <meta name="description" content="같은 길이, 다른 묶음. 피자 조각을 올리고 소리로 구우며 박자표를 배워요.">
+  <title>박자표 피자 화덕 · 똑딱 화덕</title>
+  <style>:root{color-scheme:light;--counter:#f7f1e6;--panel:#fffefa;--line:#d8d9cc;--ink:#1c2622;--ink-2:#4d5a54;--wood:#d6ab72;--wood-edge:#8a6128;--dough:#f8ecd3;--dough-edge:#cdb27a;--crust:#a9691f;--sauce:#a8321c;--sauce-soft:#f7e2db;--basil:#1f6a3d;--warn:#8a4b00;--lit:#ffd35c;--n1:#f2cf7a;--n2:#f2b19b;--n4:#a9d6ae;--n8:#cfc0ec;--font:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;--hud:44px;--card:64px;--read:40px;--dock:72px;--act:52px;--gap:5px;--ask:14px}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{overflow:hidden;background:radial-gradient(ellipse at 50% -20%,#fcfaf3 0,#f7f1e6 55%,#e8e4d8 100%);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.45;word-break:keep-all;-webkit-text-size-adjust:100%}button,input,select{font:inherit;color:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,.slice:focus-visible{outline:3px solid var(--sauce);outline-offset:3px}button:disabled{cursor:default}button:hover:not(:disabled){filter:brightness(.98)}[hidden]{display:none!important}svg{max-width:100%}h1,h2,h3,p{margin-top:0}h1,h2,h3{letter-spacing:-.04em}button{min-height:44px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-weight:700}button.primary,.primary{border-color:var(--sauce);background:var(--sauce);color:#fff;min-height:52px;font-size:16px;font-weight:800}.secondary{min-height:52px;border-color:#bdc6b8;background:var(--panel);font-size:15px}.skip-link{position:fixed;left:8px;top:-80px;z-index:100;background:white;padding:12px;color:var(--sauce)}.skip-link:focus{top:8px}
+#app{position:relative;height:100%;height:100dvh;max-width:480px;margin:0 auto;padding:4px 12px 8px;display:grid;grid-template-rows:var(--hud) var(--card) minmax(0,1fr) var(--read) var(--dock) var(--act);gap:var(--gap);background:rgba(255,254,250,.42)}#app[data-mode="tight"]{--card:62px;--dock:68px;--gap:4px;--ask:13.5px;padding-bottom:6px}#app[data-mode="tight"] .ask{line-height:1.33}.hud{display:flex;align-items:center;gap:6px;min-width:0}.hud-title{flex:0 0 auto;font-size:13px;font-weight:800;white-space:nowrap}.dots{flex:1 1 auto;display:flex;align-items:center;gap:4px;min-width:0}.dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;border:1.7px solid var(--ink-2);background:transparent}.dot.full{background:var(--ink);border-color:var(--ink)}.dot.half{background:linear-gradient(90deg,var(--ink) 50%,transparent 50%);border-color:var(--ink)}.dot.now{border-color:var(--sauce);box-shadow:0 0 0 2px var(--sauce-soft)}.chipbtn,.icon-btn{flex:0 0 auto;height:44px;min-height:44px;border-radius:15px;padding:0 10px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:5px}.icon-btn{width:44px;padding:0}.chipbtn.sound{border-color:var(--sauce);color:var(--sauce);padding:0 8px}
+.card{min-height:0;padding:3px 10px 4px;border:1px solid var(--line);border-radius:12px;background:var(--panel);display:grid;grid-template-rows:16px minmax(0,1fr);overflow:hidden;box-shadow:0 2px 0 rgba(96,64,27,.035)}.tag{font-size:12px;font-weight:800;color:var(--sauce);line-height:16px;letter-spacing:.01em}.cardrow{display:flex;align-items:center;gap:6px;min-height:0}.ask{flex:1 1 auto;min-width:0;margin:0;font-size:var(--ask);font-weight:650;line-height:1.38}.side{flex:0 0 auto;display:flex;align-items:center}.side svg{display:block;width:150px;height:34px}.card .meter-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;grid-row:1/-1}.card .meter-buttons button{min-height:44px}
+.boardbox{position:relative;width:100%;height:100%;min-height:0;max-height:380px;align-self:center;display:flex;justify-content:center;align-items:center}.boardwrap{width:min(100%,380px);height:100%;display:flex;align-items:center;justify-content:center}.boardwrap>svg{display:block;width:100%;height:100%;max-width:380px;max-height:380px}.boardwrap text{font-family:var(--font);fill:var(--ink)}.slice{stroke:#fff;stroke-width:2.4;stroke-linejoin:round}.slice.tap,.slice[role="button"]{cursor:pointer}.slice.on{fill:var(--lit)!important}.slice.on path{fill:var(--lit)!important}.lab{pointer-events:none}.lab text{font-size:16px;font-weight:700;text-anchor:middle}.hint{font-size:16px;font-weight:600;text-anchor:middle;pointer-events:none}.hand{stroke:var(--sauce);stroke-width:3.5;stroke-linecap:round}.readout{margin:0;min-height:0;overflow:hidden;display:flex;align-items:center;font-size:13.5px;font-weight:600;line-height:1.4}.readout[data-tone="good"],.readout.good{color:var(--basil)}.readout[data-tone="warn"],.readout.warn{color:var(--warn)}
+.dock,.actions{display:grid;min-height:0}.dock>*,.actions>*{grid-area:1/1;min-width:0;min-height:0}.tray{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}.piece{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;padding:2px 0 3px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel)}.piece svg{flex:0 0 28px;width:28px;height:28px}.piece b{font-size:12.5px;font-weight:800;line-height:1.2}.piece small{font-size:12px;line-height:1.2;color:var(--ink-2);font-variant-numeric:tabular-nums}.piece:disabled{opacity:.34}.piece:not(:disabled):active{background:var(--sauce-soft);transform:translateY(1px)}.choices{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px}.choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);font-size:13px;font-weight:800;line-height:1.15}.choice svg{width:34px;height:34px}.choice[aria-pressed="true"]{border-color:var(--sauce);background:var(--sauce-soft);box-shadow:inset 0 0 0 1px var(--sauce)}.choice:disabled{opacity:.5}.ts{display:inline-flex;flex-direction:column;align-items:center;font-size:19px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}.ts i,.ts span{font-style:normal}.ts i+i,.ts span+span{margin-top:2px;padding-top:2px;border-top:2px solid var(--ink)}.stripbox{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}.stripbox svg{display:block;width:100%;height:100%}.stripbox text,.side svg text{font-family:var(--font);font-size:12px;fill:var(--ink-2)}.sn.on ellipse{fill:var(--sauce)!important;stroke:var(--sauce)!important}.actions>div{display:grid;gap:8px}.a1{grid-template-columns:minmax(0,1fr)}.a2{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}.a3{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.3fr)}#act-pick:not(:has(#hear:not([hidden]))){grid-template-columns:1fr}.actions button{min-width:0;height:52px;min-height:52px;border:1.5px solid var(--line);border-radius:13px;background:var(--panel);font-size:14px;font-weight:700}.actions .primary{border-color:var(--sauce);background:var(--sauce);color:#fff;font-size:16px;font-weight:800;box-shadow:0 3px 0 #80230f}.actions button:disabled{opacity:.4}
+.screen{height:100%;height:100dvh;max-width:640px;margin:0 auto;padding:28px 24px 36px;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}.screen-head{display:flex;align-items:center;gap:12px;margin-bottom:24px}.screen-head h1,.screen-head h2,.screen-title{font-size:26px;font-weight:850;line-height:1.2;margin:0}.screen-head .icon-btn{background:transparent;border-color:#c9ccbf}.eyebrow{margin:0 0 12px;font-size:12px;font-weight:850;letter-spacing:.15em;color:var(--sauce)}.hero{text-align:center;max-width:480px;margin:8px auto 28px}.hero h1{font-size:clamp(32px,9vw,46px);font-weight:900;line-height:1.14;margin:10px 0 16px;text-wrap:balance}.hero .brand{font-size:13px;font-weight:800;letter-spacing:.15em;color:var(--sauce)}.hero>svg,.hero .hero-art>svg{display:block;width:100%;height:auto;max-height:290px;margin:20px auto}.hero .timer{max-width:96px;margin:0 auto}.lead{font-size:15px;line-height:1.7;color:var(--ink-2);max-width:390px;margin:0 auto 24px}.screen .button-stack,.screen .title-actions{display:grid;gap:10px}.screen .button-row{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.screen .button-row button{flex:1 1 120px;min-height:52px}.screen>button,.hero>button{width:100%;margin:5px 0;min-height:52px}.screen small,.muted{color:var(--ink-2);font-size:12px}.screen-footer{text-align:center;font-size:12px;color:var(--ink-2);margin-top:24px}.card-grid{display:grid;gap:12px}.day-card{width:100%;min-height:100px;padding:18px;text-align:left;display:flex;align-items:center;gap:14px;border:1px solid #cbd1c4;border-radius:18px;background:var(--panel);box-shadow:0 4px 0 rgba(44,60,35,.04)}.day-card>div{flex:1}.day-card h3,.day-card strong{display:block;margin:0 0 4px;font-size:17px;letter-spacing:-.025em}.day-card p{font-size:13px;font-weight:500;line-height:1.45;margin:4px 0 0;color:var(--ink-2)}.day-number{width:42px;height:42px;border-radius:50%;background:var(--sauce-soft);color:var(--sauce);font-size:20px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}.day-card.locked,.day-card:disabled{background:rgba(255,254,250,.5);box-shadow:none;border-style:dashed}.day-card.locked .day-number,.day-card:disabled .day-number{background:#e4e7dd;color:var(--ink-2)}.stamp{width:54px;height:54px;flex:0 0 auto;color:var(--basil);display:inline-flex;align-items:center;justify-content:center;transform:rotate(-9deg)}.stamp svg{width:100%;height:100%}.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:100px;background:var(--sauce-soft);color:var(--sauce);font-size:12px;font-weight:800;white-space:nowrap}.menu-tabs{display:flex;gap:6px;margin:18px 0}.menu-tabs button{flex:1;min-height:54px;font-size:13px;line-height:1.35}.menu-tabs button[aria-pressed="true"],.menu-tabs .active{border-color:var(--sauce);background:var(--sauce-soft);color:var(--sauce)}.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 24px}.recipe{min-width:0;min-height:100px;padding:10px;border:1px solid var(--line);border-radius:14px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.recipe svg{width:100%;height:50px}.recipe button{width:100%;min-height:44px;font-size:13px}.recipe.empty,.recipe.locked{background:rgba(255,254,250,.45);border-style:dashed;color:var(--ink-2);font-size:13px}.recipe.empty::before{content:"?";font-size:24px;font-weight:400;opacity:.6}.shelf{margin:12px 0 24px;padding:16px;border-radius:18px;background:#f0e5d3;border:1px solid #dfcfb6}.shelf h3{font-size:17px;margin:0 0 8px}.shelf p{font-size:13px;color:var(--ink-2);margin:0}.shelf .menu-grid{margin-bottom:0}.close-stat{font-size:clamp(36px,12vw,60px);font-weight:900;color:var(--basil);line-height:1.2;margin:16px 0 8px}.record{padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-size:13px;line-height:1.5;margin:8px 0;display:flex;gap:10px;align-items:flex-start}.record b{font-size:17px;line-height:1.2;flex:0 0 auto}.record small{display:block;margin-top:5px}.records{margin:0;padding:0;list-style:none}.record-list{padding-left:0;list-style:none}.screen h3{font-size:18px;margin:24px 0 10px}.screen .summary{padding:18px;border-radius:18px;background:#edf2e8;border:1px solid #c8d5c0;margin:16px 0}
+dialog{width:calc(100% - 32px);max-width:440px;max-height:calc(100dvh - 40px);border:1px solid #bfc8b8;border-radius:22px;padding:20px;background:var(--panel);color:var(--ink);box-shadow:0 20px 80px #1c262233;overflow-y:auto;overscroll-behavior:contain}dialog::backdrop{background:#1c262269;backdrop-filter:blur(3px)}.dialog-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.dialog-head h2{font-size:22px;margin:0}.dialog-head .icon-btn{border:0;background:#f2f0e7}.setting-row{min-height:60px;padding:12px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:14px}.setting-row label{flex:1}.setting-row small{display:block;color:var(--ink-2);font-size:12px;margin-top:3px}.setting-row input[type=checkbox]{width:24px;height:24px;accent-color:var(--sauce);cursor:pointer}.setting-row input[type=range]{width:140px;accent-color:var(--sauce)}.setting-row select{max-width:160px;min-height:44px;background:white;border:1px solid var(--line);border-radius:8px;padding:4px 7px}.setting-row button{padding:6px 12px}.settings-note{font-size:12px;color:var(--ink-2);margin:16px 0}.danger{color:var(--sauce);border-color:#d8b1a4;background:white}.tip-dialog{text-align:center;padding:24px}.tip-dialog h2{font-size:23px;line-height:1.3}.tip-dialog p{font-size:14px;line-height:1.7;color:var(--ink-2)}.tip-dialog .primary{width:100%;margin-top:16px}.tip-dialog svg{max-width:240px;max-height:180px;margin:8px auto}.tip{padding:16px;border:1px dashed #b8c7ad;background:#f0f4eb;border-radius:14px;font-size:13px;line-height:1.6}.rotate,.fatal{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--counter);color:var(--ink)}.rotate h2,.fatal h2{font-size:24px;margin:20px 0 10px}.rotate p,.fatal p{font-size:16px}.fatal button{padding:10px 20px;min-height:52px;background:var(--sauce);color:white}.test-results{width:100%;border-collapse:collapse;font-size:13px}.test-results th,.test-results td{padding:8px;border:1px solid var(--line);text-align:left}.test-results th{background:#e9eee3}
+@media(max-width:419px){.hud-title{display:none}.screen{padding:20px 16px 28px}.hud{gap:5px}.dots{gap:3px}.chipbtn{padding:0 8px}.day-card{padding:15px 12px;gap:10px}.screen-title,.screen-head h1,.screen-head h2{font-size:23px}}
+@media(max-height:619px){#app{--card:62px;--dock:68px;--gap:4px;--ask:13.5px;padding-bottom:6px}.ask{line-height:1.33}.hero{margin-top:0}.hero>svg,.hero .hero-art>svg{max-height:200px}}
+@media(min-width:760px){#app{border-left:1px solid #dedbcd;border-right:1px solid #dedbcd;box-shadow:0 0 60px #5c4a2710}.screen{padding-top:44px}.hero{margin-top:0}.menu-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(prefers-reduced-motion:no-preference){.piece,.choice,.day-card{transition:transform 120ms,opacity 120ms}.stamp{animation:stamp-in 250ms ease-out}.slice{transition:fill 80ms}.recipe{animation:recipe-in 300ms ease-out}@keyframes stamp-in{from{transform:rotate(-9deg) scale(1.35);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:1}}@keyframes recipe-in{from{transform:translateY(4px);opacity:0}to{transform:translateY(0);opacity:1}}}
+body[data-motion="reduced"] *,body[data-motion="reduced"] *::before,body[data-motion="reduced"] *::after{animation-duration:0ms!important;transition-duration:0ms!important}
+.hud:has(#sound:not([hidden])) .hud-title{display:none}.hud-title{max-width:100px;overflow:hidden;text-overflow:ellipsis}
+/* Product screen details and stable tutorial targets. */
+.title-screen{text-align:center;max-width:440px;margin:0 auto}.title-screen>h1{font-size:clamp(38px,10vw,54px);line-height:1.12;margin:12px 0 0;font-weight:900}.title-screen>h1 span{color:var(--sauce)}.title-screen .hero{margin:0 auto 12px}.title-screen .hero>svg{margin:0 auto;max-height:250px}.two-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.two-actions button{min-height:52px}.caption{font-size:12px!important;line-height:1.6!important;color:var(--ink-2);margin:16px 0}.quiet{background:transparent;border:0;font-size:13px;font-weight:600;padding:0 12px}.wide{width:100%;padding:10px 12px;margin:8px 0}.screen-head>div{flex:1}.icon-button{padding:0 12px;flex:none}.day-list{display:grid;gap:12px;margin-bottom:20px}.day-num{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--sauce-soft);color:var(--sauce);font-size:22px;flex:none}.day-card>span:nth-child(2){flex:1}.day-card small{display:block}.menu-tabs small{display:block}.recipe.unknown{border-style:dashed;background:transparent;color:var(--ink-2);font-size:22px}.scene-link{padding:10px 12px;text-align:left;width:100%;margin:4px 0}.close-stat{text-align:center;font-size:14px;line-height:1.6}.close-stat>svg{width:110px;height:110px;margin:0 auto 16px}.close-stat h2{font-size:26px}.close-stat p{font-size:14px;margin:10px 0}.floating-stop{position:sticky;bottom:0;width:100%}.piece span{font-size:12px;font-weight:800;line-height:1.2}.dot{font-size:0}.dot.current{border-color:var(--sauce);box-shadow:0 0 0 2px var(--sauce-soft)}.meter-choice{display:flex;flex-direction:column;align-items:center;font-size:20px;line-height:1.1}.meter-choice i{height:2px;width:20px;background:var(--ink);margin:3px}.card.free-card{display:flex;align-items:center;padding:4px 6px}.free-card #tag{display:none}.free-card .cardrow{width:100%}.free-card #order{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.free-card #order button{display:flex;align-items:center;justify-content:center;gap:3px;font-size:15px}.free-card #order button[aria-pressed=true]{background:var(--sauce-soft);border-color:var(--sauce)}.meter-line{display:block;width:1px;height:20px;background:var(--ink);transform:rotate(15deg);margin:0 4px}.tutorial-point{outline:3px solid var(--sauce);outline-offset:2px}.title-screen .caption{margin-top:20px}html[data-motion=reduced] *,html[data-motion=reduced] *::before,html[data-motion=reduced] *::after{animation-duration:0ms!important;transition-duration:0ms!important}
+@media(max-height:551px){#rotate{display:flex!important}}
+@media(max-height:619px){.title-screen .hero>svg{max-height:190px}.title-screen>h1{font-size:36px}.title-screen .lead{margin-bottom:14px}}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#screen">본문으로 건너뛰기</a>
+  <main id="app" lang="ko" data-mode="basic" hidden>
+    <header class="hud">
+      <button id="back" class="icon-btn" type="button" aria-label="영업일 지도"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <strong id="dayname" class="hud-title"></strong>
+      <div id="dots" class="dots" role="img" aria-label="주문 진행"></div>
+      <button id="sound" class="chipbtn sound" type="button">소리 켜기</button>
+      <button id="settings" class="chipbtn" type="button" aria-haspopup="dialog" aria-controls="settingsDialog">설정</button>
+    </header>
+    <section id="card" class="card" aria-label="오늘의 주문">
+      <span id="tag" class="tag"></span>
+      <div class="cardrow"><p id="order" class="ask"></p><div id="scoreCard" class="side"></div></div>
+    </section>
+    <div id="boardbox" class="boardbox"><div id="boardwrap" class="boardwrap"></div></div>
+    <p id="readout" class="readout" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="dock" class="dock">
+      <div id="tray" class="tray" role="group" aria-label="조각 쟁반" hidden>
+        <button class="piece" type="button" data-key="1" data-note="1" aria-label="온음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="2." data-note="2." aria-label="점2분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="2" data-note="2" aria-label="2분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="4." data-note="4." aria-label="점4분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="4" data-note="4" aria-label="4분음표 조각 올리기"></button>
+        <button class="piece" type="button" data-key="8" data-note="8" aria-label="8분음표 조각 올리기"></button>
+      </div>
+      <div id="choices" class="choices" role="group" aria-label="보기" hidden>
+        <button class="choice" type="button" data-choice="0" aria-pressed="false"></button>
+        <button class="choice" type="button" data-choice="1" aria-pressed="false"></button>
+        <button class="choice" type="button" data-choice="2" aria-pressed="false"></button>
+        <button class="choice" type="button" data-choice="3" aria-pressed="false"></button>
+      </div>
+      <div id="stripbox" class="stripbox" hidden></div>
+    </div>
+    <div id="actions" class="actions">
+      <div id="act-build" class="a3" hidden><button id="undo" type="button">하나 빼기</button><button id="clear" type="button">비우기</button><button id="bake" type="button" class="primary">굽기</button></div>
+      <div id="act-pick" class="a2" hidden><button id="hear" type="button" hidden>주문 듣기</button><button id="confirm" type="button" class="primary">확정</button></div>
+      <div id="act-bake" class="a1" hidden><button id="stop" type="button">멈추기</button></div>
+      <div id="act-serve" class="a3" hidden><button id="again" type="button">다시 듣기</button><button id="other" type="button">다른 조합</button><button id="next" type="button" class="primary">다음 주문</button></div>
+      <div id="act-scene" class="a2" hidden><button id="sceneHear" type="button">들어 보기</button><button id="sceneNext" type="button" class="primary">알겠어요</button></div>
+    </div>
+  </main>
+  <section id="screen" class="screen" lang="ko" tabindex="-1" aria-label="박자표 피자 화덕"></section>
+  <dialog id="settingsDialog" aria-labelledby="settingsTitle">
+    <div class="dialog-head"><h2 id="settingsTitle">화덕 설정</h2><button id="closeSettings" class="icon-btn" type="button" aria-label="설정 닫기"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+    <div id="settingsBody"></div>
+  </dialog>
+  <dialog id="tipDialog" class="tip-dialog" aria-label="소리 확인"><div id="tipBody"></div><button id="tipNext" class="primary" type="button">알겠어요</button></dialog>
+  <div id="rotate" class="rotate" role="alert" hidden><svg viewBox="0 0 80 80" width="80" height="80" aria-hidden="true"><rect x="24" y="8" width="32" height="62" rx="7" fill="none" stroke="currentColor" stroke-width="3"/><path d="M7 36c0-12 7-21 16-25M7 36l-3-9m3 9 8-5M73 42c0 12-7 21-16 25m16-25 3 9m-3-9-8 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><h2>화면이 낮아요</h2><p>세로로 돌려 주세요.</p></div>
+  <div id="fatal" class="fatal" role="alert" hidden><h2>문제가 생겼어요</h2><p>새로고침하고 다시 시작해 주세요.</p><button type="button" onclick="location.reload()">새로고침</button></div>
+  <script>(()=>{ 'use strict'; const __modules={};
+__modules.engine=(()=>{
+// 박자표 피자 화덕 — 이론 엔진 초안(분수 기반). 수치 표를 두지 않고 규칙으로 계산한다.
+const gcd = (a, b) => (b ? gcd(b, a % b) : Math.abs(a));
+const F = (n, d = 1) => { if (d < 0) { n = -n; d = -d; } const g = gcd(n, d) || 1; return { n: n / g, d: d / g }; };
+const add = (a, b) => F(a.n * b.d + b.n * a.d, a.d * b.d);
+const sub = (a, b) => F(a.n * b.d - b.n * a.d, a.d * b.d);
+const mul = (a, b) => F(a.n * b.n, a.d * b.d);
+const div = (a, b) => F(a.n * b.d, a.d * b.n);
+const eq = (a, b) => a.n === b.n && a.d === b.d;
+const cmp = (a, b) => a.n * b.d - b.n * a.d;                       // 음수: a < b
+const num = (a) => a.n / a.d;
+const str = (a) => (a.d === 1 ? `${a.n}` : `${a.n}/${a.d}`);
+const hz = (midi) => 440 * Math.pow(2, (midi - 69) / 12);
+const isPow2 = (x) => Number.isInteger(x) && x > 0 && (x & (x - 1)) === 0;
+const ZERO = F(0);
+
+// ── 음표(조각). 길이는 온음표 = 1. den: 1, 2, 4, 8, 16 / dots: 점 개수 ──
+const N = (den, dots = 0) => ({ den, dots });
+const noteWhole = (den, dots = 0) => F(2 ** (dots + 1) - 1, den * 2 ** dots);
+const dur = (note) => noteWhole(note.den, note.dots);
+// 길이에서 음표 찾기: 1/2^k 이면 민음표, 3/2^k 이면 점음표. 한 음표로 못 적으면 null
+function noteOf(len) {
+  if (len.n === 1 && isPow2(len.d)) return N(len.d, 0);
+  if (len.n === 3 && isPow2(len.d) && len.d >= 2) return N(len.d / 2, 1);
+  return null;
+}
+
+// ── 박자표. {num, den}을 약분하지 않는다(6/8과 3/4는 다른 박자표다). 길이만 분수로 계산한다 ──
+const M = (numer, den) => ({ num: numer, den });
+const capacity = (m) => F(m.num, m.den);                            // 한 마디의 길이(온음표 = 1)
+// 기본 묶음(분모 음표의 개수). 분자가 3의 배수(6, 9, 12 …)면 셋씩, 2·3·4면 한 박씩, 그 밖에는 주문이 정해야 한다
+function defaultGroups(m) {
+  if (m.num % 3 === 0 && m.num > 3) return Array(m.num / 3).fill(3);
+  if (m.num >= 2 && m.num <= 4) return Array(m.num).fill(1);
+  return null;
+}
+// 2와 3으로 n을 만드는 모든 순서(섞임박자의 묶음 후보)
+function groupings(n) {
+  if (n === 0) return [[]];
+  if (n < 2) return [];
+  return [2, 3].flatMap((g) => (n - g >= 0 ? groupings(n - g).map((rest) => [g, ...rest]) : []));
+}
+const kindOf = (groups) => (groups.every((g) => g === 1) ? "simple" : groups.every((g) => g === 3) ? "compound" : "mixed");
+// 묶음 경계(0과 마디 끝 포함)
+function bounds(m, groups) {
+  const out = [ZERO];
+  for (const g of groups) out.push(add(out[out.length - 1], F(g, m.den)));
+  return out;
+}
+// 분할 단위(잔박): 홑박자는 박을 둘로 나눈 것, 겹박자·섞임박자는 분모 음표
+const pulse = (m, groups) => (kindOf(groups) === "simple" ? F(1, m.den * 2) : F(1, m.den));
+const pulseGroups = (m, groups) => groups.map((g) => num(div(F(g, m.den), pulse(m, groups))));
+const beatNotes = (m, groups) => groups.map((g) => noteOf(F(g, m.den)));    // 큰 박 하나를 적는 음표
+// 클릭: level 0 마디 첫 박, 1 큰 박, 2 분할
+function clicks(m, groups) {
+  const B = bounds(m, groups), p = pulse(m, groups), out = [];
+  for (let t = ZERO; cmp(t, capacity(m)) < 0; t = add(t, p)) out.push({ t, level: eq(t, ZERO) ? 0 : B.some((b) => eq(b, t)) ? 1 : 2 });
+  return out;
+}
+
+// ── 판. turn = 판 한 바퀴의 길이(온음표 = 1). 보통 판 1, 큰 판 3/2 ──
+const TURN = F(1);
+const TURN_BIG = F(3, 2);
+const angle = (len, turn = TURN) => mul(div(len, turn), F(360));    // 각도(분수, 도)
+const fits = (m, turn = TURN) => cmp(capacity(m), turn) <= 0;        // 한 판에 들어가는가
+const turnFor = (m) => (fits(m, TURN) ? TURN : fits(m, TURN_BIG) ? TURN_BIG : null);
+const sameAreaRadius = (turn) => Math.sqrt(num(turn));               // 같은 음표가 같은 넓이가 되는 반지름 배율
+
+// ── 채우기(조각의 순서 있는 목록) ──
+const total = (fill) => fill.reduce((s, x) => add(s, dur(x)), ZERO);
+function spans(fill) {
+  let t = ZERO;
+  return fill.map((note) => { const s = t; t = add(t, dur(note)); return { s, e: t, note }; });
+}
+// 걸침: 조각이 묶음 경계를 부분적으로 넘는다. 경계에서 시작해 경계에서 끝나며 묶음을 통째로 덮는 조각은 걸침이 아니다
+function straddles(fill, B) {
+  const on = (t) => B.some((b) => eq(b, t));
+  return spans(fill).map(({ s, e }, i) => (B.some((b) => cmp(s, b) < 0 && cmp(b, e) < 0) && !(on(s) && on(e)) ? i : -1)).filter((i) => i >= 0);
+}
+// 길이 판정: 부족(short) · 딱 맞음(exact) · 넘침(over)과 그 차이. len은 채울 길이(한 마디 또는 조각 자리)
+function lengthIn(len, fill) {
+  const d = sub(len, total(fill)), c = cmp(d, ZERO);
+  return { state: c > 0 ? "short" : c < 0 ? "over" : "exact", diff: c < 0 ? sub(ZERO, d) : d };
+}
+const lengthOf = (m, fill) => lengthIn(capacity(m), fill);
+// 차이를 음표 개수로: 분모 음표로 나누어 떨어지면 그 음표로, 아니면 딱 떨어지는 가장 긴 민음표로. m이 없으면 뒤쪽만 쓴다
+function asCount(len, m) {
+  const k = m ? div(len, F(1, m.den)) : null;
+  if (k && k.d === 1) return { note: N(m.den), count: k.n };
+  return { note: N(len.d), count: len.n };
+}
+// 모든 채우기(순서 구분). len: 채울 길이, tray: 음표 목록
+function fillsOf(len, tray, limit = 200000) {
+  const out = [];
+  (function go(rest, acc) {
+    if (out.length >= limit) return;
+    if (eq(rest, ZERO)) { out.push(acc.slice()); return; }
+    for (const note of tray) { const d = dur(note); if (cmp(d, rest) <= 0) { acc.push(note); go(sub(rest, d), acc); acc.pop(); } }
+  })(len, []);
+  return out;
+}
+const fills = (m, tray, limit) => fillsOf(capacity(m), tray, limit);
+const fitting = (m, groups, list) => list.filter((f) => straddles(f, bounds(m, groups)).length === 0);
+const keyOf = (fill) => fill.map((x) => x.den + ".".repeat(x.dots)).join(" ");
+const parseFill = (s) => (s && s.trim() ? s.trim().split(/\s+/).map((t) => N(parseInt(t, 10), t.endsWith(".") ? 1 : 0)) : []);   // "4. 4 8" → 조각 목록
+const sameNote = (a, b) => a.den === b.den && a.dots === b.dots;
+const cells = (len) => div(len, F(1, 8));                            // 칸 수. 판의 눈금 한 칸은 8분음표 하나다
+// 그 박자표의 묶음에 맞는 채우기에 한 번이라도 나오는 조각(그 박자표의 쟁반)
+function usable(m, groups, pieces) {
+  const fit = fitting(m, groups, fills(m, pieces));
+  return pieces.filter((p) => fit.some((f) => f.some((x) => sameNote(x, p))));
+}
+// 꼬리 잇기(빔): 같은 묶음 안에서 이어지는 8분음표 이하끼리 묶는다
+function beams(fill, B) {
+  const groupOf = (t) => B.findIndex((b, i) => i < B.length - 1 && cmp(b, t) <= 0 && cmp(t, B[i + 1]) < 0);
+  const out = []; let cur = [], g = -1;
+  spans(fill).forEach(({ s, note }, i) => {
+    const flagged = note.den >= 8, gi = groupOf(s);
+    if (flagged && cur.length && gi === g) cur.push(i);
+    else { if (cur.length > 1) out.push(cur); cur = flagged ? [i] : []; g = gi; }
+  });
+  if (cur.length > 1) out.push(cur);
+  return out;
+}
+// 시간: 8분음표 하나의 길이(초)를 기준으로 한다. 빠르기는 분수 길이를 바꾸지 않는다
+const toSec = (len, eighthSec) => num(div(len, F(1, 8))) * eighthSec;
+
+// ── 이름(우리말). 이론 표가 아니다 ──
+const noteKo = (note) => "점".repeat(note.dots) + (note.den === 1 ? "온음표" : `${note.den}분음표`);
+const meterKo = (m) => `${m.den}분의 ${m.num}박자`;
+const kindKo = (groups) => ({ simple: "홑박자", compound: "겹박자", mixed: "섞임박자" }[kindOf(groups)]);
+const groupText = (xs) => xs.join("+");
+const countKo = (len, m) => { const c = asCount(len, m); return `${noteKo(c.note)} ${c.count}개 분량`; };
+const shortKo = (note) => "점".repeat(note.dots) + (note.den === 1 ? "온" : `${note.den}분`);
+
+return {F,add,sub,mul,div,eq,cmp,num,str,hz,N,noteWhole,dur,noteOf,M,capacity,defaultGroups,groupings,kindOf,bounds,pulse,pulseGroups,beatNotes,clicks,TURN,TURN_BIG,angle,fits,turnFor,sameAreaRadius,total,spans,straddles,lengthIn,lengthOf,asCount,fillsOf,fills,fitting,keyOf,parseFill,sameNote,cells,usable,beams,toSec,noteKo,meterKo,kindKo,groupText,countKo,shortKo};
+})();
+__modules.orders=(()=>{
+// 박자표 피자 화덕 — 주문 모델. 씨앗에서 문장, 보기, 풀이, 판정, 안내문을 만든다. DOM과 오디오를 만지지 않는다.
+const { F, N, M, sub, eq, cmp, num, str, dur, capacity, defaultGroups, kindOf, bounds, pulseGroups, clicks, straddles, lengthIn, fillsOf, fills, fitting, keyOf, parseFill, sameNote, cells, usable, beams, noteKo, meterKo, groupText, countKo, shortKo } = __modules.engine;
+const PIECES = [N(1), N(2, 1), N(2), N(4, 1), N(4), N(8)];        // v1.0의 조각 여섯 종. 쟁반의 자리 순서(긴 것부터)
+const METERS = [M(2, 4), M(3, 4), M(4, 4), M(6, 8)];               // v1.0의 박자표. 박자표 고르기의 보기 순서
+const meterKey = (m) => `${m.num}/${m.den}`;
+const passNeed = (n) => Math.ceil(n * 0.8);                         // 영업일 통과에 필요한 ● 수
+
+// ── 씨앗 → 계산된 주문과 발견 장면 ──
+function makeOrder(seed) {
+  const m = seed.meter ? M(seed.meter[0], seed.meter[1]) : null, slot = seed.slot ? parseFill(seed.slot)[0] : null;
+  const g = m ? seed.groups || defaultGroups(m) : null, len = m ? capacity(m) : dur(slot), B = m ? bounds(m, g) : [F(0), len];
+  const tray = seed.tray ? parseFill(seed.tray) : m ? usable(m, g, PIECES) : PIECES.filter((p) => cmp(dur(p), len) < 0);
+  const pick = seed.pick || (seed.ask === "score" || seed.ask === "sound" ? "meter" : null);
+  return { id: seed.id, kind: "order", ask: seed.ask, m, slot, g, len, B, tray, pick, target: seed.target ? parseFill(seed.target) : null,
+    cond: seed.cond || null, strict: seed.ask === "group", fresh: !!seed.fresh, final: !!seed.final };
+}
+function makeScene(seed) {
+  const states = seed.states.map((s) => { const m = M(s.meter[0], s.meter[1]), g = defaultGroups(m); return { m, g, len: capacity(m), B: bounds(m, g), fill: parseFill(s.fill) }; });
+  return { id: seed.id, kind: "scene", title: seed.title, text: seed.text, states };
+}
+// 장면 문장의 {m0} {c0} {n0} {w0}을 엔진 값으로 채운다: 박자표 이름, 칸 수, 조각 수, 묶음을 말로("둘씩 셋")
+const WORD = { 1: "하나", 2: "둘", 3: "셋", 4: "넷" };
+function sceneText(sc) {
+  return sc.text.replace(/\{([mcnw])(\d)\}/g, (_, k, i) => { const st = sc.states[+i], pg = pulseGroups(st.m, st.g);
+    return k === "m" ? meterKo(st.m) : k === "c" ? str(cells(st.len)) : k === "n" ? String(st.fill.length) : `${WORD[pg[0]]}씩 ${WORD[pg.length]}`; });
+}
+const makeItem = (seed) => (seed.states ? makeScene(seed) : makeOrder(seed));
+
+// ── 풀이와 판정 ──
+function condFail(cond, fill) {                                     // 어긴 조건 하나(없으면 null)
+  if (!cond) return null;
+  if (cond.has) { const note = parseFill(cond.has[0])[0], got = fill.filter((x) => sameNote(x, note)).length; if (got !== cond.has[1]) return { type: "has", note, want: cond.has[1], got }; }
+  if (cond.kinds != null) { const got = new Set(fill.map((x) => keyOf([x]))).size; if (got !== cond.kinds) return { type: "kinds", want: cond.kinds, got }; }
+  if (cond.pieces != null && fill.length !== cond.pieces) return { type: "pieces", want: cond.pieces, got: fill.length };
+  return null;
+}
+// 그 주문의 모든 정답. last: 방금 낸 채우기의 열쇠("다른 조합"에서만 쓴다)
+function solutions(o, last = null) {
+  if (o.target) return [o.target];
+  let list = fillsOf(o.len, o.tray);
+  if (o.strict) list = list.filter((f) => straddles(f, o.B).length === 0);
+  list = list.filter((f) => !condFail(o.cond, f));
+  return o.fresh ? list.filter((f) => keyOf(f) !== last) : list;
+}
+// 판정 순서: 길이 → 쪽지 → 묶음 → 조건 → 다른 조합
+function judge(o, fill, last = null) {
+  const len = lengthIn(o.len, fill), bad = straddles(fill, o.B);
+  if (len.state !== "exact") return { ok: false, why: "length", len, bad };
+  if (o.target) { const at = o.target.findIndex((x, i) => !fill[i] || !sameNote(x, fill[i])); if (at >= 0 || fill.length !== o.target.length) return { ok: false, why: "score", at: at >= 0 ? at : o.target.length, bad }; }
+  if (o.strict && bad.length) return { ok: false, why: "group", bad };
+  const cond = condFail(o.cond, fill);
+  if (cond) return { ok: false, why: "cond", cond, bad };
+  if (o.fresh && keyOf(fill) === last) return { ok: false, why: "fresh", bad };
+  return { ok: true, bad };
+}
+
+// ── 고르기: 도우(칸 수) 또는 박자표 ──
+const doughOptions = () => [...new Set(METERS.map((m) => num(cells(capacity(m)))))].sort((a, b) => a - b);
+// 그 박자표가 악보·소리 주문의 답인가: ok · short · long · group(묶음에 걸친다, 클릭이 다르다) · beam(꼬리 잇기가 다르다)
+function meterFits(o, m2) {
+  const g2 = defaultGroups(m2), B2 = bounds(m2, g2), c = cmp(capacity(m2), o.len), lv = (m, g) => clicks(m, g).map((x) => x.level).join("");
+  if (c !== 0) return c < 0 ? "short" : "long";
+  if (o.ask === "sound") return lv(m2, g2) === lv(o.m, o.g) ? "ok" : "group";
+  if (straddles(o.target, B2).length) return "group";
+  return JSON.stringify(beams(o.target, B2)) === JSON.stringify(beams(o.target, o.B)) ? "ok" : "beam";
+}
+const pickOptions = (o) => (o.pick === "dough" ? doughOptions() : o.pick === "meter" ? METERS : []);
+const pickAnswer = (o) => (o.pick === "dough" ? doughOptions().indexOf(num(cells(o.len))) : METERS.findIndex((m) => meterFits(o, m) === "ok"));
+const pickUnique = (o) => (o.pick === "meter" ? METERS.filter((m) => meterFits(o, m) === "ok").length === 1 : pickAnswer(o) >= 0);
+
+// ── 메뉴판: 박자표마다 묶음에 맞는 채우기 전부 ──
+const menuTray = (m) => usable(m, defaultGroups(m), PIECES);
+const menuKeys = (m) => fitting(m, defaultGroups(m), fills(m, menuTray(m))).map(keyOf);
+// 낸 리듬이 가는 곳: 묶음에 맞으면 메뉴판의 칸("menu"), 걸친 조각이 있으면 엇박 선반("shelf"). 자리 채우기는 모으지 않는다(null)
+const menuSlot = (o, fill) => (!o.m ? null : straddles(fill, o.B).length ? "shelf" : "menu");
+// 이 주문의 풀이 가운데 아직 찾지 못한 것. found: 그 박자표에서 찾은 열쇠(메뉴판과 엇박 선반). 내기의 [다른 조합]을 켤지 정한다
+const unfound = (o, found) => (!o.m || o.ask === "sound" ? [] : solutions(Object.assign({}, o, { fresh: false })).filter((f) => !found.includes(keyOf(f))));
+// 발견 장면의 보기 이름: 박자표가 서로 다르면 박자표, 같으면 조각 수
+function stateLabels(sc) {
+  const one = sc.states.every((s) => meterKey(s.m) === meterKey(sc.states[0].m));
+  return sc.states.map((s) => (one ? `조각 ${s.fill.length}개` : meterKey(s.m)));
+}
+
+// ── 문장. 수치와 이름은 전부 엔진이 넣는다 ──
+const open2 = (n) => n === 2;                                              // 묶음의 끝 숫자가 2(이)면 받침이 없다
+const iga = (xs) => (open2(xs[xs.length - 1]) ? "가" : "이"), euro = (xs) => (open2(xs[xs.length - 1]) ? "로" : "으로");
+const trayKo = (tray) => tray.map(shortKo).join("·") + "음표";
+const tagKo = (o, redo = false) => (redo ? "다시 한 번 · " : o.final ? "마감 · " : "") + (o.slot ? "자리 채우기" : o.fresh ? "다른 조합" : { set: "지정 주문", cond: "조건 주문", group: "묶음 주문", score: "악보 주문", sound: "소리 주문" }[o.ask]);
+function condKo(cond) {
+  const parts = [];
+  if (cond && cond.has) parts.push(`${noteKo(parseFill(cond.has[0])[0])} 조각을 ${cond.has[1]}개 넣어`);
+  if (cond && cond.kinds != null) parts.push(`서로 다른 조각 ${cond.kinds}종류로`);
+  if (cond && cond.pieces != null) parts.push(`조각 ${cond.pieces}개로`);
+  return parts.join(" ");
+}
+function orderText(o) {
+  if (o.ask === "score") return "이 쪽지대로 주세요.";
+  if (o.ask === "sound") return "소리를 듣고 박자표를 골라 주세요.";
+  const fresh = o.fresh ? "방금과 다르게," : "", how = o.ask === "set" ? `${trayKo(o.tray)} 조각으로만` : condKo(o.cond);
+  if (o.slot) return [fresh, `${noteKo(o.slot)} 조각만 한 자리를`, how, "채워 주세요."].filter(Boolean).join(" ");
+  const pg = pulseGroups(o.m, o.g), show = !o.strict ? "" : kindOf(o.g) === "simple" ? "박이 보이게" : `${groupText(pg)}${iga(pg)} 보이게`;
+  return [fresh, `${meterKo(o.m)} 피자를`, show, how, "주세요."].filter(Boolean).join(" ");
+}
+// 악보 쪽지를 말로 읽은 것(화면 읽기용)
+const scoreAlt = (o) => `악보 쪽지: ${o.target.map(noteKo).join(", ")}`;
+// 마감 화면의 주문별 기록에 적는 말. 악보·소리 주문은 문장이 같으므로 리듬과 박자표를 적는다
+const recordText = (o) => (o.ask === "score" ? `악보 주문: ${o.target.map(shortKo).join("·")} (${meterKo(o.m)})` : o.ask === "sound" ? `소리 주문: ${meterKo(o.m)} (${o.target.map(shortKo).join("·")})` : orderText(o));
+const straddleText = (o, bad) => `${bad.map((i) => i + 1).join("·")}번째 조각이 ${o.m && kindOf(o.g) !== "simple" ? "묶음" : "박"} 경계에 걸쳐 있어요`;
+function fillKo(fill) {                                              // "4분음표 2개" · "4분음표 1개 + 8분음표 1개"
+  const seen = [];
+  for (const x of fill) { const e = seen.find((s) => sameNote(s.note, x)); if (e) e.n++; else seen.push({ note: x, n: 1 }); }
+  return seen.map((s) => `${noteKo(s.note)} ${s.n}개`).join(" + ");
+}
+const amountKo = (len, m) => countKo(len, m).replace(" 분량", "");         // "8분음표 1개"
+// 조립 중의 판독 줄. ghost: 방금 누른, 안 들어가는 조각
+function buildText(o, fill, ghost = null) {
+  const len = lengthIn(o.len, fill), bad = straddles(fill, o.B);
+  if (ghost) return { tone: "warn", text: `${noteKo(ghost)}는 ${amountKo(sub(dur(ghost), len.diff), o.m)}만큼 넘쳐요. 남은 자리는 ${countKo(len.diff, o.m)}이에요.` };
+  if (o.final) return { tone: "", text: "마감 주문이에요. 도움 없이 만들어요." };
+  if (len.state === "short") return { tone: bad.length && o.strict ? "warn" : "", text: `남은 자리는 ${countKo(len.diff, o.m)}이에요.` + (bad.length ? ` ${straddleText(o, bad)}.` : "") };
+  if (bad.length && o.strict) return { tone: "warn", text: `길이는 맞아요. 그런데 ${straddleText(o, bad)}.` };
+  if (bad.length) return { tone: "good", text: `딱 맞아요. ${straddleText(o, bad)}. 구워서 들어 보세요.` };
+  return { tone: "good", text: "딱 맞아요. 굽기를 눌러요." };
+}
+const FULL_TEXT = "이미 딱 맞아요. 굽거나 조각을 빼요.";
+const FIXED_TEXT = "한 가지 답을 올려 두었어요. 굽기를 눌러 들어 보세요.";
+function judgeText(o, j) {
+  if (j.why === "length") return `아직 못 구워요. ${countKo(j.len.diff, o.m)}이 더 필요해요.`;
+  if (j.why === "score") return `길이는 맞아요. 그런데 쪽지와 달라요. ${j.at + 1}번째 조각을 보세요.`;
+  if (j.why === "group") return `길이는 맞지만 ${straddleText(o, j.bad)}. ${kindOf(o.g) === "simple" ? "박" : groupText(pulseGroups(o.m, o.g)) + " 묶음"}이 가려져요.`;
+  if (j.why === "fresh") return "길이는 맞아요. 그런데 방금 구운 리듬과 같아요. 조각이나 순서를 바꿔요.";
+  const c = j.cond;
+  if (c.type === "pieces") return `길이는 맞아요. 조각이 ${c.got}개예요. 주문은 ${c.want}개예요.`;
+  if (c.type === "kinds") return `길이는 맞아요. 조각 종류가 ${c.got}가지예요. 주문은 ${c.want}가지예요.`;
+  return `길이는 맞아요. ${noteKo(c.note)}가 ${c.got}개예요. 주문은 ${c.want}개예요.`;
+}
+function serveText(o, fill, isNew = false) {                         // isNew: false · "menu"(또는 true) · "shelf"
+  if (o.slot) return `완성이에요. ${noteKo(o.slot)} 하나는 ${fillKo(fill)}와 길이가 같아요.`;
+  return `완성이에요. ${meterKo(o.m)} · 묶음 ${groupText(pulseGroups(o.m, o.g))} · 조각 ${fill.length}개.` + (isNew === "shelf" ? " 엇박 선반에 새 리듬이 올랐어요." : isNew ? " 메뉴판에 새 리듬이 올랐어요." : "");
+}
+const BAKE_TEXT = "준비 한 마디를 듣고 두 바퀴 구워요.";
+const BAKE_SLOT_TEXT = "자리의 소리를 먼저 듣고, 조각의 소리를 들어요.";
+const EXTRA_TEXT = "같은 주문을 다른 리듬으로 만들어 보세요. 새 리듬은 메뉴판에 올라가요.";
+const FOUND_TEXT = "이미 찾은 리듬이에요. 조각이나 순서를 바꿔요.";
+const ABORT_TEXT = "소리가 멈춰서 중단했어요. 소리를 켜고 다시 해 주세요.";
+// 마감: ● 수와 도장. total은 그날의 주문 수
+function closeText(clean, total) {
+  const need = passNeed(total);
+  return `한 번에 맞힌 주문 ${clean}/${total}. ` + (clean >= need ? "도장을 받았어요." : `도장까지 ●가 ${need - clean}개 더 필요해요.`);
+}
+const newText = (menuNew, shelfNew) => `메뉴판에 새로 오른 리듬 ${menuNew}개` + (shelfNew ? ` · 엇박 선반 ${shelfNew}개` : "");
+function pickPrompt(o) {
+  if (o.pick === "dough") return `${meterKo(o.m)} 도우는 몇 칸일까요? 눈금 한 칸은 8분음표 하나예요.`;
+  return o.ask === "sound" ? "주문 듣기를 누르고 박자표를 골라요." : "쪽지의 리듬을 보고 박자표를 골라요.";
+}
+const PICK_FIRST_TEXT = "보기를 먼저 골라 주세요.";
+// k: 고른 보기의 번호. tries: 이 주문에서 틀린 횟수(이번 것 포함). 두 번째부터는 답을 골라 준다
+function pickWrongText(o, k, tries) {
+  if (o.pick === "dough") {
+    const unit = N(o.m.den);
+    if (tries >= 2) return `${noteKo(unit)} ${o.m.num}개면 ${str(cells(o.len))}칸이에요. 골라 두었어요. 확정을 눌러요.`;
+    return `${meterKo(o.m)}는 ${noteKo(unit)} ${o.m.num}개 분량이에요. ${noteKo(unit)} 하나는 ${str(cells(dur(unit)))}칸이에요.`;
+  }
+  if (tries >= 2) return `답은 ${meterKo(o.m)}예요. 골라 두었어요. 확정을 눌러요.`;
+  const m2 = METERS[k], why = meterFits(o, m2), g2 = defaultGroups(m2), pg2 = pulseGroups(m2, g2);
+  if (o.ask === "sound") return why === "group" ? "길이는 맞아요. 큰 박 클릭이 한 마디에 몇 번인지 세어 보세요." : "한 마디의 길이가 달라요. 첫 박 클릭 사이의 분할을 세어 보세요.";
+  if (why === "short" || why === "long") return `이 리듬은 ${str(cells(o.len))}칸이에요. ${meterKo(m2)} 도우는 ${str(cells(capacity(m2)))}칸이라 ${why === "short" ? "모자라요" : "남아요"}.`;
+  if (why === "group") return `길이는 맞아요. 그런데 ${meterKo(m2)}의 묶음에는 ${straddles(o.target, bounds(m2, g2))[0] + 1}번째 음표가 걸쳐요.`;
+  return `길이는 맞아요. 그런데 ${meterKo(m2)}라면 꼬리를 ${groupText(pg2)}${euro(pg2)} 이어요. 쪽지를 보세요.`;
+}
+function pickRightText(o) {
+  if (o.pick === "dough") return `맞아요. ${str(cells(o.len))}칸이에요. 이제 조각을 올려요.`;
+  return o.ask === "sound" ? `맞아요. ${meterKo(o.m)}예요. 리듬을 보면서 다시 들어요.` : `맞아요. ${meterKo(o.m)}예요. 이제 쪽지대로 만들어요.`;
+}
+
+return {PIECES,METERS,meterKey,passNeed,makeOrder,makeScene,sceneText,makeItem,condFail,solutions,judge,doughOptions,meterFits,pickOptions,pickAnswer,pickUnique,menuTray,menuKeys,menuSlot,unfound,stateLabels,trayKo,tagKo,condKo,orderText,scoreAlt,recordText,straddleText,fillKo,buildText,FULL_TEXT,FIXED_TEXT,judgeText,serveText,BAKE_TEXT,BAKE_SLOT_TEXT,EXTRA_TEXT,FOUND_TEXT,ABORT_TEXT,closeText,newText,pickPrompt,PICK_FIRST_TEXT,pickWrongText,pickRightText};
+})();
+__modules.seeds=(()=>{
+// 박자표 피자 화덕 — v1.0의 주문 씨앗(영업일 다섯, 주문 39개, 발견 장면 4개). 계산된 값은 적지 않는다.
+// 표기: 조각은 분모로 적고 점음표에는 점을 붙인다("4."는 점4분음표). tray가 없으면 그 박자표의 쟁반을 엔진이 정한다.
+const DAYS = [
+  { id: "d0", name: "조각 익히기", items: [
+    { id: "d0-01", ask: "set", slot: "2", tray: "4" },
+    { id: "d0-02", ask: "set", slot: "4", tray: "8" },
+    { id: "d0-03", ask: "set", slot: "1", tray: "2" },
+    { id: "d0-04", ask: "set", slot: "1", tray: "4" },
+    { id: "d0-05", ask: "cond", slot: "1", tray: "2 4", cond: { pieces: 3 } },
+    { id: "d0-06", ask: "cond", slot: "2.", tray: "2 4", cond: { pieces: 2 } },
+    { id: "d0-07", ask: "cond", slot: "4.", tray: "4 8", cond: { pieces: 2 } },
+    { id: "d0-08", ask: "cond", slot: "2", tray: "4 8", cond: { pieces: 3 }, final: true },
+  ] },
+  { id: "d1", name: "분모와 분자", items: [
+    { id: "d1-01", ask: "set", meter: [4, 4], tray: "4" },
+    { id: "d1-02", ask: "set", meter: [2, 4], tray: "4" },
+    { id: "S1", title: "두 박자표의 도우를 견주어 보세요.", text: "{m0}는 {c0}칸, {m1}는 {c1}칸이에요. 같은 조각이 {n0}개, {n1}개 들어가요.", states: [{ meter: [2, 4], fill: "4 4" }, { meter: [4, 4], fill: "4 4 4 4" }] },
+    { id: "d1-03", ask: "set", meter: [3, 4], tray: "4", pick: "dough" },
+    { id: "d1-04", ask: "set", meter: [2, 4], tray: "8", pick: "dough" },
+    { id: "d1-05", ask: "set", meter: [4, 4], tray: "2" },
+    { id: "d1-06", ask: "set", meter: [3, 4], tray: "8", pick: "dough" },
+    { id: "d1-07", ask: "set", meter: [4, 4], tray: "4", pick: "dough", final: true },
+  ] },
+  { id: "d2", name: "섞어 채우기", items: [
+    { id: "d2-01", ask: "cond", meter: [4, 4], tray: "1 2 4", cond: { pieces: 3 } },
+    { id: "d2-02", ask: "cond", meter: [4, 4], tray: "1 2 4", cond: { pieces: 3 }, fresh: true },
+    { id: "S2", title: "같은 박자표를 세 가지로 채웠어요.", text: "박의 수는 그대로예요. 조각은 {n0}개, {n1}개, {n2}개예요. 조각 수와 박 수는 달라요.", states: [{ meter: [4, 4], fill: "4 4 4 4" }, { meter: [4, 4], fill: "2 4 4" }, { meter: [4, 4], fill: "1" }] },
+    { id: "d2-03", ask: "cond", meter: [3, 4], tray: "2 4", cond: { pieces: 2 } },
+    { id: "d2-04", ask: "cond", meter: [2, 4], tray: "2 4 8", cond: { has: ["8", 2] } },
+    { id: "d2-05", ask: "cond", meter: [4, 4], tray: "2 4 8", cond: { pieces: 5 } },
+    { id: "d2-06", ask: "cond", meter: [4, 4], tray: "1 2 4 8", cond: { kinds: 3 } },
+    { id: "d2-07", ask: "cond", meter: [3, 4], tray: "2. 2 4 8", cond: { pieces: 4 } },
+    { id: "d2-08", ask: "cond", meter: [4, 4], tray: "2 4 8", cond: { has: ["2", 1], pieces: 4 }, final: true },
+  ] },
+  { id: "d3", name: "셋씩 묶기", items: [
+    { id: "d3-01", ask: "set", meter: [6, 8], tray: "8" },
+    { id: "d3-02", ask: "set", meter: [6, 8], tray: "4." },
+    { id: "S3", title: "조각은 그대로 두고 박자표만 바꿔 보세요.", text: "묶음이 달라요. {m0}는 {w0}, {m1}는 {w1}이에요.", states: [{ meter: [3, 4], fill: "8 8 8 8 8 8" }, { meter: [6, 8], fill: "8 8 8 8 8 8" }] },
+    { id: "d3-03", ask: "group", meter: [6, 8], cond: { pieces: 3 } },
+    { id: "d3-04", ask: "group", meter: [6, 8], cond: { pieces: 4 } },
+    { id: "S4", title: "같은 조각 셋을 두 박자표에 놓아 보세요.", text: "{m0}에서는 가운데 조각이 묶음 경계에 걸쳐요. {m1}에는 딱 맞아요.", states: [{ meter: [6, 8], fill: "4 4 4" }, { meter: [3, 4], fill: "4 4 4" }] },
+    { id: "d3-05", ask: "group", meter: [6, 8], cond: { pieces: 4 }, fresh: true },
+    { id: "d3-06", ask: "group", meter: [3, 4], cond: { pieces: 4 } },
+    { id: "d3-07", ask: "group", meter: [6, 8], cond: { pieces: 5 } },
+    { id: "d3-08", ask: "group", meter: [6, 8], cond: { has: ["4.", 1] }, final: true },
+  ] },
+  { id: "d4", name: "거꾸로 읽기", items: [
+    { id: "d4-01", ask: "score", meter: [2, 4], target: "4 8 8" },
+    { id: "d4-02", ask: "score", meter: [6, 8], target: "4 8 4 8" },
+    { id: "d4-03", ask: "score", meter: [3, 4], target: "8 8 8 8 8 8" },
+    { id: "d4-04", ask: "score", meter: [6, 8], target: "8 8 8 8 8 8" },
+    { id: "d4-05", ask: "sound", meter: [4, 4], target: "4 4 2" },
+    { id: "d4-06", ask: "sound", meter: [3, 4], target: "4 4 4" },
+    { id: "d4-07", ask: "sound", meter: [6, 8], target: "4. 4." },
+    { id: "d4-08", ask: "sound", meter: [6, 8], target: "8 8 8 8 8 8", final: true },
+  ] },
+];
+
+return {DAYS};
+})();
+__modules.storage=(()=>{
+// Versioned, defensive local records. A failed browser storage operation keeps
+// the current session usable without claiming that it was saved on the device.
+const { capacity, bounds, defaultGroups, lengthIn, straddles, parseFill, keyOf } = __modules.engine;
+const { METERS, meterKey, menuKeys } = __modules.orders;
+const { DAYS } = __modules.seeds;
+const SAVE_KEY = 'pzo_save_v1';
+const BACKUP_KEY = 'pzo_save_v1_backup';
+const WARNING = '이 기기에서는 기록이 저장되지 않아요.';
+let memoryRaw = null;
+const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const count = value => Number.isSafeInteger(value) && value >= 0 ? value : 0;
+const strings = value => Array.isArray(value) ? [...new Set(value.filter(x => typeof x === 'string'))] : [];
+const knownScenes = new Set(DAYS.flatMap(day => day.items.filter(item => item.states).map(item => item.id)));
+
+function freshSave() {
+  return {
+    version: 1,
+    settings: { volume: 0.8, muted: false, slow: false, subs: true, motion: 'system', soundChecked: false, tips: [] },
+    days: Object.fromEntries(DAYS.map(day => [day.id, { passed: false, runs: 0, best: 0 }])),
+    menu: {}, shelf: {}, scenes: [], stats: { orders: 0, clean: 0, bakes: 0 }, active: null,
+  };
+}
+
+// Parse only the six supported note tokens before asking the fraction engine to
+// inspect a saved recipe. Invalid tokens never reach recursive fill functions.
+const validRecipe = value => typeof value === 'string' && /^(?:1|2\.?|4\.?|8)(?: (?:1|2\.?|4\.?|8))*$/.test(value);
+function cleanBooks(source, shelf = false) {
+  const out = {};
+  for (const meter of METERS) {
+    const mk = meterKey(meter), B = bounds(meter, defaultGroups(meter)), canonical = new Set(menuKeys(meter));
+    const keys = strings(record(source) ? source[mk] : []).filter(key => {
+      if (!validRecipe(key)) return false;
+      if (!shelf) return canonical.has(key);
+      const fill = parseFill(key);
+      return keyOf(fill) === key && lengthIn(capacity(meter), fill).state === 'exact' && straddles(fill, B).length > 0;
+    });
+    if (keys.length) out[mk] = keys;
+  }
+  return out;
+}
+
+function cleanActive(active) {
+  if (!record(active)) return null;
+  const day = DAYS.find(day => day.id === active.day);
+  if (!day || !Array.isArray(active.queue) || !active.queue.length || active.queue.length > day.items.length * 2) return null;
+  if (!Number.isInteger(active.idx) || active.idx < 0 || active.idx >= active.queue.length) return null;
+  if (active.queue.some(entry => !record(entry) || !Number.isInteger(entry.i) || entry.i < 0 || entry.i >= day.items.length || typeof entry.redo !== 'boolean' || (entry.redo && (day.items[entry.i].states || day.items[entry.i].final)))) return null;
+  const orderIds = new Set(day.items.filter(item => !item.states).map(item => item.id));
+  const results = Array.isArray(active.results) ? active.results.filter(item => record(item) && orderIds.has(item.id) && ['full', 'half'].includes(item.recipe)).map(item => ({ id: item.id, text: typeof item.text === 'string' ? item.text : '', recipe: item.recipe, ...(['full', 'half'].includes(item.again) ? { again: item.again } : {}) })) : [];
+  if (new Set(results.map(item => item.id)).size !== results.length) return null;
+  return { day: day.id, queue: active.queue.map(({ i, redo }) => ({ i, redo })), idx: active.idx, results, last: validRecipe(active.last) ? active.last : null, fresh: count(active.fresh), freshShelf: count(active.freshShelf) };
+}
+
+function normalizeSave(source) {
+  const save = freshSave(), settings = record(source.settings) ? source.settings : {};
+  if (typeof settings.volume === 'number' && Number.isFinite(settings.volume)) save.settings.volume = Math.min(1, Math.max(0, settings.volume));
+  for (const key of ['muted', 'slow', 'subs', 'soundChecked']) if (typeof settings[key] === 'boolean') save.settings[key] = settings[key];
+  if (['system', 'reduced', 'full'].includes(settings.motion)) save.settings.motion = settings.motion;
+  save.settings.tips = strings(settings.tips);
+  for (const day of DAYS) {
+    const stored = record(source.days) && record(source.days[day.id]) ? source.days[day.id] : {};
+    save.days[day.id] = { passed: stored.passed === true, runs: count(stored.runs), best: Math.min(count(stored.best), day.items.filter(item => !item.states).length) };
+  }
+  save.menu = cleanBooks(source.menu);
+  save.shelf = cleanBooks(source.shelf, true);
+  save.scenes = strings(source.scenes).filter(id => knownScenes.has(id));
+  for (const key of ['orders', 'clean', 'bakes']) save.stats[key] = count(record(source.stats) ? source.stats[key] : undefined);
+  save.active = cleanActive(source.active);
+  return save;
+}
+
+function browserStorage(provided) {
+  if (provided !== undefined) return provided;
+  try { return globalThis.localStorage; } catch { return null; }
+}
+
+function loadSave(provided) {
+  const storage = browserStorage(provided);
+  let raw = memoryRaw, persistent = !!storage;
+  if (storage) {
+    try { raw = storage.getItem(SAVE_KEY); } catch { persistent = false; }
+  }
+  if (raw == null) return { save: freshSave(), persistent, warning: persistent ? '' : WARNING };
+  let source;
+  try {
+    source = JSON.parse(raw);
+    if (!record(source) || source.version !== 1) throw new Error('unsupported save');
+  } catch {
+    if (storage && persistent) {
+      try { storage.setItem(BACKUP_KEY, raw); } catch { persistent = false; }
+    }
+    return { save: freshSave(), persistent, warning: persistent ? '' : WARNING, recovered: true };
+  }
+  return { save: normalizeSave(source), persistent, warning: persistent ? '' : WARNING };
+}
+
+function writeSave(save, provided) {
+  const storage = browserStorage(provided);
+  try { memoryRaw = JSON.stringify(save); } catch { return false; }
+  if (!storage) return false;
+  try { storage.setItem(SAVE_KEY, memoryRaw); return true; } catch { return false; }
+}
+
+return {SAVE_KEY,BACKUP_KEY,freshSave,normalizeSave,loadSave,writeSave};
+})();
+__modules.game=(()=>{
+const { cmp, dur, lengthIn, keyOf, sameNote, eq } = __modules.engine;
+const { makeItem, makeOrder, METERS, PIECES, pickAnswer, pickRightText, pickWrongText, PICK_FIRST_TEXT, FULL_TEXT, FIXED_TEXT, BAKE_TEXT, BAKE_SLOT_TEXT, EXTRA_TEXT, FOUND_TEXT, ABORT_TEXT, judge, judgeText, solutions, menuSlot, meterKey, unfound, serveText, recordText, passNeed } = __modules.orders;
+const { DAYS } = __modules.seeds;
+const { freshSave } = __modules.storage;
+// The model is independent of DOM, wall clocks and audio scheduling.
+class Game {
+  constructor(save = freshSave(), onChange = () => {}, persist = () => {}) {
+    this.save = save; this.onChange = onChange; this.persist = persist;
+    this.state = { screen:'title', day:'d0', queue:[], idx:0, phase:'build', sel:null, tries:0, assisted:false, fill:[], served:[], ghost:null, msg:null, playing:'', extra:false, st:0, results:[], last:null, fresh:0, freshShelf:0, menu:save.menu, shelf:save.shelf };
+    this.dayItems = []; this.pendingJudge = null;
+  }
+  setState(patch) { this.state = {...this.state, ...patch}; this.onChange(this.state); }
+  loadDay(id) { const day = DAYS.find(d=>d.id===id); if (!day) return false; this.dayItems=day.items.map(makeItem); return day; }
+  entry() { return this.state.queue[this.state.idx]; }
+  item() {
+    if(this.state.screen==='free') return this.freeOrder;
+    const e=this.entry(); if(!e) return null; const it=this.dayItems[e.i];
+    return e.redo && it.fresh ? {...it,fresh:false} : it;
+  }
+  enter(idx, more={}) {
+    const q=more.queue||this.state.queue, it=this.dayItems[q[idx].i];
+    this.pendingJudge=null;
+    this.setState({idx, phase:it.kind==='scene'?'scene':it.pick?'pick':'build',sel:null,tries:0,assisted:false,fill:[],served:[],ghost:null,msg:null,playing:'',extra:false,st:0,...more});
+  }
+  startDay(id) {
+    const day=this.loadDay(id); if(!day) return;
+    this.enter(0,{screen:'shift',day:id,queue:this.dayItems.map((_,i)=>({i,redo:false})),results:[],last:null,fresh:0,freshShelf:0}); this.checkpoint();
+  }
+  resume() {
+    const a=this.save.active; if(!a||!this.loadDay(a.day)) return false;
+    this.enter(a.idx,{...a,screen:'shift'}); return true;
+  }
+  checkpoint() {
+    const s=this.state;
+    this.save.menu=s.menu;this.save.shelf=s.shelf;
+    if(s.screen==='shift') this.save.active={day:s.day,queue:s.queue,idx:s.idx,results:s.results,last:s.last,fresh:s.fresh,freshShelf:s.freshShelf};
+    this.persist(this.save);
+  }
+  choose(k) { const o=this.item(); if(this.state.phase!=='pick'||!o) return; const n=o.pick==='dough'?3:METERS.length;if(k>=0&&k<n)this.setState({sel:k,msg:null}); }
+  confirmPick() {
+    const s=this.state,o=this.item();if(s.phase!=='pick')return null;
+    if(s.sel===null) {this.setState({msg:{tone:'warn',text:PICK_FIRST_TEXT}});return null;}
+    if(s.sel!==pickAnswer(o)) {
+      const tries=s.tries+1;this.setState({tries,assisted:true,sel:tries>=2?pickAnswer(o):s.sel,msg:{tone:'warn',text:pickWrongText(o,s.sel,tries)}});return null;
+    }
+    if(o.ask==='sound') {this.setState({phase:'bake',tries:0,fill:o.target,playing:'bake',msg:{tone:'good',text:pickRightText(o)}});this.pendingJudge={ok:true};return {play:true};}
+    this.setState({phase:'build',tries:0,playing:'',msg:{tone:'good',text:pickRightText(o)}});return null;
+  }
+  place(note) {
+    const s=this.state,o=this.item();if(s.phase!=='build'||s.playing||!o||!o.tray.some(n=>sameNote(n,note)))return;
+    const len=lengthIn(o.len,s.fill);
+    if(len.state==='exact')return this.setState({ghost:null,msg:{tone:'',text:FULL_TEXT}});
+    if(cmp(dur(note),len.diff)>0)return this.setState({ghost:note,msg:null});
+    this.setState({fill:s.fill.concat([note]),ghost:null,msg:null});
+  }
+  removeAt(i) {const s=this.state;if(s.phase==='build'&&!s.playing)this.setState({fill:s.fill.filter((_,k)=>k!==i),ghost:null,msg:null});}
+  clear() {if(this.state.phase==='build'&&!this.state.playing)this.setState({fill:[],ghost:null,msg:null});}
+  bakePress() {
+    const s=this.state,o=this.item();if(s.phase!=='build'||s.playing)return null;
+    const j=judge(o,s.fill,s.last);
+    if(j.why==='length'){this.setState({ghost:null,msg:{tone:'warn',text:judgeText(o,j)}});return null;}
+    if(s.extra&&j.ok&&this.found(o).includes(keyOf(s.fill))){this.setState({msg:{tone:'warn',text:FOUND_TEXT}});return null;}
+    if(!j.ok&&j.why!=='group'){this.wrong(j);return null;}
+    this.pendingJudge=j;this.setState({phase:'bake',ghost:null,playing:'bake',msg:{tone:'',text:o.slot?BAKE_SLOT_TEXT:BAKE_TEXT}});return {play:true};
+  }
+  wrong(j) {
+    const s=this.state,o=this.item();if(s.extra)return this.setState({msg:{tone:'warn',text:judgeText(o,j)}});
+    const tries=s.tries+1, patch={tries,assisted:true,msg:{tone:'warn',text:judgeText(o,j)}};
+    if(tries>=2) { const answer=solutions(o,s.last)[0];if(!answer)throw new Error('Order has no solution: '+o.id);patch.fill=answer;patch.ghost=null;patch.msg={tone:'warn',text:FIXED_TEXT}; }
+    this.setState(patch);
+  }
+  completeBake() {
+    if(this.state.phase!=='bake')return;
+    if(this.pendingJudge&&!this.pendingJudge.ok){const j=this.pendingJudge;this.setState({phase:'build',playing:''});this.wrong(j);}
+    else this.serve(); this.pendingJudge=null;
+  }
+  serve() {
+    const s=this.state,o=this.item(),key=keyOf(s.fill),slot=menuSlot(o,s.fill);let menu=s.menu,shelf=s.shelf,isNew=false;
+    if(slot){const mk=meterKey(o.m),book=slot==='menu'?menu:shelf,have=book[mk]||[];if(!have.includes(key)){isNew=slot;const next={...book,[mk]:have.concat([key])};if(slot==='menu')menu=next;else shelf=next;}}
+    this.save.stats.bakes++;
+    this.setState({phase:s.screen==='free'?'build':'serve',playing:'',extra:false,served:s.fill,last:key,menu,shelf,fresh:s.fresh+(isNew==='menu'?1:0),freshShelf:s.freshShelf+(isNew==='shelf'?1:0),msg:{tone:'good',text:serveText(o,s.fill,isNew)}});this.checkpoint();
+  }
+  stopBake(interrupted=false) {
+    const s=this.state,o=this.item();if(s.phase!=='bake'){this.setState({playing:''});return;}
+    this.pendingJudge=null;
+    this.setState({phase:o.ask==='sound'?(interrupted?'pick':'serve'):'build',playing:'',msg:interrupted?{tone:'warn',text:ABORT_TEXT}:null});
+    if(!interrupted&&o.ask==='sound')this.serve();
+  }
+  nextItem() {
+    const s=this.state,it=this.item(),e=this.entry();if(!it||!['serve','scene'].includes(s.phase))return;
+    let results=s.results,queue=s.queue,mark=s.assisted?'half':'full';
+    if(it.kind==='scene') {if(!this.save.scenes.includes(it.id))this.save.scenes.push(it.id);}
+    else if(!e.redo){results=results.concat([{id:it.id,text:recordText(it),recipe:mark}]);this.save.stats.orders++;if(mark==='full')this.save.stats.clean++;
+      if(s.assisted&&!it.final){queue=queue.slice();const at=this.dayItems[queue[queue.length-1].i].final?queue.length-1:queue.length;queue.splice(at,0,{i:e.i,redo:true});}}
+    else results=results.map(r=>r.id===it.id?{...r,again:mark}:r);
+    if(s.idx+1>=queue.length){this.close(results,queue);}else{this.enter(s.idx+1,{results,queue});this.checkpoint();}
+  }
+  close(results,queue) {
+    const clean=results.filter(r=>r.recipe==='full').length,passed=clean>=passNeed(results.length),id=this.state.day,prev=this.save.days[id]||{passed:false,best:0,runs:0};
+    this.save.days[id]={passed:prev.passed||passed,best:Math.max(prev.best,clean),runs:prev.runs+1};this.save.active=null;
+    this.setState({screen:'close',results,queue,playing:'',msg:null});this.persist(this.save);
+  }
+  found(o) {return (this.state.menu[meterKey(o.m)]||[]).concat(this.state.shelf[meterKey(o.m)]||[]);}
+  canOther() {const o=this.item();return !!o?.m&&unfound(o,this.found(o)).length>0;}
+  otherFill() {if(this.state.phase!=='serve'||!this.canOther())return;this.setState({phase:'build',extra:true,fill:[],ghost:null,playing:'',msg:{tone:'',text:EXTRA_TEXT}});}
+  quitExtra() {if(!this.state.extra)return;const s=this.state;this.setState({phase:'serve',extra:false,fill:s.served,ghost:null,playing:'',msg:{tone:'good',text:serveText(this.item(),s.served)}});}
+  startFree(index=0) {this.freeOrder={...makeOrder({id:'free',ask:'cond',meter:[METERS[index].num,METERS[index].den]}),tray:PIECES};this.setState({screen:'free',phase:'build',playing:'',fill:[],ghost:null,msg:null,extra:false});}
+  changeMeter(index) {if(this.state.screen!=='free'||!METERS[index])return;const old=this.freeOrder, m=METERS[index];this.freeOrder={...makeOrder({id:'free',ask:'cond',meter:[m.num,m.den]}),tray:PIECES};this.setState({phase:'build',playing:'',fill:eq(old.len,this.freeOrder.len)?this.state.fill:[],ghost:null,msg:null});}
+}
+
+return {Game};
+})();
+__modules.render=(()=>{
+const { F, TURN, add, div, num, eq, cmp, angle, dur, noteWhole, total, spans, straddles, pulse, beams, cells, noteKo, shortKo, capacity, defaultGroups, bounds, meterKo } = __modules.engine;
+let serial = 0;
+const escape = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// ── 그리기 도구 ──
+const CX = 170, CY = 170, R_WOOD = 166, R_T0 = 154, R_T1 = 162, R_ARC = 145, R_DOUGH = 132, R_SLICE = 124, R_HUB = 28, RAD = Math.PI / 180;
+const r1 = (x) => Math.round(x * 10) / 10;
+const pt = (a, r) => [r1(CX + r * Math.sin(a * RAD)), r1(CY - r * Math.cos(a * RAD))];
+function wedge(a0, a1, r, cx = CX, cy = CY) {
+  if (a1 - a0 >= 359.99) return `M${cx} ${cy - r}A${r} ${r} 0 1 1 ${cx - 0.01} ${cy - r}Z`;
+  const p = (a) => [r1(cx + r * Math.sin(a * RAD)), r1(cy - r * Math.cos(a * RAD))], [x0, y0] = p(a0), [x1, y1] = p(a1);
+  return `M${cx} ${cy}L${x0} ${y0}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1} ${y1}Z`;
+}
+function arcPath(a0, a1, r) { const [x0, y0] = pt(a0, r), [x1, y1] = pt(a1, r); return `M${x0} ${y0}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1} ${y1}`; }
+const tint = (note) => `var(--n${note.den})`;                                        // 점음표는 바탕 음표와 같은 색을 쓴다
+function glyph(note, x, y, o = {}) {                                                 // 음표 하나: 머리, 기둥, 꼬리, 점
+  const c = o.color || "var(--ink)", open = note.den <= 2, up = 22;
+  let h = `<g transform="translate(${r1(x)} ${r1(y)})${o.s ? ` scale(${o.s})` : ""}">`;
+  h += `<ellipse rx="5.6" ry="4" transform="rotate(-20)" style="fill:${open ? "none" : c};stroke:${c}" stroke-width="${open ? 1.7 : 0}"/>`;
+  if (note.den >= 2) h += `<line x1="5.1" y1="-1.2" x2="5.1" y2="${-up}" style="stroke:${c}" stroke-width="1.5"/>`;
+  if (note.den >= 8 && !o.beamed) h += `<path d="M5.1 ${-up}c1.5 5 7 6 5.5 13" fill="none" style="stroke:${c}" stroke-width="1.6" stroke-linecap="round"/>`;
+  for (let i = 0; i < note.dots; i++) h += `<circle cx="${10.5 + i * 4.5}" cy="-2.6" r="1.8" style="fill:${c}"/>`;
+  return h + "</g>";
+}
+
+function boardContent(v) {
+  const A = (len) => num(angle(len, v.turn)), capA = v.len ? A(v.len) : 0, tot = total(v.fill), totA = A(tot), full = !!v.len && eq(tot, v.len), sp = spans(v.fill), bad = v.B && v.marks ? straddles(v.fill, v.B) : [];
+  let h = `<defs><pattern id="${v.uid}hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" style="stroke:var(--warn)" stroke-width="2.4"/></pattern></defs>`;
+  h += `<circle cx="${CX}" cy="${CY}" r="${R_WOOD}" style="fill:var(--wood);stroke:var(--wood-edge)" stroke-width="3"/>`;
+  h += `<g fill="none" stroke="#8a6128" stroke-width="1" opacity=".13" pointer-events="none"><path d="M30 110Q170 85 310 115M20 210Q170 190 320 214M61 65Q170 42 279 70M50 275Q170 255 290 275"/><ellipse cx="80" cy="200" rx="18" ry="6"/><ellipse cx="80" cy="200" rx="10" ry="3"/></g>`;
+  for (let k = 0, ticks = num(cells(v.turn)); k < ticks; k++) { const a = A(F(k, 8)), q = k % 2 === 0, [x0, y0] = pt(a, q ? R_T0 - 2 : R_T0), [x1, y1] = pt(a, R_T1); h += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" style="stroke:var(--wood-edge)" stroke-width="${q ? 3 : 1.8}" stroke-linecap="round"/>`; }
+  if (v.len) {
+    h += `<path class="doughfill" d="${wedge(0, capA, R_DOUGH)}" style="fill:var(--dough);stroke:${full ? "var(--crust)" : "var(--dough-edge)"}" stroke-width="${full ? 6 : 2}"${full ? "" : ' stroke-dasharray="5 4"'} stroke-linejoin="round"/>`;
+    if (360 - capA >= 60) { const [x, y] = pt((capA + 360) / 2, R_DOUGH * 0.6); h += `<text class="hint" text-anchor="middle" font-size="16" font-weight="600" fill="var(--ink)" x="${x}" y="${y + 5}">안 쓰는 판</text>`; }
+    const emptyA = capA - totA;
+    if ((emptyA >= 60 && !(v.preview && !v.note)) || (emptyA >= 44 && v.note)) { const [x, y] = emptyA >= 359 ? [CX, CY - 78] : pt((totA + capA) / 2, R_DOUGH * 0.6); h += `<text class="hint" text-anchor="middle" font-size="16" font-weight="600" fill="var(--ink)" x="${x}" y="${y + 5}">${v.note || (v.slot ? "자리" : "빈 자리")}</text>`; }
+  } else if (v.hub.text !== "") { h += `<text class="hint" text-anchor="middle" font-size="16" font-weight="600" fill="var(--ink)" x="${CX}" y="${CY - 78}">${v.hub.text === "?" ? "박자표를 골라요" : "도우를 골라요"}</text>`; }
+  // 묶음 경계: 긴 선은 조각 밑에 깔고(빈 도우에서만 보인다), 조각 위에는 가장자리의 짧은 눈금만 얹는다. 두 박을 덮는 조각이 둘로 잘려 보이지 않게
+  if (v.g) v.B.slice(1, -1).forEach((b) => { const [x0, y0] = pt(A(b), R_HUB), [x1, y1] = pt(A(b), R_DOUGH + 7); h += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" style="stroke:var(--ink)" stroke-width="2.6" stroke-linecap="round" pointer-events="none"/>`; });
+  sp.forEach(({ s, e, note }, i) => {
+    h += `<path class="slice${v.tap ? " tap" : ""}" data-i="${i}"${v.tap ? ` tabindex="0" role="button" aria-label="${i + 1}번째 조각 ${noteKo(note)}. 누르면 빼요"` : ""} d="${wedge(A(s), A(e), R_SLICE)}" style="fill:${tint(note)};stroke:#fff" stroke-width="2.4"/>`;
+    h += `<defs><clipPath id="${v.uid}slice${i}"><path d="${wedge(A(s), A(e), R_SLICE)}"/></clipPath></defs><g clip-path="url(#${v.uid}slice${i})" opacity=".32" pointer-events="none">`;
+    for (const [delta, radial] of [[0, .9], [-.23, .49], [.23, .78]]) { const aa = (A(s)+A(e))/2 + (A(e)-A(s))*delta, [tx,ty] = pt(aa, R_SLICE*radial); h += toppingSVG(note,tx,ty,0.8); }
+    h += `</g>`;
+    if (bad.includes(i)) h += `<path d="${wedge(A(s), A(e), R_SLICE)}" fill="url(#${v.uid}hatch)" opacity="0.5" pointer-events="none"/>`;
+    if (note.dots) { const a = A(add(s, noteWhole(note.den))), [x0, y0] = pt(a, R_HUB + 4), [x1, y1] = pt(a, R_SLICE - 3); h += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" style="stroke:#fff" stroke-width="1.6" stroke-dasharray="3 4" pointer-events="none"/>`; }
+  });
+  if (v.ghost) {                                                                     // 넘친 조각: 테두리는 전체, 빗금은 도우를 넘은 만큼만
+    const g1 = totA + A(dur(v.ghost));
+    h += `<path d="${wedge(capA, g1, R_SLICE)}" fill="url(#${v.uid}hatch)" opacity="0.6" pointer-events="none"/><path d="${wedge(totA, g1, R_SLICE)}" fill="none" style="stroke:var(--warn)" stroke-width="2.6" stroke-dasharray="6 4" stroke-linejoin="round" pointer-events="none"/>`;
+  }
+  if (v.g) {
+    const p = pulse(v.m, v.g);
+    v.B.slice(1, -1).forEach((b) => { const [x0, y0] = pt(A(b), R_SLICE - 9), [x1, y1] = pt(A(b), R_DOUGH + 7); h += `<line class="gtick" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" style="stroke:var(--ink)" stroke-width="2.6" stroke-linecap="round" pointer-events="none"/>`; });
+    v.g.forEach((_, i) => {                                                          // 묶음 테두리와 분할 점
+      h += `<path class="garc" d="${arcPath(A(v.B[i]) + 3.5, A(v.B[i + 1]) - 3.5, R_ARC)}" fill="none" style="stroke:var(--ink)" stroke-width="3.2" stroke-linecap="round"/>`;
+      for (let t = v.B[i], k = 0; cmp(t, v.B[i + 1]) < 0; t = add(t, p), k++) { const [x, y] = pt(A(t) + (k === 0 ? 3.5 : 0), R_ARC); h += `<circle cx="${x}" cy="${y}" r="${k === 0 ? (i === 0 ? 7.5 : 6) : 3}" style="fill:${k === 0 && i === 0 ? "var(--sauce)" : "var(--ink)"};stroke:var(--wood)" stroke-width="1.5"/>`; }
+    });
+  }
+  h += `<g class="lab" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)" pointer-events="none">`;
+  sp.forEach(({ s, e, note }) => {
+    const a0 = A(s), a1 = A(e), wide = a1 - a0, [x, y] = wide >= 359 ? [CX, CY - 76] : pt((a0 + a1) / 2, R_SLICE * (wide >= 180 ? 0.52 : wide >= 90 ? 0.6 : 0.7));
+    h += glyph(note, x - 4, y + 2) + `<text x="${x}" y="${y + 22}">${shortKo(note)}</text>`;
+  });
+  h += `</g>`;
+  if (v.cursor && !full) { const [x, y] = pt(totA, R_DOUGH + 4); h += `<path d="M0 0L7 -13H-7Z" transform="translate(${x} ${y}) rotate(${r1(totA)})" style="fill:var(--sauce)" pointer-events="none"/>`; }
+  h += `<line id="${v.handId}" class="hand" stroke="var(--sauce)" stroke-width="3.5" stroke-linecap="round" x1="${CX}" y1="${CY - R_HUB}" x2="${CX}" y2="${CY - R_ARC - 8}" visibility="hidden"/>`;
+  h += `<circle cx="${CX}" cy="${CY}" r="${R_HUB}" style="fill:var(--panel);stroke:var(--ink)" stroke-width="2"/>`;
+  if (v.hub.m) h += `<text x="${CX}" y="${CY - 3}" text-anchor="middle" font-size="20" font-weight="800">${v.hub.m.num}</text><line x1="${CX - 11}" y1="${CY + 1}" x2="${CX + 11}" y2="${CY + 1}" style="stroke:var(--ink)" stroke-width="1.6"/><text x="${CX}" y="${CY + 19}" text-anchor="middle" font-size="20" font-weight="800">${v.hub.m.den}</text>`;
+  else if (v.hub.note) h += glyph(v.hub.note, CX - 5, CY + 9, { s: 1.35 });
+  else if (v.hub.text) h += `<text x="${CX}" y="${CY + 8}" text-anchor="middle" font-size="24" font-weight="800">${v.hub.text}</text>`;
+  return h;
+}
+
+function stripSvg(o) {
+  const { W, H, len, fill } = o, pad = o.pad || 14, y = o.y || Math.round(H * 0.56), turn = o.turn || TURN;
+  const X = (t) => r1(pad + num(div(t, turn)) * (W - 2 * pad)), xe = X(len), xt = X(turn), tot = total(fill), sp = spans(fill), bm = beams(fill, o.B), beamed = new Set(bm.flat());
+  let h = "";
+  if (!o.plain && xt - xe > 1) h += `<line x1="${xe}" y1="${y}" x2="${xt}" y2="${y}" style="stroke:var(--line)" stroke-width="1.4" stroke-dasharray="2 4"/>` + (xt - xe >= 62 ? `<text x="${(xe + xt) / 2}" y="${y - 9}" text-anchor="middle">안 쓰는 판</text>` : "");
+  h += `<line x1="${X(F(0))}" y1="${y}" x2="${xe}" y2="${y}" style="stroke:var(--ink)" stroke-width="1.4"/>`;
+  if (!o.plain) {
+    h += `<line x1="${X(F(0))}" y1="${y - 13}" x2="${X(F(0))}" y2="${y + 13}" style="stroke:var(--ink)" stroke-width="1.4"/><line x1="${xe - 3.5}" y1="${y - 13}" x2="${xe - 3.5}" y2="${y + 13}" style="stroke:var(--ink)" stroke-width="1.4"/><line x1="${xe}" y1="${y - 13}" x2="${xe}" y2="${y + 13}" style="stroke:var(--ink)" stroke-width="3"/>`;
+    if (o.g) { const p = pulse(o.m, o.g); o.g.forEach((_, i) => {
+      h += `<line x1="${X(o.B[i]) + 4}" y1="${H - 9}" x2="${X(o.B[i + 1]) - 6}" y2="${H - 9}" style="stroke:var(--ink)" stroke-width="2.6" stroke-linecap="round"/>`;
+      for (let t = o.B[i], k = 0; cmp(t, o.B[i + 1]) < 0; t = add(t, p), k++) h += `<circle cx="${X(t) + 4}" cy="${H - 9}" r="${k === 0 ? (i === 0 ? 5.5 : 4.5) : 2.4}" style="fill:${k === 0 && i === 0 ? "var(--sauce)" : "var(--ink)"}"/>`;
+    }); }
+  }
+  bm.forEach((ix) => { const xa = X(sp[ix[0]].s) + 9 + 5.1, xb = X(sp[ix[ix.length - 1]].s) + 9 + 5.1; h += `<rect x="${xa - 0.8}" y="${y - 23}" width="${r1(xb - xa + 1.6)}" height="3.4" style="fill:var(--ink)"/>`; });
+  sp.forEach(({ s, note }, i) => { h += `<g class="sn" data-i="${i}">${glyph(note, X(s) + 9, y, { beamed: beamed.has(i) })}</g>`; });
+  return h;
+}
+
+function toppingSVG(note, x, y, scale = 1) {
+  const shapes = {
+    1: '<path d="M-8 0Q-3-12 9-7Q10 5-1 9Q-9 9-8 0Z" fill="#a9691f"/><path d="M-5 5L6-5" stroke="#f8ecd3" stroke-width="2"/>',
+    2: '<circle r="8" fill="#a8321c"/><circle cx="-2" cy="-3" r="1.4" fill="#f8ecd3"/><circle cx="3" cy="2" r="1.5" fill="#f8ecd3"/>',
+    4: '<path d="M-9 3Q-6-10 8-9Q12 3-2 8Z" fill="#1f6a3d"/><path d="M-7 5L6-6" stroke="#f8ecd3" stroke-width="1.3"/>',
+    8: '<circle r="8" fill="#624578"/><circle r="3.5" fill="#cfc0ec"/>'
+  };
+  return `<g transform="translate(${r1(x)} ${r1(y)}) scale(${scale})">${shapes[note.den] || shapes[8]}</g>`;
+}
+
+function boardSVG(options = {}) {
+  const meter = options.meter || options.m || null;
+  const g = options.groups || options.g || (meter ? defaultGroups(meter) : null);
+  const len = options.len !== undefined ? options.len : meter ? capacity(meter) : options.slot ? dur(options.slot) : null;
+  const fill = options.fill || [];
+  const v = {
+    ...options, turn: options.turn || TURN, m: meter, g, len, fill,
+    B: options.boundaries || options.B || (meter && g ? bounds(meter, g) : null),
+    hub: options.hub || (meter ? { m: meter } : options.slot ? { note: options.slot } : { text: options.question === false ? '' : '?' }),
+    marks: options.help !== false && options.marks !== false,
+    tap: options.interactive !== false && options.tap !== false && !options.preview,
+    cursor: options.interactive !== false && options.cursor !== false && !options.preview,
+    note: escape(options.previewLabel || options.note || ''), uid: `pizza${++serial}-`,
+    handId: options.handId || 'hand'
+  };
+  const label = options.label || (meter ? `${meterKo(meter)} 피자판, 조각 ${fill.length}개` : '피자 조립판');
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="pizza-board" viewBox="0 0 340 340" role="${v.tap ? 'group' : 'img'}" aria-label="${escape(label)}" style="color:var(--ink)">${boardContent(v)}</svg>`;
+}
+
+function rhythmSVG(options = {}) {
+  const meter = options.meter || options.m || null;
+  const g = options.groups || options.g || (meter ? defaultGroups(meter) : null);
+  const len = options.len || (meter ? capacity(meter) : total(options.fill || []));
+  const B = options.boundaries || options.B || (meter && g ? bounds(meter, g) : [F(0), len]);
+  const W = options.width || options.W || (options.plain ? 150 : 296);
+  const H = options.height || options.H || (options.plain ? 34 : 68);
+  const fill = options.fill || [];
+  const o = { ...options, W, H, len, m: meter, g, B, fill, turn: options.plain ? len : options.turn || TURN, ...(options.plain ? { pad: 8, y: 27 } : {}) };
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="rhythm-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${escape(options.plain ? '악보 쪽지: ' : '리듬 줄: ')}${escape(fill.map(noteKo).join(', '))}" style="font-size:12px;fill:var(--ink)">${stripSvg(o)}</svg>`;
+}
+
+function traySVG(note, turn = TURN) {
+  const a = num(angle(dur(note), turn));
+  const cx = 20, cy = a >= 300 ? 20 : a > 180 ? 22 : 29;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" aria-hidden="true"><path d="${wedge(-a / 2, a / 2, 17, cx, cy)}" style="fill:${tint(note)};stroke:var(--ink-2)" stroke-width="1.2" stroke-linejoin="round"/>${toppingSVG(note, cx, cy - 10, .38)}</svg>`;
+}
+
+function doughSVG(count, turn = TURN) {
+  return `<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" style="fill:var(--wood);stroke:var(--wood-edge)" stroke-width="1.5"/><path d="${wedge(0,num(angle(F(count,8),turn)),14,20,20)}" style="fill:var(--dough);stroke:var(--dough-edge)" stroke-width="1.2"/></svg>`;
+}
+
+function timerSVG(mood = 'neutral') {
+  const mouth = mood === 'happy' ? 'M43 62Q54 73 65 62' : mood === 'curious' ? 'M48 66Q54 60 60 65' : 'M47 65Q54 68 61 65';
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="timer-art" viewBox="0 0 110 112" role="img" aria-label="박을 세는 화덕 타이머, 똑딱"><path d="M39 10H71V20H39Z" fill="#a8321c"/><path d="M43 7H67V13H43Z" fill="#f2b19b"/><path d="M29 91L23 104M79 91L86 104" stroke="#8a6128" stroke-width="8" stroke-linecap="round"/><circle cx="55" cy="56" r="41" fill="#a8321c"/><circle cx="55" cy="56" r="34" fill="#fffaf0" stroke="#8a6128" stroke-width="2"/><path d="M55 28V33M27 56H32M78 56H83" stroke="#8a6128" stroke-width="2.5"/><path d="M55 56V37M55 56L69 48" stroke="#a8321c" stroke-width="3" stroke-linecap="round"/><circle cx="55" cy="56" r="4" fill="#a8321c"/><circle cx="42" cy="54" r="2.7" fill="#1c2622"/><circle cx="68" cy="54" r="2.7" fill="#1c2622"/><path d="${mouth}" fill="none" stroke="#1c2622" stroke-width="2.7" stroke-linecap="round"/>${mood === 'counting' ? '<path d="M12 30L5 24M96 30L104 24" stroke="#a8321c" stroke-width="3" stroke-linecap="round"/>' : ''}</svg>`;
+}
+
+function ovenSceneSVG() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="oven-art" viewBox="0 0 420 230" role="img" aria-label="박자표 피자 화덕 가게"><path d="M20 209V70Q20 28 62 28H358Q400 28 400 70V209Z" fill="#f8ecd3"/><path d="M20 89H400M20 149H400M82 28V89M208 28V89M335 28V89M143 89V149M270 89V149" stroke="#e7cfad" stroke-width="3"/><path d="M110 211V132A100 100 0 0 1 310 132V211Z" fill="#a9691f"/><path d="M126 211V137A84 84 0 0 1 294 137V211Z" fill="#49352c"/><path d="M144 206Q135 173 155 155Q151 182 172 169Q163 194 180 206M256 206Q246 184 269 160Q264 184 281 190Q283 199 277 206" fill="#f2b19b"/><path d="M151 206Q148 189 161 182Q158 200 171 206M263 206Q258 193 273 184Q266 200 277 206" fill="#ffd35c"/><ellipse cx="211" cy="198" rx="55" ry="13" fill="#d6ab72"/><ellipse cx="211" cy="195" rx="48" ry="10" fill="#f2cf7a" stroke="#a9691f" stroke-width="3"/><ellipse cx="195" cy="193" rx="6" ry="2.6" fill="#a8321c"/><ellipse cx="228" cy="194" rx="6" ry="2.6" fill="#a8321c"/><path d="M208 191Q212 184 218 190Q217 197 208 191Z" fill="#1f6a3d"/><path d="M12 212H408" stroke="#8a6128" stroke-width="9" stroke-linecap="round"/><path d="M42 220H378" stroke="#cdb27a" stroke-width="12" stroke-linecap="round"/></svg>`;
+}
+
+function iconSVG(name, size = 20) {
+  const shapes = {
+    sound: '<path d="M4 9H8L13 5V19L8 15H4Z"/><path d="M16 8Q21 12 16 16M19 5Q27 12 19 19"/>',
+    settings: '<circle cx="12" cy="12" r="3"/><path d="M9 3L8 6L5 7L3 6L1 10L4 12L3 15L2 17L6 20L8 18L11 19L12 22L16 21V18L19 16L22 16L23 12L20 10L19 7L20 5L16 2L14 4L11 4Z"/>',
+    back: '<path d="M14 5L7 12L14 19M7 12H22"/>',
+    replay: '<path d="M4 10A8 8 0 1 1 6 18M4 4V10H10"/>',
+    slow: '<circle cx="12" cy="13" r="8"/><path d="M12 9V13L15 16M9 2H15M12 2V5"/>',
+    book: '<path d="M3 4H10Q12 4 12 7Q12 4 14 4H21V20H14Q12 20 12 22Q12 20 10 20H3ZM12 7V20"/>',
+    close: '<path d="M5 5L19 19M19 5L5 19"/>'
+  };
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shapes[name] || shapes.settings}</svg>`;
+}
+
+function stampSVG(day = 0) {
+  return `<svg viewBox="0 0 96 96" class="stamp-art" role="img" aria-label="${day}단 영업일 도장"><circle cx="48" cy="48" r="42" fill="none" stroke="#1f6a3d" stroke-width="3" stroke-dasharray="3 2"/><circle cx="48" cy="48" r="35" fill="none" stroke="#1f6a3d" stroke-width="1.5"/><path d="M27 48L42 63L68 32" fill="none" stroke="#1f6a3d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text x="48" y="82" text-anchor="middle" font-size="12" fill="#1f6a3d">${day}단 영업 완료</text></svg>`;
+}
+
+
+return {boardSVG,rhythmSVG,traySVG,doughSVG,timerSVG,ovenSceneSVG,iconSVG,stampSVG,glyph,wedge};
+})();
+__modules.audio=(()=>{
+const { F, TURN, capacity, defaultGroups, dur, spans, clicks, num, angle, toSec, hz } = __modules.engine;
+const CLICK = [[2700, 0.9], [1900, 0.5], [1250, 0.16]];
+const ABORT_TEXT = '소리가 멈춰서 중단했어요. 소리를 켜고 다시 해 주세요.';
+
+/** A complete relative-time score, calculated once before any sound is scheduled. */
+function createAudioPlan(spec, options = {}) {
+  const meter = spec.meter || spec.m;
+  const groups = spec.groups || spec.g || (meter ? defaultGroups(meter) : null);
+  const len = spec.len || (meter ? capacity(meter) : dur(spec.slot));
+  const fill = spec.fill || [];
+  const e8 = options.slow ? .45 : .3;
+  const capS = toSec(len, e8);
+  const lead = spec.slot ? 2 * e8 : capS;
+  const parts = spans(fill);
+  const events = [];
+  if (spec.slot) {
+    const full = Math.round((lead + 2 * capS) / e8);
+    const cellCount = Math.round(capS / e8);
+    for (let k = 0; k < full; k++) events.push({ type: 'click', time: k * e8, level: k === 2 || k === 2 + cellCount ? 1 : 2 });
+    events.push({ type: 'tone', midi: 60, time: lead, duration: capS });
+    for (const { s, note } of parts) events.push({ type: 'tone', midi: 72, time: lead + capS + toSec(s, e8), duration: toSec(dur(note), e8) });
+  } else {
+    const subs = options.subs !== false || options.kind === 'hear' || options.forceSubs;
+    for (let k = 0; k < 3; k++) for (const ck of clicks(meter, groups)) {
+      if (ck.level < 2 || subs) events.push({ type: 'click', time: k * capS + toSec(ck.t, e8), level: ck.level });
+    }
+    for (let k = 1; k < 3; k++) for (const { s, note } of parts) events.push({ type: 'tone', midi: 72, time: k * capS + toSec(s, e8), duration: toSec(dur(note), e8) });
+  }
+  return { events, lead, capS, len, parts, slot: !!spec.slot, end: lead + 2 * capS + .2, capA: num(angle(len, spec.turn || TURN)) };
+}
+
+class AudioEngine {
+  constructor({ onState = () => {}, onFrame = () => {}, onInterrupt = () => {} } = {}) {
+    this.ctx = null;
+    this.master = null;
+    this.noise = null;
+    this.nodes = new Set();
+    this.run = null;
+    this.raf = 0;
+    this.volume = .8;
+    this.muted = false;
+    this.onState = onState;
+    this.onFrame = onFrame;
+    this.onInterrupt = onInterrupt;
+    this._visibility = () => { if (document.hidden && this.run) this._interrupt('hidden'); };
+    if (typeof document !== 'undefined') document.addEventListener('visibilitychange', this._visibility);
+  }
+
+  get available() { return !!this.ctx && this.ctx.state === 'running' && !this.muted && this.volume > 0; }
+  get playing() { return !!this.run; }
+
+  _ensureAudio() {
+    try {
+      if (!this.ctx) {
+        const AC = globalThis.AudioContext || globalThis.webkitAudioContext;
+        if (!AC) { this.onState(false); return null; }
+        this.ctx = new AC();
+        this.master = this.ctx.createGain();
+        this.master.gain.value = this.muted ? 0 : this.volume;
+        this.master.connect(this.ctx.destination);
+        this.noise = this.ctx.createBuffer(1, this.ctx.sampleRate, this.ctx.sampleRate);
+        const data = this.noise.getChannelData(0);
+        for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+        this.ctx.addEventListener('statechange', () => {
+          this.onState(this.available);
+          if (this.ctx.state !== 'running' && this.run && !this.run.perf) this._interrupt('context');
+        });
+      }
+      if (this.ctx.state !== 'running') this.ctx.resume().catch(() => this.onState(false));
+      this.onState(this.available);
+      return this.ctx;
+    } catch { this.onState(false); return null; }
+  }
+
+  async unlock() {
+    const ctx = this._ensureAudio();
+    if (!ctx) return false;
+    try { if (ctx.state !== 'running') await ctx.resume(); } catch { /* State remains visible in HUD. */ }
+    this.onState(this.available);
+    return this.available;
+  }
+
+  setVolume(volume = .8, muted = false) {
+    this.volume = Math.min(1, Math.max(0, Number(volume) || 0));
+    this.muted = !!muted;
+    if (this.master) this.master.gain.setTargetAtTime(this.muted ? 0 : this.volume, this.ctx.currentTime, .015);
+    this.onState(this.available);
+  }
+
+  _keep(node, extras) {
+    this.nodes.add(node);
+    node.addEventListener('ended', () => {
+      this.nodes.delete(node);
+      node.disconnect();
+      extras.forEach(x => x.disconnect());
+    }, { once: true });
+  }
+
+  _tone(midi, when, len) {
+    const o = this.ctx.createOscillator(), g = this.ctx.createGain();
+    const hold = Math.max(.06, len * .86), peak = .3;
+    o.type = 'triangle';
+    o.frequency.setValueAtTime(hz(midi), when);
+    g.gain.setValueAtTime(.0001, when);
+    g.gain.linearRampToValueAtTime(peak, when + .01);
+    g.gain.setValueAtTime(peak * .8, when + hold - .04);
+    g.gain.linearRampToValueAtTime(.0001, when + hold);
+    o.connect(g); g.connect(this.master);
+    this._keep(o, [g]);
+    o.start(when); o.stop(when + hold + .03);
+  }
+
+  _click(when, level) {
+    const s = this.ctx.createBufferSource(), f = this.ctx.createBiquadFilter(), g = this.ctx.createGain();
+    s.buffer = this.noise;
+    f.type = 'bandpass'; f.frequency.value = CLICK[level][0]; f.Q.value = 6;
+    g.gain.setValueAtTime(CLICK[level][1], when);
+    g.gain.exponentialRampToValueAtTime(.0001, when + .035);
+    s.connect(f); f.connect(g); g.connect(this.master);
+    this._keep(s, [f, g]);
+    s.start(when); s.stop(when + .055);
+  }
+
+  _silence() {
+    this.nodes.forEach(n => { try { n.stop(); } catch { /* A source may already have ended. */ } });
+    this.nodes.clear();
+  }
+
+  play(spec, options = {}) {
+    this.stop();
+    const ctx = this._ensureAudio();
+    if (options.volume !== undefined || options.muted !== undefined) this.setVolume(options.volume ?? this.volume, options.muted ?? this.muted);
+    const soundOnly = options.kind === 'hear';
+    if (soundOnly && (!ctx || this.muted || this.volume === 0)) {
+      this.onInterrupt('sound-required', '이 주문은 소리가 필요해요. 소리를 켜 주세요.');
+      return null;
+    }
+    const plan = createAudioPlan(spec, options);
+    const t0 = (ctx ? ctx.currentTime : performance.now() / 1000) + .12;
+    this.run = { ...plan, t0, kind: options.kind || 'bake', visual: !soundOnly, perf: !ctx, onEnd: options.onEnd, ctx0: ctx?.currentTime || 0, audioStarted: ctx?.state === 'running', p0: performance.now(), lastAt: performance.now(), lastNow: null, index: null };
+    if (ctx) {
+      try {
+        for (const e of plan.events) {
+          if (e.type === 'tone') this._tone(e.midi, t0 + e.time, e.duration);
+          else this._click(t0 + e.time, e.level);
+        }
+      } catch {
+        this._silence();
+        if (soundOnly) { this._interrupt('sound-required'); return null; }
+        this.run.perf = true;
+        this.run.t0 = performance.now() / 1000 + .12;
+        this.onState(false);
+      }
+    }
+    this.raf = requestAnimationFrame(() => this._frame());
+    return this.run;
+  }
+
+  _frame() {
+    const r = this.run;
+    if (!r) return;
+    const wall = performance.now();
+    if (!r.perf && r.audioStarted && this.ctx.currentTime === r.ctx0 && wall - r.p0 > 800) { this._interrupt('clock'); return; }
+    if (!r.perf && wall - r.p0 > 1200 && this.ctx.currentTime === r.ctx0) {
+      if (r.kind === 'hear') { this._interrupt('clock'); return; }
+      r.perf = true; r.t0 = wall / 1000 + .1; this._silence(); this.onState(false);
+    }
+    const now = r.perf ? wall / 1000 : this.ctx.currentTime - (this.ctx.outputLatency || this.ctx.baseLatency || 0);
+    if (!r.perf) {
+      if (now !== r.lastNow) { r.lastNow = now; r.lastAt = wall; }
+      else if (this.ctx.currentTime !== r.ctx0 && wall - r.lastAt > 800) { this._interrupt('clock'); return; }
+    }
+    if (now >= r.t0 + r.end) {
+      const after = r.onEnd;
+      this.stop();
+      after?.();
+      return;
+    }
+    if (r.visual) {
+      const u = now - r.t0 - r.lead;
+      const cycle = Math.floor(u / r.capS);
+      const fraction = u < 0 ? (r.slot ? 0 : Math.max(0, (now - r.t0) / r.capS)) : cycle > 1 ? 1 : u / r.capS - cycle;
+      let index = -1;
+      const all = r.slot && u >= 0 && cycle === 0;
+      if (u >= 0 && cycle <= 1 && !all) {
+        const t = fraction * num(r.len);
+        index = r.parts.findIndex(x => num(x.s) <= t + 1e-9 && t < num(x.e) - 1e-9);
+      }
+      this.onFrame({ angle: r.capA * Math.min(1, fraction), index, all, preparing: u < 0, visible: true });
+    }
+    this.raf = requestAnimationFrame(() => this._frame());
+  }
+
+  stop() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = 0;
+    this._silence();
+    this.run = null;
+    this.onFrame({ angle: 0, index: -1, all: false, preparing: false, visible: false });
+  }
+
+  _interrupt(reason) {
+    if (!this.run) return;
+    this.stop();
+    this.onState(this.available);
+    this.onInterrupt(reason, ABORT_TEXT);
+  }
+
+  /** Tutorial sound check, started only by a learner's button press. */
+  async testTone() {
+    const ok = await this.unlock();
+    if (ok) this._tone(72, this.ctx.currentTime + .05, .45);
+    return ok;
+  }
+
+  destroy() {
+    this.stop();
+    if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', this._visibility);
+    this.ctx?.close();
+  }
+}
+
+return {CLICK,ABORT_TEXT,createAudioPlan,AudioEngine};
+})();
+__modules.selftest=(()=>{
+// Browser-safe verification suite: core theory, every curriculum path, storage,
+// and relative audio schedules. No real audio is emitted and no user save is written.
+const E = __modules.engine;
+const O = __modules.orders;
+const { DAYS } = __modules.seeds;
+const { Game } = __modules.game;
+const { SAVE_KEY, BACKUP_KEY, freshSave, loadSave, writeSave } = __modules.storage;
+const { createAudioPlan, AudioEngine, CLICK } = __modules.audio;
+const fail = message => { throw new Error(message || '검사 값이 일치하지 않아요.'); };
+const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+const assert = {
+  equal(a, b, message) { if (!Object.is(a, b)) fail(message || `${a} !== ${b}`); },
+  deepEqual(a, b, message) { if (JSON.stringify(canonical(a)) !== JSON.stringify(canonical(b))) fail(message); },
+  ok(value, message) { if (!value) fail(message); },
+  match(value, pattern) { if (!pattern.test(value)) fail(`${value} !~ ${pattern}`); },
+  doesNotMatch(value, pattern) { if (pattern.test(value)) fail(`${value} ~ ${pattern}`); },
+};
+
+function selfTests() {
+  const results = [];
+  let category = 'NT';
+  const originalMemory = loadSave().save;
+  const check = (name, body) => {
+    const group = /^[A-Z]{2}-/.test(name) ? name.slice(0, 2) : category;
+    try { body(); results.push({ name, id: name.split(' ')[0], group, ok: true }); }
+    catch (error) { results.push({ name, id: name.split(' ')[0], group, ok: false, error: String(error.message || error) }); }
+  };
+  {
+    category = 'NT';
+
+
+const { F, N, M, add, sub, mul, div, eq, num, dur, noteOf, capacity, defaultGroups,
+  groupings, bounds, pulse, pulseGroups, clicks, angle, cells, total, spans,
+  straddles, lengthIn, fills, fitting, keyOf, parseFill, beams, sameNote } = E;
+const items = DAYS.flatMap(day => day.items.map(O.makeItem));
+const orders = items.filter(item => item.kind === 'order');
+const scenes = items.filter(item => item.kind === 'scene');
+const order = id => orders.find(o => o.id === id);
+const fill = parseFill;
+const b = (n, d) => bounds(M(n, d), defaultGroups(M(n, d)));
+
+check('FR-01 fractions normalize and preserve exact arithmetic', () => {
+  assert.deepEqual(F(6, 8), F(3, 4));
+  assert.deepEqual(F(1, -2), F(-1, 2));
+  assert.deepEqual(add(F(1, 4), F(1, 8)), F(3, 8));
+  assert.deepEqual(sub(F(3, 4), F(1, 8)), F(5, 8));
+  assert.deepEqual(mul(F(3, 8), F(2)), F(3, 4));
+  assert.deepEqual(div(F(3, 4), F(1, 8)), F(6));
+});
+check('NT-01 dotted and plain note lengths', () => {
+  assert.deepEqual(dur(N(4)), F(1, 4));
+  assert.deepEqual(dur(N(4, 1)), F(3, 8));
+  assert.deepEqual(dur(N(2, 1)), F(3, 4));
+  for (const den of [1, 2, 4, 8]) {
+    assert.deepEqual(dur(N(den, 1)), mul(dur(N(den)), F(3, 2)));
+    assert.deepEqual(dur(N(den * 2)), div(dur(N(den)), F(2)));
+  }
+});
+check('NT-02 note length inverse and unrepresentable duration', () => {
+  for (const p of O.PIECES) assert.deepEqual(noteOf(dur(p)), p);
+  assert.equal(noteOf(F(5, 8)), null);
+});
+check('NT-03 rhythm keys round trip', () => {
+  assert.deepEqual(fill('4. 4 8'), [N(4, 1), N(4), N(8)]);
+  for (const m of O.METERS) for (const key of O.menuKeys(m)) assert.equal(keyOf(fill(key)), key);
+});
+check('MT-01 equal dough has distinct grouping', () => {
+  assert.deepEqual(capacity(M(6, 8)), capacity(M(3, 4)));
+  assert.deepEqual(pulseGroups(M(3, 4), defaultGroups(M(3, 4))), [2, 2, 2]);
+  assert.deepEqual(pulseGroups(M(6, 8), defaultGroups(M(6, 8))), [3, 3]);
+});
+check('MT-02 time signature is never reduced', () => {
+  assert.deepEqual(M(6, 8), { num: 6, den: 8 });
+  assert.equal(E.meterKo(M(6, 8)), '8분의 6박자');
+});
+check('MT-03 default groups follow meter rules', () => {
+  for (const n of [2, 3, 4]) assert.deepEqual(defaultGroups(M(n, 4)), Array(n).fill(1));
+  for (const n of [6, 9, 12]) assert.deepEqual(defaultGroups(M(n, 8)), Array(n / 3).fill(3));
+  assert.equal(defaultGroups(M(5, 8)), null);
+  assert.equal(defaultGroups(M(7, 8)), null);
+});
+check('MT-04 mixed grouping candidates', () => {
+  assert.deepEqual(groupings(5), [[2, 3], [3, 2]]);
+  assert.deepEqual(groupings(7), [[2, 2, 3], [2, 3, 2], [3, 2, 2]]);
+});
+check('MT-05 boundaries and pulses equal bar duration', () => {
+  for (const m of [...O.METERS, M(9, 8), M(12, 8), M(5, 8), M(7, 8)]) {
+    for (const g of defaultGroups(m) ? [defaultGroups(m)] : groupings(m.num)) {
+      assert.deepEqual(bounds(m, g).at(-1), capacity(m));
+      assert.deepEqual(mul(pulse(m, g), F(clicks(m, g).length)), capacity(m));
+    }
+  }
+});
+check('MT-06 large beats as notes', () => {
+  assert.deepEqual(E.beatNotes(M(6, 8), [3, 3]), [N(4, 1), N(4, 1)]);
+  assert.deepEqual(E.beatNotes(M(5, 8), [2, 3]), [N(4), N(4, 1)]);
+});
+check('MT-07 three-level click signatures', () => {
+  const cases = [[M(2, 4), [1, 1], '0212'], [M(3, 4), [1, 1, 1], '021212'],
+    [M(4, 4), [1, 1, 1, 1], '02121212'], [M(6, 8), [3, 3], '022122'],
+    [M(9, 8), [3, 3, 3], '022122122'], [M(5, 8), [2, 3], '02122'], [M(5, 8), [3, 2], '02212']];
+  for (const [m, g, signature] of cases) assert.equal(clicks(m, g).map(c => c.level).join(''), signature);
+});
+check('MT-08 kinds and divisions', () => {
+  assert.equal(E.kindOf([1, 1, 1]), 'simple');
+  assert.equal(E.kindOf([3, 3]), 'compound');
+  assert.equal(E.kindOf([2, 3]), 'mixed');
+  assert.equal(E.kindKo([3, 3]), '겹박자');
+});
+check('AN-01 fixed note angles and cell counts', () => {
+  assert.deepEqual(O.PIECES.map(p => num(angle(dur(p)))), [360, 270, 180, 135, 90, 45]);
+  assert.deepEqual(O.PIECES.map(p => num(cells(dur(p)))), [8, 6, 4, 3, 2, 1]);
+});
+check('AN-02 dough angle and cell counts', () => {
+  assert.deepEqual(O.METERS.map(m => num(angle(capacity(m)))), [180, 270, 360, 270]);
+  assert.deepEqual(O.METERS.map(m => num(cells(capacity(m)))), [4, 6, 8, 6]);
+});
+check('AN-03 exact sum of slice angles equals dough', () => {
+  for (const m of O.METERS) for (const f of fills(m, O.menuTray(m))) {
+    assert.deepEqual(f.reduce((acc, note) => add(acc, angle(dur(note))), F(0)), angle(capacity(m)));
+  }
+});
+check('AN-04 future large-board geometry', () => {
+  for (const [n, expected] of [[9, 270], [12, 360]]) {
+    assert.equal(E.fits(M(n, 8)), false);
+    assert.deepEqual(E.turnFor(M(n, 8)), E.TURN_BIG);
+    assert.equal(num(angle(capacity(M(n, 8)), E.TURN_BIG)), expected);
+  }
+});
+check('AN-05 larger board keeps proportional angles', () => {
+  for (const p of O.PIECES) assert.deepEqual(angle(dur(p), E.TURN_BIG), mul(angle(dur(p)), F(2, 3)));
+});
+check('FL-01 fill counts and 69 fitting menu slots', () => {
+  assert.deepEqual(O.METERS.map(m => fills(m, O.menuTray(m)).length), [6, 19, 61, 25]);
+  assert.deepEqual(O.METERS.map(m => O.menuKeys(m).length), [5, 13, 34, 17]);
+  assert.equal(O.METERS.reduce((sum, m) => sum + O.menuKeys(m).length, 0), 69);
+});
+check('FL-02 fills are exact and unique', () => {
+  for (const m of O.METERS) {
+    const fs = fills(m, O.menuTray(m));
+    assert.equal(new Set(fs.map(keyOf)).size, fs.length);
+    for (const f of fs) assert.deepEqual(total(f), capacity(m));
+  }
+});
+check('FL-03 same length and tray produce same rhythm list', () => {
+  assert.deepEqual(fills(M(3, 4), O.PIECES), fills(M(6, 8), O.PIECES));
+});
+check('FL-04 trays are derived from fitting fills', () => {
+  assert.deepEqual(O.METERS.map(m => keyOf(O.menuTray(m))), ['2 4 8', '2. 2 4 8', '1 2. 2 4 8', '2. 4. 4 8']);
+});
+check('FL-05 dotted quarters always cross simple beat boundaries', () => {
+  for (const m of O.METERS.filter(m => m.den === 4)) {
+    for (const f of fills(m, O.PIECES)) {
+      const bad = straddles(f, bounds(m, defaultGroups(m)));
+      f.forEach((p, i) => { if (sameNote(p, N(4, 1))) assert.ok(bad.includes(i)); });
+    }
+  }
+});
+check('ST-01 identical quarter notes have meter-dependent crossing', () => {
+  assert.deepEqual(straddles(fill('4 4 4'), b(6, 8)), [1]);
+  assert.deepEqual(straddles(fill('4 4 4'), b(3, 4)), []);
+});
+check('ST-02 whole groups may be spanned', () => {
+  assert.deepEqual(straddles(fill('2.'), b(6, 8)), []);
+  assert.deepEqual(straddles(fill('4 2 4'), b(4, 4)), []);
+  assert.deepEqual(straddles(fill('1'), b(4, 4)), []);
+});
+check('ST-03 syncopation indices', () => {
+  assert.deepEqual(straddles(fill('8 4 8'), b(2, 4)), [1]);
+  assert.deepEqual(straddles(fill('4. 8'), b(2, 4)), [0]);
+});
+check('ST-04 slot orders have no internal boundaries', () => {
+  for (const o of orders.filter(o => o.slot)) for (const f of O.solutions(o)) assert.deepEqual(straddles(f, o.B), []);
+});
+check('LN-01 exact length comparison', () => {
+  assert.deepEqual(lengthIn(F(1), fill('2 4')), { state: 'short', diff: F(1, 4) });
+  assert.deepEqual(lengthIn(F(1), fill('2 4 4')), { state: 'exact', diff: F(0) });
+  assert.deepEqual(lengthIn(F(3, 8), fill('4 4')), { state: 'over', diff: F(1, 8) });
+});
+check('LN-02 difference explanation uses longest exact plain unit', () => {
+  assert.equal(E.countKo(F(3, 8), M(4, 4)), '8분음표 3개 분량');
+  assert.equal(E.countKo(F(1, 2), M(4, 4)), '4분음표 2개 분량');
+  assert.equal(E.countKo(F(1, 2)), '2분음표 1개 분량');
+});
+check('BM-01 eighth-note beams distinguish 3/4 and 6/8', () => {
+  const six = fill('8 8 8 8 8 8');
+  assert.deepEqual(beams(six, b(3, 4)), [[0, 1], [2, 3], [4, 5]]);
+  assert.deepEqual(beams(six, b(6, 8)), [[0, 1, 2], [3, 4, 5]]);
+});
+check('BM-02 beams join only flagged notes in one group', () => {
+  assert.deepEqual(beams(fill('4 8 4 8'), b(6, 8)), []);
+  assert.deepEqual(beams(fill('4 8 8'), b(2, 4)), [[1, 2]]);
+  assert.deepEqual(beams(fill('2 4 4'), b(4, 4)), []);
+});
+check('GN-01 exact curriculum inventory', () => {
+  assert.deepEqual(DAYS.map(d => d.items.filter(i => !i.states).length), [8, 7, 8, 8, 8]);
+  assert.equal(orders.length, 39);
+  assert.equal(scenes.length, 4);
+});
+check('GN-02 final order is unique and last, all IDs unique', () => {
+  assert.equal(new Set(items.map(i => i.id)).size, items.length);
+  for (const d of DAYS) {
+    assert.equal(d.items.filter(i => i.final).length, 1);
+    assert.equal(d.items.at(-1).final, true);
+  }
+});
+check('GN-03 all orders solvable, alternatives genuinely multiple', () => {
+  for (const o of orders) {
+    const ss = O.solutions(o);
+    assert.ok(ss.length >= (o.fresh ? 2 : 1), o.id);
+  }
+});
+check('GN-04 set, score and sound solutions are unique', () => {
+  for (const o of orders.filter(o => ['set', 'score', 'sound'].includes(o.ask))) assert.equal(O.solutions(o).length, 1, o.id);
+});
+check('GN-05 solutions exactly equal accepting complete fills', () => {
+  for (const o of orders) {
+    const valid = new Set(O.solutions(o).map(keyOf));
+    for (const f of E.fillsOf(o.len, o.tray)) assert.equal(O.judge(o, f).ok, valid.has(keyOf(f)), `${o.id}: ${keyOf(f)}`);
+  }
+});
+check('GN-06 tray lengths and score membership', () => {
+  for (const o of orders) {
+    for (const p of o.tray) assert.ok(E.cmp(dur(p), o.len) <= 0, o.id);
+    if (o.slot) for (const p of o.tray) assert.ok(!eq(dur(p), o.len));
+    if (o.target) for (const p of o.target) assert.ok(o.tray.some(t => sameNote(p, t)), o.id);
+  }
+});
+check('GN-07 all twelve pick questions have one answer', () => {
+  const picked = orders.filter(o => o.pick);
+  assert.equal(picked.length, 12);
+  assert.equal(picked.filter(o => o.pick === 'dough').length, 4);
+  assert.equal(picked.filter(o => o.pick === 'meter').length, 8);
+  for (const o of picked) assert.equal(O.pickUnique(o), true, o.id);
+});
+check('GN-08 score and sound targets are exact and uncrossed', () => {
+  for (const o of orders.filter(o => o.target)) {
+    assert.deepEqual(total(o.target), o.len, o.id);
+    assert.deepEqual(straddles(o.target, o.B), [], o.id);
+  }
+});
+check('GN-09 alternative orders follow same-capacity same-tray orders', () => {
+  for (const day of DAYS) {
+    const os = day.items.filter(i => !i.states).map(O.makeOrder);
+    os.forEach((o, i) => { if (o.fresh) {
+      assert.deepEqual(o.len, os[i - 1].len);
+      assert.equal(keyOf(o.tray), keyOf(os[i - 1].tray));
+    } });
+  }
+});
+check('GN-10 discovery states full and uniquely labelled', () => {
+  for (const sc of scenes) {
+    assert.equal(new Set(O.stateLabels(sc)).size, sc.states.length);
+    for (const st of sc.states) assert.deepEqual(total(st.fill), st.len);
+  }
+});
+check('GN-11 order trays belong to meter menu trays', () => {
+  for (const o of orders.filter(o => o.m)) for (const p of o.tray) assert.ok(O.menuTray(o.m).some(t => sameNote(t, p)), o.id);
+});
+check('GN-12 pass threshold is rounded up', () => {
+  assert.equal(O.passNeed(8), 7);
+  assert.equal(O.passNeed(7), 6);
+});
+check('JD-01 length checked before any other condition', () => {
+  assert.equal(O.judge(order('d2-01'), fill('4')).why, 'length');
+});
+check('JD-02 piece count condition', () => {
+  const j = O.judge(order('d2-01'), fill('4 4 4 4'));
+  assert.equal(j.why, 'cond'); assert.deepEqual(j.cond, { type: 'pieces', want: 3, got: 4 });
+});
+check('JD-03 required note count and kinds', () => {
+  assert.equal(O.judge(order('d2-04'), fill('4 4')).cond.type, 'has');
+  assert.equal(O.judge(order('d2-06'), fill('2 2')).cond.type, 'kinds');
+});
+check('JD-04 grouping condition reports crossing indices', () => {
+  const j = O.judge(order('d3-03'), fill('4 4 4'));
+  assert.equal(j.why, 'group'); assert.deepEqual(j.bad, [1]);
+});
+check('JD-05 crossed rhythms accepted by non-group orders', () => {
+  const j = O.judge(order('d2-04'), fill('8 4 8'));
+  assert.equal(j.ok, true); assert.deepEqual(j.bad, [1]);
+});
+check('JD-06 grouping takes priority over piece count', () => {
+  assert.equal(O.judge(order('d3-04'), fill('4 4 4')).why, 'group');
+});
+check('JD-07 alternative compares only immediate prior rhythm', () => {
+  const o = order('d2-02');
+  assert.equal(O.judge(o, fill('2 4 4'), '2 4 4').why, 'fresh');
+  assert.equal(O.judge(o, fill('4 2 4'), '2 4 4').ok, true);
+  assert.equal(O.judge(o, fill('2 4 4'), '4 2 4').ok, true);
+});
+check('JD-08 score compares note order and reports first difference', () => {
+  const j = O.judge(order('d4-01'), fill('8 4 8'));
+  assert.equal(j.why, 'score'); assert.equal(j.at, 0);
+});
+check('JD-09 dotted-quarter slot allows both note orders', () => {
+  assert.equal(O.judge(order('d0-07'), fill('4 8')).ok, true);
+  assert.equal(O.judge(order('d0-07'), fill('8 4')).ok, true);
+});
+check('JD-10 alternative solutions omit only immediate prior key', () => {
+  assert.deepEqual(O.solutions(order('d2-02'), '2 4 4').map(keyOf), ['4 2 4', '4 4 2']);
+});
+check('JD-11 collection routing respects groups and slot orders', () => {
+  assert.equal(O.menuSlot(order('d2-04'), fill('4 8 8')), 'menu');
+  assert.equal(O.menuSlot(order('d2-04'), fill('8 4 8')), 'shelf');
+  assert.equal(O.menuSlot(order('d0-07'), fill('4 8')), null);
+});
+check('JD-12 extra rhythm availability excludes collected/sound/slot', () => {
+  assert.equal(O.unfound(order('d2-01'), []).length, 3);
+  assert.equal(O.unfound(order('d2-01'), ['2 4 4', '4 2 4', '4 4 2']).length, 0);
+  assert.deepEqual(O.unfound(order('d4-05'), []), []);
+  assert.deepEqual(O.unfound(order('d0-05'), []), []);
+});
+check('PK-01 dough options and expected answers', () => {
+  assert.deepEqual(O.doughOptions(), [4, 6, 8]);
+  assert.deepEqual(['d1-03', 'd1-04', 'd1-06', 'd1-07'].map(id => O.pickOptions(order(id))[O.pickAnswer(order(id))]), [6, 4, 6, 8]);
+});
+check('PK-02 meter options and eight answers', () => {
+  assert.deepEqual(O.METERS.map(O.meterKey), ['2/4', '3/4', '4/4', '6/8']);
+  assert.deepEqual(orders.filter(o => o.id.startsWith('d4')).map(o => O.meterKey(O.pickOptions(o)[O.pickAnswer(o)])),
+    ['2/4', '6/8', '3/4', '6/8', '4/4', '3/4', '6/8', '6/8']);
+});
+check('PK-03 score excludes bars with different lengths', () => {
+  assert.equal(O.meterFits(order('d4-02'), M(2, 4)), 'short');
+  assert.equal(O.meterFits(order('d4-02'), M(4, 4)), 'long');
+});
+check('PK-04 equal length with crossed groups cannot match score', () => {
+  assert.equal(O.meterFits(order('d4-02'), M(3, 4)), 'group');
+});
+check('PK-05 equal length with different beams cannot match score', () => {
+  assert.equal(O.meterFits(order('d4-03'), M(6, 8)), 'beam');
+  assert.equal(O.meterFits(order('d4-04'), M(3, 4)), 'beam');
+});
+check('PK-06 sound questions distinguish click grouping', () => {
+  assert.equal(O.meterFits(order('d4-06'), M(6, 8)), 'group');
+  assert.equal(O.meterFits(order('d4-07'), M(3, 4)), 'group');
+});
+check('PK-07 ambiguous unbeamed score is rejected by uniqueness check', () => {
+  const ambiguous = O.makeOrder({ id: 'ambiguous', ask: 'score', meter: [6, 8], target: '2.' });
+  assert.equal(O.pickUnique(ambiguous), false);
+});
+check('TX-01 all order texts are generated and nonempty', () => {
+  for (const o of orders) assert.ok(O.orderText(o).endsWith('주세요.'), o.id);
+  assert.equal(O.orderText(order('d2-01')), '4분의 4박자 피자를 조각 3개로 주세요.');
+});
+check('TX-02 grouping particles follow final numeral', () => {
+  assert.match(O.orderText(order('d3-03')), /3\+3이 보이게/);
+  for (const [groups, wording] of [[[3, 2], '3+2가'], [[2, 3], '2+3이']]) {
+    assert.ok(O.orderText(O.makeOrder({ id: 'mixed', ask: 'group', meter: [5, 8], groups })).includes(wording));
+  }
+  assert.match(O.orderText(order('d3-06')), /박이 보이게/);
+});
+check('TX-03 tags include close and retry prefixes', () => {
+  assert.equal(O.tagKo(order('d0-01')), '자리 채우기');
+  assert.equal(O.tagKo(order('d2-02')), '다른 조합');
+  assert.equal(O.tagKo(order('d3-08')), '마감 · 묶음 주문');
+  assert.equal(O.tagKo(order('d1-01'), true), '다시 한 번 · 지정 주문');
+});
+check('TX-04 building messages explain amount and conceal closing help', () => {
+  assert.match(O.buildText(order('d1-01'), fill('4')).text, /4분음표 3개/);
+  assert.match(O.buildText(order('d1-01'), fill('4 4 4 4')).text, /딱 맞아요/);
+  assert.match(O.buildText(order('d3-03'), fill('4 4 4')).text, /2번째 조각/);
+  assert.equal(O.buildText(order('d3-08'), fill('4')).text, '마감 주문이에요. 도움 없이 만들어요.');
+  assert.match(O.buildText(order('d0-07'), fill('4'), N(4)).text, /8분음표 1개만큼 넘쳐요/);
+});
+check('TX-05 verdict messages include precise cause', () => {
+  for (const [id, rhythm, expected] of [['d2-01', '4', '더 필요해요'], ['d2-01', '4 4 4 4', '주문은 3개'],
+    ['d3-03', '4 4 4', '3+3 묶음'], ['d4-01', '8 4 8', '1번째 조각']]) {
+    const o = order(id); assert.ok(O.judgeText(o, O.judge(o, fill(rhythm))).includes(expected));
+  }
+});
+check('TX-06 serving messages use correct collection and slot relation', () => {
+  assert.match(O.serveText(order('d0-07'), fill('4 8')), /길이가 같아요/);
+  assert.match(O.serveText(order('d3-02'), fill('4. 4.'), 'menu'), /묶음 3\+3.*메뉴판/);
+  assert.match(O.serveText(order('d2-04'), fill('8 4 8'), 'shelf'), /엇박 선반/);
+});
+check('TX-07 pick explanations and second-attempt assistance', () => {
+  assert.match(O.pickPrompt(order('d1-03')), /몇 칸일까요/);
+  assert.match(O.pickWrongText(order('d1-03'), 0, 1), /4분음표 3개/);
+  assert.match(O.pickWrongText(order('d1-03'), 0, 2), /6칸.*확정/);
+  assert.match(O.pickWrongText(order('d4-02'), 1, 1), /걸쳐요/);
+  assert.match(O.pickWrongText(order('d4-03'), 3, 1), /꼬리/);
+  assert.match(O.pickWrongText(order('d4-06'), 3, 1), /큰 박 클릭/);
+  assert.match(O.pickRightText(order('d4-08')), /8분의 6박자/);
+});
+check('TX-08 all discovery templates interpolate correctly', () => {
+  for (const sc of scenes) assert.doesNotMatch(O.sceneText(sc), /\{[mcnw]\d\}/);
+  assert.match(O.sceneText(scenes.find(s => s.id === 'S3')), /둘씩 셋.*셋씩 둘/);
+  const s4 = scenes.find(s => s.id === 'S4');
+  assert.deepEqual(s4.states.map(st => straddles(st.fill, st.B)), [[1], []]);
+});
+check('TX-09 closing text and order record identity', () => {
+  assert.match(O.closeText(7, 8), /도장을 받았어요/);
+  assert.match(O.closeText(5, 8), /●가 2개/);
+  assert.match(O.recordText(order('d4-02')), /4분·8분·4분·8분.*8분의 6박자/);
+  assert.match(O.recordText(order('d4-06')), /소리 주문: 4분의 3박자/);
+});
+check('AU-01 pitch derived from equal-temperament formula', () => {
+  assert.ok(Math.abs(E.hz(72) - 523.2511306011972) < 1e-10);
+  assert.ok(Math.abs(E.hz(60) - 261.6255653005986) < 1e-10);
+});
+check('AU-02 duration-to-seconds preserves note length', () => {
+  const near = (a, b) => assert.ok(Math.abs(a - b) < 1e-10);
+  near(E.toSec(F(3, 4), 0.3), 1.8);
+  near(E.toSec(F(1), 0.3), 2.4);
+  near(E.toSec(F(1, 8), 0.45), 0.45);
+  spans(fill('2 4 4')).forEach((s, i) => near(E.toSec(s.s, 0.3), [0, 1.2, 1.8][i]));
+});
+check('CT-02 and CT-03 generated content avoids prohibited or reduced wording', () => {
+  const banned = /여섯 박|6박|틀렸|틀린|오답|실패/;
+  const texts = [];
+  for (const o of orders) {
+    texts.push(O.orderText(o), O.tagKo(o), O.recordText(o));
+    if (o.pick) texts.push(O.pickPrompt(o), O.pickRightText(o));
+    for (const f of O.solutions(o)) texts.push(O.buildText(o, f).text, O.serveText(o, f));
+    if (o.m?.num === 6) assert.doesNotMatch(O.orderText(o), /4분의 3박자/);
+  }
+  texts.push(...scenes.map(O.sceneText));
+  for (const text of texts) assert.doesNotMatch(text.replaceAll('8분의 6박자', ''), banned);
+});
+
+  }
+  {
+    category = 'SM';
+const { solutions, pickAnswer, makeItem, menuKeys } = O; const { parseFill, keyOf, fillsOf } = E;
+
+function answer(game) {
+  const o = game.item();
+  if (o.kind === 'scene') { game.nextItem(); return; }
+  if (game.state.phase === 'pick') { game.choose(pickAnswer(o)); game.confirmPick(); }
+  if (game.state.phase === 'build') { for (const note of solutions(game.item(), game.state.last)[0]) game.place(note); game.bakePress(); }
+  assert.equal(game.state.phase, 'bake', o.id);
+  game.completeBake();
+  assert.equal(game.state.phase, 'serve', o.id);
+}
+
+check('all five days complete all 39 exact orders and four discoveries without assistance', () => {
+  const game = new Game();
+  for (const day of DAYS) {
+    game.startDay(day.id);
+    let guard = 100;
+    while (game.state.screen === 'shift' && guard-- > 0) { const o = game.item(); answer(game); if (o.kind !== 'scene') game.nextItem(); }
+    assert.ok(guard > 0);
+    const count = day.items.filter(item => !item.states).length;
+    assert.equal(game.state.screen, 'close');
+    assert.equal(game.state.results.length, count);
+    assert.ok(game.state.results.every(result => result.recipe === 'full'));
+    assert.deepEqual(game.save.days[day.id], { passed: true, runs: 1, best: count });
+  }
+  assert.equal(game.save.stats.orders, 39);
+  assert.equal(game.save.stats.clean, 39);
+  assert.deepEqual(game.save.scenes.sort(), ['S1', 'S2', 'S3', 'S4']);
+});
+
+check('every assisted order is repeated once before final, with original marks preserved', () => {
+  for (const day of DAYS) {
+    const game = new Game(); game.startDay(day.id);
+    const repeatIds = [];
+    let guard = 100;
+    while (game.state.screen === 'shift' && guard-- > 0) {
+      const o = game.item(), e = game.entry();
+      if (o.kind === 'scene') { game.nextItem(); continue; }
+      if (e.redo) { repeatIds.push(o.id); assert.equal(o.fresh, false); }
+      else game.setState({ assisted: true });
+      answer(game); game.nextItem();
+    }
+    assert.ok(guard > 0);
+    const originals = day.items.filter(item => !item.states);
+    assert.deepEqual(repeatIds, originals.filter(item => !item.final).map(item => item.id));
+    assert.ok(game.state.results.every(result => result.recipe === 'half'));
+    assert.ok(game.state.results.filter(result => result.id !== originals.at(-1).id).every(result => result.again === 'full'));
+    assert.equal(game.state.queue.at(-1).redo, false);
+    assert.equal(game.save.days[day.id].passed, false);
+  }
+});
+
+check('pick omissions do not count; second choice miss supplies answer and build tries reset', () => {
+  const game = new Game(); game.startDay('d1'); game.enter(3);
+  const answerIndex = pickAnswer(game.item());
+  game.confirmPick(); assert.equal(game.state.tries, 0); assert.equal(game.state.assisted, false);
+  game.choose((answerIndex + 1) % 3); game.confirmPick(); assert.equal(game.state.tries, 1);
+  game.choose((answerIndex + 1) % 3); game.confirmPick(); assert.equal(game.state.tries, 2); assert.equal(game.state.sel, answerIndex);
+  game.confirmPick(); assert.equal(game.state.phase, 'build'); assert.equal(game.state.tries, 0); assert.equal(game.state.assisted, true);
+});
+
+check('incomplete bakes, overflow and a stopped bake preserve attempts and original pieces', () => {
+  const game = new Game(); game.startDay('d0');
+  game.bakePress(); assert.equal(game.state.tries, 0);
+  game.place(parseFill('4')[0]);
+  const before = keyOf(game.state.fill); game.place(parseFill('1')[0]); assert.equal(keyOf(game.state.fill), before);
+  game.place(parseFill('4')[0]); game.bakePress(); game.stopBake();
+  assert.equal(game.state.phase, 'build'); assert.equal(game.state.tries, 0); assert.equal(game.state.assisted, false);
+  assert.equal(keyOf(game.state.fill), '4 4'); assert.deepEqual(game.state.menu, {});
+});
+
+check('second condition miss supplies first computed answer without baking', () => {
+  const game = new Game(); game.startDay('d2');
+  game.place(parseFill('1')[0]); game.bakePress(); assert.equal(game.state.tries, 1); assert.equal(game.state.phase, 'build');
+  game.bakePress(); assert.equal(game.state.tries, 2); assert.equal(game.state.assisted, true);
+  assert.equal(keyOf(game.state.fill), keyOf(solutions(game.item(), game.state.last)[0]));
+});
+
+check('group crossing is heard before assistance, but a condition order accepts and shelves it', () => {
+  const grouped = new Game(); grouped.startDay('d3'); grouped.enter(3);
+  for (const note of parseFill('4 4 4')) grouped.place(note);
+  grouped.bakePress(); assert.equal(grouped.state.phase, 'bake'); assert.equal(grouped.state.tries, 0);
+  grouped.completeBake(); assert.equal(grouped.state.phase, 'build'); assert.equal(grouped.state.tries, 1); assert.equal(keyOf(grouped.state.fill), '4 4 4');
+  const cond = new Game(); cond.startDay('d2'); cond.enter(4);
+  for (const note of parseFill('8 4 8')) cond.place(note);
+  cond.bakePress(); cond.completeBake();
+  assert.equal(cond.state.phase, 'serve'); assert.equal(cond.state.assisted, false);
+  assert.deepEqual(cond.state.shelf['2/4'], ['8 4 8']); assert.equal(cond.state.menu['2/4'], undefined);
+});
+
+check('other combination rejects known fill without marking and quit restores last served fill', () => {
+  const game = new Game(); game.startDay('d2'); answer(game);
+  const served = keyOf(game.state.served); assert.equal(game.canOther(), true);
+  game.otherFill(); for (const note of parseFill(served)) game.place(note); game.bakePress();
+  assert.equal(game.state.phase, 'build'); assert.equal(game.state.tries, 0); assert.equal(game.state.assisted, false);
+  assert.match(game.state.msg.text, /이미 찾은/);
+  game.clear(); game.place(parseFill('4')[0]); game.quitExtra();
+  assert.equal(game.state.phase, 'serve'); assert.equal(keyOf(game.state.fill), served);
+});
+
+check('all solutions collected disables other combination', () => {
+  const game = new Game(); game.startDay('d2'); answer(game);
+  let guard = 50;
+  while (game.canOther() && guard-- > 0) {
+    game.otherFill();
+    const fill = solutions({ ...game.item(), fresh: false }).find(fill => !game.found(game.item()).includes(keyOf(fill)));
+    for (const note of fill) game.place(note);
+    game.bakePress(); game.completeBake();
+  }
+  assert.ok(guard > 0); assert.equal(game.canOther(), false);
+});
+
+check('resume restores redo queue and records but restarts current order without partial pieces', () => {
+  const game = new Game(); game.startDay('d2'); game.setState({ assisted: true }); answer(game); game.nextItem();
+  const queue = game.state.queue; const idx = game.state.idx;
+  game.place(parseFill('2')[0]); game.checkpoint();
+  const restored = new Game(JSON.parse(JSON.stringify(game.save))); assert.equal(restored.resume(), true);
+  assert.deepEqual(restored.state.queue, queue); assert.equal(restored.state.idx, idx); assert.deepEqual(restored.state.results, game.state.results);
+  assert.equal(restored.state.last, game.state.last); assert.deepEqual(restored.state.fill, []); assert.equal(restored.state.phase, 'build');
+});
+
+check('free oven keeps equal-length fill, clears different-length fill and only collects complete bakes', () => {
+  const game = new Game(); game.startFree(1);
+  for (const note of parseFill('4 4 4')) game.place(note);
+  game.changeMeter(3); assert.equal(keyOf(game.state.fill), '4 4 4');
+  game.bakePress(); game.stopBake(); assert.deepEqual(game.state.shelf, {});
+  game.bakePress(); game.completeBake(); assert.deepEqual(game.state.shelf['6/8'], ['4 4 4']);
+  game.changeMeter(1); game.bakePress(); game.completeBake(); assert.deepEqual(game.state.menu['3/4'], ['4 4 4']);
+  game.changeMeter(0); assert.deepEqual(game.state.fill, []);
+});
+
+check('sound-pick stop counts accepted answer; interrupted sound returns to choice', () => {
+  const game = new Game(); game.startDay('d4'); game.enter(4);
+  game.choose(pickAnswer(game.item())); game.confirmPick(); game.stopBake(true);
+  assert.equal(game.state.phase, 'pick'); assert.equal(game.state.assisted, false); assert.deepEqual(game.state.menu, {});
+  game.confirmPick(); game.stopBake(false); assert.equal(game.state.phase, 'serve');
+});
+
+check('passed stamps and best scores survive later assisted run', () => {
+  const save = freshSave(); save.days.d0 = { passed: true, runs: 1, best: 8 };
+  const game = new Game(save); game.startDay('d0');
+  let guard = 100;
+  while (game.state.screen === 'shift' && guard-- > 0) { game.setState({ assisted: true }); answer(game); game.nextItem(); }
+  assert.deepEqual(game.save.days.d0, { passed: true, runs: 2, best: 8 });
+  assert.equal(game.save.active, null);
+});
+
+  }
+  {
+    category = 'SV';
+
+
+function storage(initial = {}) {
+  const values = new Map(Object.entries(initial));
+  return { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), values };
+}
+
+check('SV-01 version 1 settings, day, books, scenes and active order survive round trip', () => {
+  const save = freshSave(), host = storage();
+  save.settings = { ...save.settings, slow: true, motion: 'reduced', soundChecked: true, tips: ['place'] };
+  save.days.d0 = { passed: true, best: 7, runs: 2 };
+  save.menu = { '3/4': ['4 4 4'] };
+  save.shelf = { '2/4': ['8 4 8'] };
+  save.scenes = ['S1'];
+  save.stats = { orders: 8, clean: 7, bakes: 9 };
+  save.active = { day: 'd1', queue: [{ i: 0, redo: false }, { i: 1, redo: true }], idx: 1, results: [{ id: 'd1-02', text: '기록', recipe: 'half', again: 'full' }], last: '4 4', fresh: 2, freshShelf: 1 };
+  assert.equal(writeSave(save, host), true);
+  assert.deepEqual(loadSave(host).save, save);
+  assert.equal(loadSave(host).persistent, true);
+});
+
+check('SV-02 damaged and future saves preserve original bytes in backup', () => {
+  for (const raw of ['{broken', '{"version":2,"unknown":"keep"}', 'null', '[]']) {
+    const host = storage({ [SAVE_KEY]: raw }), loaded = loadSave(host);
+    assert.equal(loaded.recovered, true);
+    assert.deepEqual(loaded.save, freshSave());
+    assert.equal(host.values.get(BACKUP_KEY), raw);
+    assert.equal(host.values.get(SAVE_KEY), raw);
+  }
+});
+
+check('missing v1 fields receive defaults, values are bounded and unknown day IDs ignored', () => {
+  const host = storage({ [SAVE_KEY]: JSON.stringify({ version: 1, settings: { volume: 9, slow: 'yes', motion: 'bad' }, days: { d0: { best: 50, runs: -1, passed: true }, d9: {} }, stats: { orders: -1 } }) });
+  const save = loadSave(host).save;
+  assert.equal(save.settings.volume, 1);
+  assert.equal(save.settings.slow, false);
+  assert.equal(save.settings.motion, 'system');
+  assert.deepEqual(save.days.d0, { passed: true, best: 8, runs: 0 });
+  assert.equal(save.days.d9, undefined);
+  assert.deepEqual(save.stats, { orders: 0, clean: 0, bakes: 0 });
+});
+
+check('SV-03 blocked localStorage falls back to current session and reports limitation', () => {
+  const blocked = { getItem() { throw new Error('blocked'); }, setItem() { throw new Error('blocked'); } };
+  const save = freshSave(); save.settings.slow = true;
+  assert.equal(writeSave(save, blocked), false);
+  const loaded = loadSave(blocked);
+  assert.equal(loaded.persistent, false);
+  assert.equal(loaded.save.settings.slow, true);
+  assert.equal(loaded.warning, '이 기기에서는 기록이 저장되지 않아요.');
+});
+
+check('SV-04 menu and shelf are filtered by exact full length and crossing semantics', () => {
+  const raw = { version: 1, menu: { '3/4': ['4 4 4', '4 4 4', '8 4 8', '4. 4.', '1', 'bad', '0'], '6/8': ['4. 4.'], '9/8': ['4. 4. 4.'] }, shelf: { '2/4': ['8 4 8', '4 4', '8 8', 'bad'], '6/8': ['4 4 4', '4. 4.'] }, scenes: ['S1', 'S1', 'S9'] };
+  const save = loadSave(storage({ [SAVE_KEY]: JSON.stringify(raw) })).save;
+  assert.deepEqual(save.menu, { '3/4': ['4 4 4'], '6/8': ['4. 4.'] });
+  assert.deepEqual(save.shelf, { '2/4': ['8 4 8'], '6/8': ['4 4 4'] });
+  assert.deepEqual(save.scenes, ['S1']);
+});
+
+check('invalid resumable queues never reach game indexing', () => {
+  for (const active of [ { day: 'd9', queue: [], idx: 0 }, { day: 'd0', queue: [{ i: 100, redo: false }], idx: 0 }, { day: 'd0', queue: [{ i: 0, redo: false }], idx: 8 }, { day: 'd0', queue: [{ i: 7, redo: true }], idx: 0 } ]) {
+    assert.equal(loadSave(storage({ [SAVE_KEY]: JSON.stringify({ version: 1, active }) })).save.active, null);
+  }
+});
+
+check('fresh saves do not share mutable arrays or objects', () => {
+  const a = freshSave(), b = freshSave();
+  a.settings.tips.push('x'); a.days.d0.best = 7; a.menu['2/4'] = ['4 4'];
+  assert.deepEqual(b.settings.tips, []);
+  assert.equal(b.days.d0.best, 0);
+  assert.deepEqual(b.menu, {});
+});
+
+  }
+
+  category = 'AU';
+  check('AU-03 metered schedule uses one preparation and two exact rhythm loops', () => {
+    const spec = { m: E.M(3, 4), fill: E.parseFill('4 4 4') }, plan = createAudioPlan(spec);
+    const tones = plan.events.filter(event => event.type === 'tone');
+    assert.equal(tones.length, 6);
+    tones.forEach((event, i) => assert.ok(Math.abs(event.time - (1.8 + i * .6)) < 1e-9));
+    const clicks = plan.events.filter(event => event.type === 'click');
+    assert.equal(clicks.length, 18);
+    clicks.forEach((event, i) => assert.ok(Math.abs(event.time - i * .3) < 1e-9));
+    const slow = createAudioPlan({ m: E.M(4, 4), fill: E.parseFill('2 4 4') }, { slow: true, subs: false });
+    const mainClicks = slow.events.filter(event => event.type === 'click');
+    assert.equal(mainClicks.length, 12);
+    mainClicks.forEach((event, i) => assert.ok(Math.abs(event.time - i * .9) < 1e-9));
+    assert.deepEqual(CLICK.map(value => value[0]), [2700, 1900, 1250]);
+  });
+  check('AU-04 slot compares one low reference tone with exactly equal-duration pieces', () => {
+    const plan = createAudioPlan({ slot: E.N(4, 1), fill: E.parseFill('4 8') });
+    const tones = plan.events.filter(event => event.type === 'tone');
+    assert.equal(plan.events.filter(event => event.type === 'click').length, 8);
+    assert.deepEqual(tones.map(event => event.midi), [60, 72, 72]);
+    tones.forEach((event, i) => assert.ok(Math.abs(event.time - [.6, 1.5, 2.1][i]) < 1e-9));
+  });
+  check('AU-05 stop cancels the entire outstanding node group and hides the needle', () => {
+    const frames = [], engine = new AudioEngine({ onFrame: value => frames.push(value) });
+    let cancelled = 0;
+    engine.nodes.add({ stop() { cancelled++; } });
+    engine.nodes.add({ stop() { cancelled++; } });
+    engine.run = { kind: 'bake' }; engine.stop();
+    assert.equal(cancelled, 2); assert.equal(engine.nodes.size, 0); assert.equal(engine.run, null);
+    assert.equal(frames.at(-1).visible, false);
+    engine.destroy();
+  });
+  check('AU-06 sound questions force subdivision clicks while normal replay honors settings', () => {
+    const spec = { m: E.M(3, 4), fill: E.parseFill('4 4 4') };
+    assert.equal(createAudioPlan(spec, { subs: false, kind: 'hear' }).events.filter(event => event.type === 'click').length, 18);
+    assert.equal(createAudioPlan(spec, { subs: false, kind: 'listen' }).events.filter(event => event.type === 'click').length, 9);
+  });
+  // Restore the fallback snapshot after fake-storage tests; never write to the device.
+  writeSave(originalMemory, null);
+  const groupMap = {};
+  for (const result of results) { groupMap[result.group] ||= { name: result.group, pass: 0, passed: 0, total: 0, failures: [], results: [] }; const group = groupMap[result.group]; group.total++; group.results.push(result); if (result.ok) { group.pass++; group.passed++; } else group.failures.push(result.name); }
+  const pass = results.filter(result => result.ok).length;
+  return { pass, passed: pass, total: results.length, fail: results.length - pass, results, groups: Object.values(groupMap), groupMap };
+}
+
+return {selfTests};
+})();
+__modules.main=(()=>{
+const { F, N, num, cells, dur, lengthIn, parseFill, keyOf, shortKo, noteKo, meterKo, capacity, defaultGroups, eq, sameNote } = __modules.engine;
+const { PIECES, METERS, makeOrder, makeItem, meterKey, menuKeys, orderText, tagKo, buildText, pickPrompt, pickOptions, sceneText, stateLabels, closeText, newText, passNeed, scoreAlt } = __modules.orders;
+const { DAYS } = __modules.seeds;
+const { loadSave, writeSave } = __modules.storage;
+const { Game } = __modules.game;
+const { boardSVG, rhythmSVG, traySVG, doughSVG, timerSVG, ovenSceneSVG, stampSVG } = __modules.render;
+const { AudioEngine } = __modules.audio;
+const { selfTests } = __modules.selftest;
+const $=id=>document.getElementById(id), esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const loaded=loadSave();let persistent=loaded.persistent, boardKey='', stripKey='', cardKey='', screenKey='', menuTab=0, replayScene=false, inRender=false, activeIndex=-1, menuRun=false,playRequest=0;
+const store=save=>{persistent=writeSave(save)&&persistent;};
+const game=new Game(loaded.save,()=>render(),store), tests=selfTests();
+window.__tests=tests;
+const audio=new AudioEngine({onState:()=>updateSound(),onFrame:frame=>{
+  const s=game.state;
+  if(s.playing==='hear')return;
+  const hand=$('hand');if(hand){hand.setAttribute('visibility',frame.visible===false?'hidden':'visible');hand.setAttribute('transform',`rotate(${frame.angle} 170 170)`);}
+  if(activeIndex!==frame.index||frame.all){document.querySelectorAll('.slice,.sn').forEach(el=>el.classList.toggle('on',frame.all||Number(el.dataset.i)===frame.index));activeIndex=frame.index;}
+},onInterrupt:(reason,message)=>{if(menuRun){menuRun=false;menuRender();}else{game.stopBake(true);game.setState({playing:'',msg:{tone:'warn',text:message||'소리가 멈춰서 중단했어요. 소리를 켜고 다시 해 주세요.'}});updateSound();}}});
+const soundSpec=()=>{const it=game.item();if(it.kind==='scene'){const st=it.states[game.state.st];return {...st,meter:st.m,groups:st.g};}return {...it,meter:it.m,groups:it.g,fill:game.state.playing==='hear'?it.target:game.state.fill};};
+function clearVisual(){const hand=$('hand');if(hand)hand.setAttribute('visibility','hidden');document.querySelectorAll('.on').forEach(el=>el.classList.remove('on'));activeIndex=-1;}
+function stopAudio(){playRequest++;audio.stop();menuRun=false;clearVisual();}
+function updateSound(){if($('sound')){$('sound').hidden=audio.available&&!game.save.settings.muted;$('sound').textContent=game.save.settings.muted?'소리 꺼짐':'소리 켜기';}}
+async function unlock(){const ok=await audio.unlock();if(!ok)game.setState({msg:{tone:'warn',text:'소리를 쓰기 어려워요. 화면으로 이어갈 수 있어요.'}});updateSound();return ok;}
+async function play(kind='bake') {
+  stopAudio(); const request=playRequest;await unlock();if(request!==playRequest)return;
+  const options={...game.save.settings,kind,onEnd:()=>{clearVisual();if(kind==='bake')game.completeBake();else game.setState({playing:''});}};
+  if(kind!=='bake')game.setState({playing:kind});
+  audio.play(soundSpec(),options);
+}
+async function bake(){const result=game.bakePress();if(result?.play)await play();}
+function go(screen){if(location.hash==='#test')history.replaceState(null,'',location.pathname);stopAudio();if(game.state.screen==='shift'&&!replayScene){if(game.state.phase==='bake')game.stopBake(true);game.checkpoint();}replayScene=false;game.setState({screen,playing:''});$('screen').focus();}
+function start(id){stopAudio();replayScene=false;game.startDay(id);if(id==='d0'&&!game.save.settings.soundChecked)soundCheck();}
+
+// Keep the board and the six tray controls alive throughout playback.
+function boardView(){
+  const s=game.state,it=game.item();if(!it)return {};
+  if(it.kind==='scene'){const st=it.states[s.st];return {meter:st.m,groups:st.g,fill:st.fill,interactive:false};}
+  const base={meter:it.m,slot:it.slot,fill:s.fill,help:!it.final||s.assisted,interactive:s.phase==='build',ghost:s.ghost};
+  if(s.phase==='pick'){
+    if(it.pick==='dough')return {...base,fill:[],len:s.sel===null?null:F(pickOptions(it)[s.sel],8),groups:[],hub:{m:it.m},preview:true,previewLabel:s.sel===null?'':pickOptions(it)[s.sel]+'칸'};
+    return s.sel===null?{len:null,fill:[],interactive:false,hub:{text:'?'}}:{meter:METERS[s.sel],fill:[],interactive:false,preview:true};
+  }
+  return base;
+}
+function renderBoard(){const view=boardView(),key=JSON.stringify(view);if(key===boardKey)return;const focus=document.activeElement?.closest?.('.slice'),i=focus?Number(focus.dataset.i):null;boardKey=key;$('boardwrap').innerHTML=boardSVG(view);if(i!==null){const pieces=$('boardwrap').querySelectorAll('.slice');(pieces[Math.min(i,pieces.length-1)]||$('bake')).focus();}}
+function setText(id,text){if($(id).textContent!==text)$(id).textContent=text;}
+function gameRender(){
+  const s=game.state,it=game.item();if(!it)return;
+  const free=s.screen==='free',scene=it.kind==='scene',day=DAYS.find(d=>d.id===s.day);
+  $('app').hidden=false;$('screen').hidden=true;
+  setText('dayname',free?'자유 화덕':replayScene?'발견 장면':`${s.day.slice(1)}단 · ${day.name}`);
+  const dots=free||replayScene?'':game.dayItems.filter(x=>x.kind==='order').map(o=>{const r=s.results.find(x=>x.id===o.id),current=it.id===o.id;return `<span class="dot ${current?'current':''} ${r?.recipe||''}" aria-label="${o.id} ${r?r.recipe==='full'?'한 번에 맞힘':'안내를 받고 맞힘':'아직'}${current?' 현재 주문':''}">${r?r.recipe==='full'?'●':'◐':'○'}</span>`;}).join('');
+  if($('dots').innerHTML!==dots)$('dots').innerHTML=dots;
+  const ck=free?'free'+meterKey(it.m):s.day+it.id+!!game.entry()?.redo;
+  if(cardKey!==ck){cardKey=ck;
+    $('scoreCard').hidden=true;$('card').classList.toggle('free-card',free);
+    if(free){setText('tag','자유 화덕');$('order').innerHTML=METERS.map((m,i)=>`<button data-meter="${i}" aria-label="${meterKo(m)}" aria-pressed="${eq(capacity(m),it.len)&&meterKey(m)===meterKey(it.m)}">${m.num}<span class="meter-line"></span>${m.den}</button>`).join('');}
+    else{setText('tag',scene?'발견 장면':tagKo(it,game.entry().redo));setText('order',scene?it.title:orderText(it));if(it.ask==='score'){$('scoreCard').hidden=false;$('scoreCard').innerHTML=rhythmSVG({fill:it.target,meter:it.m,width:150,height:34,plain:true,label:scoreAlt(it)});}}
+  }
+  renderBoard();
+  const build=s.phase==='build',pick=s.phase==='pick',strip=['bake','serve'].includes(s.phase);
+  $('tray').hidden=!build;$('choices').hidden=!(pick||scene);$('stripbox').hidden=!strip;
+  for(const [i,button]of [...$('tray').querySelectorAll('button')].entries()){const n=PIECES[i];if(!button.dataset.ready){button.innerHTML=traySVG(n)+`<span>${shortKo(n)}</span><small>${num(cells(dur(n)))}칸</small>`;button.dataset.ready='1';button.setAttribute('aria-label',`${noteKo(n)}, ${num(cells(dur(n)))}칸`);}button.disabled=!it.tray?.some(x=>sameNote(x,n));}
+  if(pick||scene){const options=scene?stateLabels(it):pickOptions(it);[...$('choices').querySelectorAll('button')].forEach((b,i)=>{b.hidden=i>=options.length;if(b.hidden)return;const text=scene?options[i]:it.pick==='dough'?options[i]+'칸':meterKo(options[i]);b.innerHTML=!scene&&it.pick==='meter'?`<span class="meter-choice">${options[i].num}<i></i>${options[i].den}</span>`:!scene&&it.pick==='dough'?doughSVG(options[i])+`<span>${esc(text)}</span>`:esc(text);b.setAttribute('aria-label',text);b.setAttribute('aria-pressed',String(i===(scene?s.st:s.sel)));});}
+  if(strip){const key=keyOf(s.fill)+JSON.stringify(it.m)+$('stripbox').clientWidth;if(stripKey!==key){stripKey=key;$('stripbox').innerHTML=rhythmSVG({fill:s.fill,meter:it.m,slot:it.slot,len:it.len,width:Math.max(280,$('stripbox').clientWidth),height:68});}}
+  ['build','pick','bake','serve','scene'].forEach(p=>{$('act-'+p).hidden=s.phase!==p;});
+  if(s.phase==='build'){$('undo').disabled=!s.fill.length;$('clear').disabled=!s.fill.length&&!s.extra;setText('clear',s.extra?'그만하기':'비우기');}
+  if(s.phase==='serve'){$('other').disabled=!game.canOther();setText('next',s.idx===s.queue.length-1?'마감하기':'다음 주문');setText('again',s.playing?'멈추기':'다시 듣기');}
+  $('hear').hidden=it.ask!=='sound';setText('hear',s.playing?'멈추기':'주문 듣기');setText('sceneHear',s.playing?'멈추기':'들어 보기');setText('sceneNext',replayScene?'메뉴판으로':'알겠어요');
+  let msg=s.msg||(scene?{text:sceneText(it)}:pick?{text:pickPrompt(it)}:build?buildText(s.assisted?{...it,final:false}:it,s.fill,s.ghost):{text:''});
+  const tip=inlineTip();if(tip&&!s.msg)msg={text:tip};
+  setText('readout',msg.text);$('readout').className='readout '+(msg.tone||'');
+  updateSound();
+}
+function shellScreen(html,key){$('app').hidden=true;$('screen').hidden=false;if(screenKey!==key){screenKey=key;$('screen').innerHTML=html;}}
+const header=(name,subtitle='')=>`<header class="screen-head"><button data-go="title" class="icon-button" aria-label="처음으로">←</button><div><p class="eyebrow">똑딱 화덕</p><h1 class="screen-title">${name}</h1></div><button data-settings class="icon-button" aria-label="설정">설정</button></header>${subtitle?`<p class="lead">${subtitle}</p>`:''}`;
+function titleRender(){const save=game.save,count=Object.values(save.menu).reduce((n,a)=>n+a.length,0);shellScreen(`<div class="title-screen"><p class="eyebrow">한 조각씩, 박자가 들려요</p><h1>박자표<br><span>피자 화덕</span></h1><div class="hero">${ovenSceneSVG()}</div><p class="lead">같은 크기의 조각, 서로 다른 리듬.<br>피자를 만들며 박자표를 배워요.</p><div class="title-actions">${save.active?'<button class="primary" data-resume>이어서 영업</button>':''}<button class="${save.active?'secondary':'primary'}" data-go="map">영업일 지도</button><div class="two-actions"><button data-free>자유 화덕</button><button data-go="menu">메뉴판 <small>${count}/69</small></button></div></div><p class="caption">재촉하지 않아요. 만들고, 듣고, 다시 해 봐요.</p><button class="quiet" data-settings>소리와 화면 설정</button></div>`,'title'+JSON.stringify(save));}
+function mapRender(){shellScreen(header('영업일 지도','도장을 모으며 새로운 주문을 만나 봐요.')+`<div class="day-list">${DAYS.map((d,i)=>{const unlocked=i===0||game.save.days[DAYS[i-1].id].passed,r=game.save.days[d.id],n=d.items.filter(x=>!x.states).length;return `<button class="day-card ${unlocked?'':'locked'}" data-day="${d.id}" ${unlocked?'':'aria-disabled="true"'}><span class="day-num">${i}</span><span><strong>${d.name}</strong><small>${unlocked?`주문 ${n}개 · ● ${r.best}/${n}`:'앞 영업일을 통과하면 열려요.'}</small></span><span class="stamp">${r.passed?stampSVG(i):unlocked?'→':'잠김'}</span></button>`;}).join('')}</div><button class="secondary wide" data-free>수업에서 자유롭게 · 자유 화덕</button>`,'map'+JSON.stringify(game.save.days));}
+function menuRender(){const m=METERS[menuTab],mk=meterKey(m),have=game.state.menu[mk]||[],keys=menuKeys(m),shelf=game.state.shelf[mk]||[],scenes=DAYS.flatMap(d=>d.items.filter(i=>i.states&&game.save.scenes.includes(i.id)));shellScreen(header('나의 메뉴판',`묶음이 보이는 리듬을 모아요. ${Object.values(game.state.menu).reduce((n,a)=>n+a.length,0)}/69칸을 찾았어요.`)+`<nav class="menu-tabs" aria-label="박자표">${METERS.map((x,i)=>`<button data-tab="${i}" aria-pressed="${i===menuTab}">${meterKey(x)}<small>${(game.state.menu[meterKey(x)]||[]).length}/${menuKeys(x).length}</small></button>`).join('')}</nav><div class="menu-grid">${keys.map((k,i)=>have.includes(k)?`<button class="recipe" data-recipe="${esc(k)}" data-mk="${menuTab}" aria-label="리듬 ${i+1} 듣기: ${parseFill(k).map(noteKo).join(', ')}">${rhythmSVG({fill:parseFill(k),meter:m,width:190,height:70})}<small>${menuRun?'다른 리듬 듣기':'듣기'}</small></button>`:`<div class="recipe unknown" aria-label="아직 찾지 않은 리듬">${i+1}<small>새 리듬을 찾아요</small></div>`).join('')}</div><section class="shelf"><h2>엇박 선반</h2><p>박 경계를 걸친 리듬도 소중하게 모아요.</p>${shelf.length?shelf.map(k=>`<button class="recipe" data-recipe="${esc(k)}" data-mk="${menuTab}">${rhythmSVG({fill:parseFill(k),meter:m,width:280,height:68})}<small>듣기</small></button>`).join(''):'<p class="caption">조각 음과 큰 박이 어긋나는 소리를 찾아보세요.</p>'}</section><section><h2>다시 보는 발견</h2>${scenes.length?scenes.map(sc=>`<button class="scene-link" data-scene="${sc.id}">${sc.title} →</button>`).join(''):'<p class="caption">영업 중 만난 발견 장면이 여기에 모여요.</p>'}</section><button class="secondary wide" data-free>자유 화덕에서 새 리듬 찾기</button>${menuRun?'<button class="primary floating-stop" data-menu-stop>멈추기</button>':''}`,'menu'+menuTab+JSON.stringify(game.state.menu)+JSON.stringify(game.state.shelf)+menuRun+game.save.scenes.join());}
+function closeRender(){const s=game.state,clean=s.results.filter(r=>r.recipe==='full').length,pass=clean>=passNeed(s.results.length);shellScreen(header('오늘의 영업 마감')+`<div class="close-stat">${pass?stampSVG(Number(s.day.slice(1))):timerSVG('calm')}<h2>${pass?'도장을 받았어요':'한 번 더 익혀 봐요'}</h2><p>${closeText(clean,s.results.length)}</p>${s.fresh||s.freshShelf?`<p>${newText(s.fresh,s.freshShelf)}</p>`:''}</div><div class="title-actions"><button class="primary" data-go="map">영업일 지도로</button><div class="two-actions"><button data-day="${s.day}">다시 영업하기</button><button data-go="menu">메뉴판 보기</button></div></div><h2>주문 기록</h2><div class="records">${s.results.map(r=>`<p class="record"><span>${r.recipe==='full'?'●':'◐'}</span><span>${esc(r.text)}${r.recipe==='half'?'<small>안내를 받고 맞힘'+(r.again==='full'?' · 다시 내서는 한 번에 맞힘':'')+'</small>':''}</span></p>`).join('')}</div>`,'close'+JSON.stringify(s.results));}
+function render(){if(inRender)return;inRender=true;try{const s=game.state;document.documentElement.dataset.motion=game.save.settings.motion;const gaming=['shift','free'].includes(s.screen);if(!gaming){boardKey='';cardKey='';}if(gaming)gameRender();else if(s.screen==='map')mapRender();else if(s.screen==='menu')menuRender();else if(s.screen==='close')closeRender();else titleRender();}finally{inRender=false;}}
+
+function markTip(name){if(!game.save.settings.tips.includes(name)){game.save.settings.tips.push(name);store(game.save);}}
+function inlineTip(){document.querySelectorAll('.tutorial-point').forEach(el=>el.classList.remove('tutorial-point'));const s=game.state,o=game.item();if(s.screen!=='shift'||!o||o.kind!=='order')return '';const tips=game.save.settings.tips,point=(id)=>$(id)?.classList.add('tutorial-point');
+  if(o.id==='d0-01'&&s.phase==='build'){if(!s.fill.length&&!tips.includes('tray'))point('tray');else if(s.fill.length)markTip('tray');if(lengthIn(o.len,s.fill).state==='exact'&&!tips.includes('bake'))point('bake');}
+  if(o.id==='d0-02'&&s.phase==='build'&&s.fill.length&&!tips.includes('remove')){point('boardwrap');return '조각을 누르면 빠져요.';}
+  if(o.id==='d1-01'&&s.phase==='build'&&!tips.includes('groups')){point('boardwrap');return '큰 점이 박, 작은 점이 박을 나눈 자리예요.';}
+  if(o.id==='d1-03'&&s.phase==='pick'&&!tips.includes('pick'))point('choices');
+  if(s.day==='d2'&&s.phase==='serve'&&!tips.includes('other')){point('other');return '다른 리듬을 찾으면 메뉴판에 올라가요.';}return '';
+}
+function settings(){stopAudio();if(game.state.phase==='bake')game.stopBake(true);else if(game.state.playing)game.setState({playing:''});const set=game.save.settings;
+  $('settingsBody').innerHTML=`<p class="eyebrow">편안하게 배워요</p><h2>소리와 화면</h2><label class="setting-row"><span>전체 음량</span><input id="volume" type="range" min="0" max="1" step="0.05" value="${set.volume}" aria-label="전체 음량"></label>${[['muted','소리 끄기'],['slow','느리게 듣기'],['subs','분할 클릭 듣기']].map(([key,label])=>`<label class="setting-row"><span>${label}</span><input type="checkbox" data-setting="${key}" ${set[key]?'checked':''}></label>`).join('')}<label class="setting-row"><span>움직임</span><select id="motion"><option value="system">기기 설정 따르기</option><option value="reduced">줄이기</option><option value="full">모두 보기</option></select></label><button data-tips class="secondary wide">조작 안내 다시 보기</button><button data-soundcheck class="secondary wide">소리 확인하기</button><p class="caption">${persistent?'이 기기에 학습 기록을 저장해요.':'이 기기에서는 기록이 저장되지 않아요.'}</p><p class="caption">자가검사 ${tests.passed}/${tests.total} · <a href="#test">결과 보기</a></p><p class="caption">키보드: 숫자 1~6 조각 · Backspace 하나 빼기 · Enter 굽기/확정 · 0 전체화면</p>`;$('motion').value=set.motion;$('settingsDialog').showModal();
+}
+async function soundCheck(){stopAudio();$('tipBody').innerHTML=`${timerSVG('happy')}<h2>소리가 들리나요?</h2><p>기기의 음량과 무음 설정을 확인해 주세요.</p><button data-check-play class="secondary wide">음 하나 다시 듣기</button><div class="two-actions"><button data-check-yes class="primary">들려요</button><button data-check-no>안 들려요</button></div><p id="soundHelp" class="caption"></p>`;$('tipNext').textContent='지금은 건너뛰기';$('tipDialog').showModal();await checkTone();}
+async function checkTone(){audio.setVolume(game.save.settings.volume,game.save.settings.muted);await audio.testTone();}
+function endSoundCheck(checked){stopAudio();game.save.settings.soundChecked=checked;store(game.save);$('tipDialog').close();}
+
+// Persistent controls: attach listeners once, with delegation only for screen cards.
+$('back').onclick=()=>go(replayScene?'menu':game.state.screen==='free'?'title':'map');$('sound').onclick=async()=>{game.save.settings.muted=false;store(game.save);audio.setVolume(game.save.settings.volume,false);await unlock();render();};$('settings').onclick=settings;
+$('tray').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;game.place(PIECES[[...$('tray').querySelectorAll('button')].indexOf(b)]);};
+$('boardwrap').onclick=e=>{const p=e.target.closest('.slice');if(p){markTip('remove');game.removeAt(Number(p.dataset.i));}};
+$('boardwrap').onkeydown=e=>{const p=e.target.closest('.slice');if(p&&['Enter',' '].includes(e.key)){e.preventDefault();markTip('remove');game.removeAt(Number(p.dataset.i));}};
+$('choices').onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=Number(b.dataset.choice);if(game.state.phase==='scene'){stopAudio();game.setState({st:i,playing:'',msg:null});}else{markTip('pick');game.choose(i);}};
+$('card').onclick=e=>{const b=e.target.closest('[data-meter]');if(b){stopAudio();game.changeMeter(Number(b.dataset.meter));}};
+$('undo').onclick=()=>{markTip('remove');game.removeAt(game.state.fill.length-1);};$('clear').onclick=()=>game.state.extra?game.quitExtra():game.clear();$('bake').onclick=()=>{markTip('bake');if(game.item()?.id==='d1-01')markTip('groups');bake();};
+$('confirm').onclick=()=>{stopAudio();if(game.state.playing)game.setState({playing:''});const result=game.confirmPick();if(result?.play)play();};$('stop').onclick=()=>{stopAudio();game.stopBake();};
+$('hear').onclick=()=>game.state.playing?(stopAudio(),game.setState({playing:''})):play('hear');$('again').onclick=()=>game.state.playing?(stopAudio(),game.setState({playing:''})):play('listen');
+$('other').onclick=()=>{stopAudio();markTip('other');game.otherFill();};$('next').onclick=()=>{stopAudio();if(game.state.day==='d2'&&game.state.phase==='serve')markTip('other');game.nextItem();};$('sceneHear').onclick=()=>game.state.playing?(stopAudio(),game.setState({playing:''})):play('scene');$('sceneNext').onclick=()=>{stopAudio();if(replayScene)go('menu');else game.nextItem();};
+$('screen').onclick=async e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.go)go(b.dataset.go);else if(b.hasAttribute('data-resume')){stopAudio();game.resume();}else if(b.hasAttribute('data-free')){stopAudio();replayScene=false;game.startFree();}else if(b.dataset.day){const i=DAYS.findIndex(d=>d.id===b.dataset.day);if(i===0||game.save.days[DAYS[i-1].id].passed)start(b.dataset.day);else{b.setAttribute('aria-label','앞 영업일을 통과하면 열려요.');}}else if(b.hasAttribute('data-settings'))settings();else if(b.dataset.tab){stopAudio();menuTab=Number(b.dataset.tab);render();}else if(b.dataset.recipe){stopAudio();const request=playRequest;await unlock();if(request!==playRequest)return;menuRun=true;const m=METERS[Number(b.dataset.mk)];audio.play({meter:m,fill:parseFill(b.dataset.recipe)},{...game.save.settings,kind:'listen',onEnd:()=>{menuRun=false;render();}});render();}else if(b.hasAttribute('data-menu-stop')){stopAudio();render();}else if(b.dataset.scene){const day=DAYS.find(d=>d.items.some(i=>i.id===b.dataset.scene));game.loadDay(day.id);replayScene=true;const index=game.dayItems.findIndex(i=>i.id===b.dataset.scene);game.enter(0,{screen:'shift',day:day.id,queue:[{i:index,redo:false}]});}};
+$('closeSettings').onclick=()=>$('settingsDialog').close();$('settingsDialog').onchange=e=>{const t=e.target,s=game.save.settings;if(t.dataset.setting)s[t.dataset.setting]=t.checked;else if(t.id==='volume')s.volume=Number(t.value);else if(t.id==='motion')s.motion=t.value;audio.setVolume(s.volume,s.muted);store(game.save);render();};
+$('settingsDialog').onclick=e=>{if(e.target.closest('[data-tips]')){game.save.settings.tips=[];store(game.save);$('settingsDialog').close();render();}if(e.target.closest('[data-soundcheck]')){$('settingsDialog').close();soundCheck();}};
+$('tipNext').onclick=()=>endSoundCheck(false);$('tipDialog').onclick=e=>{if(e.target.closest('[data-check-play]'))checkTone();if(e.target.closest('[data-check-yes]'))endSoundCheck(true);if(e.target.closest('[data-check-no]')){setText('soundHelp','음량을 올리고 무음 설정을 풀어 주세요. 다시 듣거나 건너뛸 수 있어요.');checkTone();}};
+$('tipDialog').addEventListener('cancel',()=>stopAudio());$('settingsDialog').addEventListener('cancel',()=>render());
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&audio.playing){stopAudio();game.stopBake(true);}});
+window.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||document.querySelector('dialog[open]')||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;const s=game.state;if(e.key==='0'){e.preventDefault();if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>{});return;}if(!['shift','free'].includes(s.screen))return;if(/^[1-6]$/.test(e.key)){e.preventDefault();const i=Number(e.key)-1;if(s.phase==='build')game.place(PIECES[i]);else if(s.phase==='pick')game.choose(i);}else if(e.key==='Backspace'&&s.phase==='build'){e.preventDefault();game.removeAt(s.fill.length-1);}else if(e.key==='Enter'&&e.target===document.body){e.preventDefault();if(s.phase==='build')bake();else if(s.phase==='pick')$('confirm').click();else if(['serve','scene'].includes(s.phase))$('next').click();}else if(e.key==='Escape'&&s.playing){stopAudio();game.stopBake();}});
+window.addEventListener('error',e=>{console.error(e.error||e.message);$('fatal').hidden=false;});window.addEventListener('unhandledrejection',e=>{console.error(e.reason);$('fatal').hidden=false;});
+function testScreen(){stopAudio();$('settingsDialog').close();$('tipDialog').close();game.setState({screen:'test',playing:''});$('app').hidden=true;$('screen').hidden=false;$('screen').innerHTML=header('자가검사')+`<p class="lead">${tests.passed}/${tests.total} 통과</p>${tests.groups.map(g=>`<section><h2>${g.name} · ${g.passed}/${g.total}</h2>${g.results.filter(r=>!r.ok).map(r=>`<p>${esc(r.name)}: ${esc(r.error)}</p>`).join('')}</section>`).join('')}<p class="caption">실기기 청취·강사·학습자 검수는 별도 확인이 필요해요.</p>`;window.__state=()=>structuredClone(game.state);window.__item=()=>game.item();window.__t={game,audio,startDay:id=>start(id),solutions:undefined};}
+window.addEventListener('hashchange',()=>{if(location.hash==='#test')testScreen();else {screenKey='';render();}});
+if(location.hash==='#test')testScreen();else if(/^#d[0-4]$/.test(location.hash))start(location.hash.slice(1));else render();
+
+return {};
+})();
+})();</script>
+</body>
+</html>
