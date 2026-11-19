@@ -4,8 +4,9 @@ import * as E from './engine.js';
 import * as O from './orders.js';
 import { DAYS } from './seeds.js';
 import { Game } from './game.js';
-import { SAVE_KEY, BACKUP_KEY, freshSave, loadSave, writeSave } from './storage.js';
-import { createAudioPlan, AudioEngine, CLICK } from './audio.js';
+import { SAVE_KEY, BACKUP_KEY, freshSave, normalizeSave, loadSave, writeSave } from './storage.js';
+import { createAudioPlan, createTasterPlan, AudioEngine, CLICK } from './audio.js';
+import { initialTaster, reduceTaster, tasterView, resolveLanding } from './taster.js';
 
 const fail = message => { throw new Error(message || '검사 값이 일치하지 않아요.'); };
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
@@ -685,6 +686,101 @@ check('fresh saves do not share mutable arrays or objects', () => {
     const spec = { m: E.M(3, 4), fill: E.parseFill('4 4 4') };
     assert.equal(createAudioPlan(spec, { subs: false, kind: 'hear' }).events.filter(event => event.type === 'click').length, 18);
     assert.equal(createAudioPlan(spec, { subs: false, kind: 'listen' }).events.filter(event => event.type === 'click').length, 9);
+  });
+  category = 'TA';
+  check('TA-01 new taster accepts exactly two independent quarter-note additions', () => {
+    const initial = initialTaster(), step = (s, type) => reduceTaster(s, type).state;
+    assert.equal(tasterView(initial).remaining, 2);
+    assert.equal(tasterView(initial).canBake, false);
+    const one = step(initial, 'ADD'), empty = step(one, 'UNDO'), full = step(one, 'ADD');
+    assert.equal(tasterView(one).remaining, 1);
+    assert.equal(tasterView(empty).count, 0);
+    assert.equal(tasterView(full).remaining, 0);
+    assert.equal(tasterView(full).canBake, true);
+    assert.equal(step(full, 'ADD'), full);
+    assert.equal(initial.two.length, 0);
+  });
+  check('TA-02 two to three keeps exact quarter-note size and copies both pieces', () => {
+    let s = initialTaster(); s = reduceTaster(s, 'ADD').state; s = reduceTaster(s, 'ADD').state;
+    const three = reduceTaster(s, 'SKIP_TO_COMPARE').state;
+    assert.deepEqual(three.two, three.three);
+    assert.ok(three.two !== three.three && three.two[0] !== three.three[0]);
+    assert.equal(tasterView(three).remaining, 1);
+    assert.deepEqual(E.angle(E.dur(E.N(4))), E.F(90));
+    assert.deepEqual(E.angle(E.capacity(E.M(2, 4))), E.F(180));
+    assert.deepEqual(E.angle(E.capacity(E.M(3, 4))), E.F(270));
+    assert.equal(reduceTaster(three, 'ADD').state.phase, 'compare');
+  });
+  check('TA-03 a stopped or dialog-cancelled taster cannot accept stale playback completion', () => {
+    let s = initialTaster(); s = reduceTaster(s, 'ADD').state; s = reduceTaster(s, 'ADD').state;
+    const started = reduceTaster(s, 'BAKE');
+    assert.equal(started.state.phase, 'playTwo');
+    assert.equal(started.effects[0].type, 'play');
+    for (const type of ['STOP', 'OPEN_DIALOG', 'VISIBILITY_HIDDEN']) {
+      const cancelled = reduceTaster(started.state, type);
+      assert.equal(cancelled.state.phase, 'two');
+      assert.equal(cancelled.state.two.length, 2);
+      assert.equal(cancelled.effects[0].type, 'cancel');
+      assert.equal(reduceTaster(cancelled.state, { type: 'END', token: started.state.token }).state, cancelled.state);
+    }
+  });
+  check('TA-04 comparison records seen once, supports undo and replays without regular scoring', () => {
+    let s = initialTaster(); for (const type of ['ADD', 'ADD', 'SKIP_TO_COMPARE']) s = reduceTaster(s, type).state;
+    const completed = reduceTaster(s, 'ADD');
+    assert.deepEqual(completed.effects, [{ type: 'seen' }]);
+    const undone = reduceTaster(completed.state, 'UNDO').state;
+    const rebuilt = reduceTaster(undone, 'ADD');
+    assert.equal(undone.phase, 'three'); assert.equal(undone.three.length, 2);
+    assert.deepEqual(rebuilt.effects, []);
+    const replay = reduceTaster(rebuilt.state, 'BAKE');
+    assert.equal(replay.state.phase, 'compare');
+    assert.equal(replay.effects[0].fill.length, 3);
+    assert.equal(reduceTaster(replay.state, { type: 'END', token: replay.state.token }).state.phase, 'compare');
+  });
+  check('TA-05 hashes, resumable progress and prior traces take precedence over a new landing', () => {
+    const save = freshSave();
+    assert.deepEqual(resolveLanding('', save), { screen: 'taster' });
+    assert.deepEqual(resolveLanding('#test', save), { screen: 'test' });
+    for (let i = 0; i <= 4; i++) assert.deepEqual(resolveLanding('#d' + i, save), { screen: 'shift', day: 'd' + i });
+    save.active = { day: 'd1', queue: [{ i: 0, redo: false }, { i: 1, redo: false }], idx: 1 };
+    assert.deepEqual(resolveLanding('', save), { screen: 'title' });
+    save.active = null; save.menu = { '2/4': ['4 4'] };
+    assert.deepEqual(resolveLanding('', save), { screen: 'title' });
+    assert.deepEqual(resolveLanding('', freshSave(), { enabled: false }), { screen: 'title' });
+  });
+  check('TA-06 optional seen boolean normalizes without altering regular learning records', () => {
+    const save = freshSave(); save.days.d0 = { best: 2, runs: 1, passed: false };
+    save.menu = { '2/4': ['4 4'] }; save.shelf = { '2/4': ['8 4 8'] }; save.scenes = ['S1'];
+    const before = { days: save.days, menu: save.menu, shelf: save.shelf, scenes: save.scenes, stats: save.stats, active: save.active };
+    save.settings.tasterSeenV1 = true; save.settings.tips = [];
+    const restored = normalizeSave(save);
+    assert.equal(restored.settings.tasterSeenV1, true);
+    assert.equal(restored.settings.soundChecked, false);
+    assert.equal(restored.version, 1);
+    assert.deepEqual({ days: restored.days, menu: restored.menu, shelf: restored.shelf, scenes: restored.scenes, stats: restored.stats, active: restored.active }, before);
+    assert.equal(normalizeSave({ version: 1, settings: { tasterSeenV1: 'true' } }).settings.tasterSeenV1, false);
+  });
+  check('TA-07 taster schedule is one bar without preparation, repetition or terminal sound', () => {
+    for (const beats of [2, 3]) {
+      const spec = { meter: E.M(beats, 4), fill: Array.from({ length: beats }, () => E.N(4)) };
+      for (const slow of [false, true]) {
+        const plan = createTasterPlan(spec, { slow }), beatSec = slow ? .9 : .6;
+        const tones = plan.events.filter(e => e.type === 'tone'), clicks = plan.events.filter(e => e.type === 'click');
+        assert.equal(plan.lead, 0); assert.equal(tones.length, beats); assert.equal(clicks.length, beats);
+        assert.ok(Math.abs(plan.end - beats * beatSec) < 1e-9);
+        tones.forEach((e, i) => assert.ok(Math.abs(e.time - i * beatSec) < 1e-9));
+        assert.deepEqual(clicks.map(e => e.level), Array.from({ length: beats }, (_, i) => i === 0 ? 0 : 1));
+        assert.ok(plan.events.every(e => e.time < plan.end));
+      }
+    }
+  });
+  check('TA-08 taster plan keeps note spans separate from quarter-note beat positions', () => {
+    const plan = createTasterPlan({ meter: E.M(2, 4), fill: [E.N(2)] });
+    assert.equal(plan.parts.length, 1);
+    assert.equal(plan.beats.length, 2);
+    assert.deepEqual(plan.beats.map(beat => beat.beatIndex), [0, 1]);
+    assert.equal(plan.events.filter(e => e.type === 'tone').length, 1);
+    assert.ok(Math.abs(plan.events.find(e => e.type === 'tone').duration - plan.end) < 1e-9);
   });
   // Restore the fallback snapshot after fake-storage tests; never write to the device.
   writeSave(originalMemory, null);

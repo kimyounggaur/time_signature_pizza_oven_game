@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import vm from 'node:vm';
-const names=['engine','orders','seeds','storage','game','render','audio','selftest','rulebook','main'];
+const names=['engine','orders','seeds','storage','game','render','audio','taster','selftest','rulebook','main'];
 const modules=[];
 for(const name of names){
   let source=await readFile(new URL(`../src/${name}.js`,import.meta.url),'utf8');

@@ -30,6 +30,18 @@ export function createAudioPlan(spec, options = {}) {
   return { events, lead, capS, len, parts, slot: !!spec.slot, end: lead + 2 * capS + .2, capA: num(angle(len, spec.turn || TURN)) };
 }
 
+/** One bar only. Taster timing is separate from regular preparation/repetition. */
+export function createTasterPlan(spec, options = {}) {
+  const meter = spec.meter || spec.m;
+  const groups = spec.groups || spec.g || defaultGroups(meter);
+  const len = capacity(meter), fill = spec.fill || [], parts = spans(fill);
+  const e8 = options.slow ? .45 : .3, capS = toSec(len, e8);
+  const beats = clicks(meter, groups).filter(x => x.level < 2).map((x, beatIndex) => ({ time: toSec(x.t, e8), level: x.level, beatIndex }));
+  const events = beats.map(x => ({ type: 'click', time: x.time, level: x.level }));
+  for (const { s, note } of parts) events.push({ type: 'tone', midi: 72, time: toSec(s, e8), duration: toSec(dur(note), e8) });
+  return { events, beats, parts, len, lead: 0, end: capS, capS, slot: false, capA: num(angle(len, spec.turn || TURN)) };
+}
+
 export class AudioEngine {
   constructor({ onState = () => {}, onFrame = () => {}, onInterrupt = () => {} } = {}) {
     this.ctx = null;
@@ -38,6 +50,7 @@ export class AudioEngine {
     this.nodes = new Set();
     this.run = null;
     this.raf = 0;
+    this.generation = 0;
     this.volume = .8;
     this.muted = false;
     this.onState = onState;
@@ -64,7 +77,10 @@ export class AudioEngine {
         for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
         this.ctx.addEventListener('statechange', () => {
           this.onState(this.available);
-          if (this.ctx.state !== 'running' && this.run && !this.run.perf) this._interrupt('context');
+          if (this.ctx.state !== 'running' && this.run && !this.run.perf) {
+            if (this.run.owner === 'taster' && !(typeof document !== 'undefined' && document.hidden)) this._fallbackTasterClock();
+            else this._interrupt('context');
+          }
         });
       }
       if (this.ctx.state !== 'running') this.ctx.resume().catch(() => this.onState(false));
@@ -157,6 +173,73 @@ export class AudioEngine {
     return this.run;
   }
 
+  /** Called by a trusted play button, never while adding or removing pieces.
+   * We request audio activation but never await it. A late resume cannot add
+   * notes to the visual-only run, nor can it revive a canceled run.
+   */
+  playTaster(spec, options = {}) {
+    this.stop();
+    if (options.volume !== undefined || options.muted !== undefined) this.setVolume(options.volume ?? this.volume, options.muted ?? this.muted);
+    const ctx = !this.muted && this.volume > 0 ? this._ensureAudio() : this.ctx;
+    const ready = !!ctx && ctx.state === 'running' && !this.muted && this.volume > 0;
+    const plan = createTasterPlan(spec, options), wall = performance.now();
+    // Short scheduling headroom is not a musical preparation bar. Visual-only
+    // starts immediately; audible visuals use the same scheduled t0 and latency.
+    const headroom = ready ? .04 : 0;
+    const run = this.run = { ...plan, owner: 'taster', kind: 'taster', requestId: options.requestId, visual: true, perf: !ready,
+      t0: ready ? ctx.currentTime + headroom : wall / 1000, wallT0: wall / 1000 + headroom,
+      onEnd: options.onEnd, p0: wall, lastAt: wall, lastNow: null, lastElapsed: 0, ctx0: ctx?.currentTime || 0 };
+    if (ready) {
+      try {
+        for (const event of plan.events) {
+          if (event.type === 'tone') this._tone(event.midi, run.t0 + event.time, event.duration);
+          else this._click(run.t0 + event.time, event.level);
+        }
+      } catch { this._fallbackTasterClock(); }
+    }
+    this._frameTaster();
+    return run;
+  }
+
+  _fallbackTasterClock() {
+    const run = this.run;
+    if (!run || run.owner !== 'taster' || run.perf) return;
+    this._silence();
+    const now = performance.now() / 1000;
+    const elapsed = Math.max(0, run.lastElapsed, now - run.wallT0);
+    run.perf = true;
+    run.t0 = now - elapsed;
+    this.onState(false);
+  }
+
+  _frameTaster(expectedRun = this.run) {
+    const run = this.run;
+    if (!run || run !== expectedRun || run.owner !== 'taster') return;
+    const wall = performance.now();
+    if (!run.perf) {
+      const current = this.ctx.currentTime;
+      if (current !== run.lastNow) { run.lastNow = current; run.lastAt = wall; }
+      else if (wall - run.lastAt > 800) this._fallbackTasterClock();
+    }
+    const now = run.perf ? wall / 1000 : this.ctx.currentTime - (this.ctx.outputLatency || this.ctx.baseLatency || 0);
+    const started = now >= run.t0;
+    const elapsed = Math.max(0, now - run.t0);
+    run.lastElapsed = Math.max(run.lastElapsed, elapsed);
+    if (elapsed >= run.end) {
+      const after = run.onEnd;
+      this.stop();
+      after?.();
+      return;
+    }
+    const musical = elapsed / run.capS * num(run.len);
+    const noteIndex = started ? run.parts.findIndex(x => num(x.s) <= musical + 1e-9 && musical < num(x.e) - 1e-9) : -1;
+    let beatIndex = -1;
+    if (started) for (const beat of run.beats) if (beat.time <= elapsed + 1e-9) beatIndex = beat.beatIndex;
+    this.onFrame({ owner: 'taster', requestId: run.requestId, angle: run.capA * elapsed / run.capS, index: noteIndex, noteIndex, beatIndex,
+      all: false, preparing: false, visible: true, elapsed, duration: run.capS });
+    if (this.run === run) this.raf = requestAnimationFrame(() => this._frameTaster(run));
+  }
+
   _frame() {
     const r = this.run;
     if (!r) return;
@@ -193,25 +276,31 @@ export class AudioEngine {
   }
 
   stop() {
+    this.generation++;
+    const previous = this.run;
     if (this.raf) cancelAnimationFrame(this.raf);
     this.raf = 0;
     this._silence();
     this.run = null;
-    this.onFrame({ angle: 0, index: -1, all: false, preparing: false, visible: false });
+    this.onFrame({ ...(previous?.owner === 'taster' ? { owner: 'taster', requestId: previous.requestId, noteIndex: -1, beatIndex: -1 } : {}), angle: 0, index: -1, all: false, preparing: false, visible: false });
   }
 
   _interrupt(reason) {
     if (!this.run) return;
+    const owner = this.run.owner;
     this.stop();
     this.onState(this.available);
-    this.onInterrupt(reason, ABORT_TEXT);
+    this.onInterrupt(reason, ABORT_TEXT, owner);
   }
 
   /** Tutorial sound check, started only by a learner's button press. */
   async testTone() {
+    this.stop();
+    const generation = this.generation;
     const ok = await this.unlock();
-    if (ok) this._tone(72, this.ctx.currentTime + .05, .45);
-    return ok;
+    if (!ok || generation !== this.generation || (typeof document !== 'undefined' && document.hidden)) return false;
+    this._tone(72, this.ctx.currentTime + .05, .45);
+    return true;
   }
 
   destroy() {

@@ -50,6 +50,18 @@
       <div id="act-scene" class="a2" hidden><button id="sceneHear" type="button">들어 보기</button><button id="sceneNext" type="button" class="primary">알겠어요</button></div>
     </div>
   </main>
+  <main id="taster" class="taster-screen" aria-labelledby="tasterTitle" hidden>
+    <header class="taster-header"><strong>박자표 피자 화덕</strong><nav aria-label="맛보기 메뉴"><button data-taster-action="map">지도</button><button data-taster-action="rulebook" aria-haspopup="dialog" aria-controls="rulebookDialog">룰북</button><button data-taster-action="settings" aria-haspopup="dialog" aria-controls="settingsDialog">설정</button></nav></header>
+    <div class="taster-intro"><span class="taster-label">같은 조각으로 한 박 더</span><h1 id="tasterTitle" tabindex="-1">두 박 피자를 만들어요</h1><p id="tasterLead">한 자리에 한 박. 빈자리를 채워요.</p></div>
+    <div id="tasterBoard" class="taster-board"></div>
+    <p id="tasterSummary" class="visually-hidden"></p>
+    <div id="tasterBeats" class="taster-beats" aria-hidden="true"><span data-beat="0"><b>①</b><small>첫 박</small></span><span data-beat="1"><b>②</b><small>둘째 박</small></span><span data-beat="2"><b>③</b><small>셋째 박</small></span></div>
+    <p id="tasterStatus" class="taster-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="tasterActions" class="taster-actions"><button id="tasterAdd" class="primary" data-taster-action="add">한 박 조각 올리기 <small>4분음표</small></button><div class="taster-action-pair"><button id="tasterUndo" data-taster-action="undo">하나 빼기</button><button id="tasterBake" data-taster-action="bake">한 마디 구워 듣기</button></div></div>
+    <div id="tasterPlayback" class="taster-action-pair" hidden><button data-taster-action="stop">멈추기</button><button id="tasterSkipCompare" class="primary" data-taster-action="compare">바로 비교</button></div>
+    <section id="tasterComparison" class="taster-comparison" aria-label="두 박과 세 박 비교" hidden><div class="taster-comparison-cards"><div><strong>2/4 · 두 박</strong><div id="tasterTwoUnits"></div></div><div><strong>3/4 · 세 박</strong><div id="tasterThreeUnits"></div></div></div><p><b>아래 숫자 4:</b> 4분음표가 기준이에요.<br><b>위 숫자 2와 3:</b> 그 기준이 한 마디에 두 개, 세 개 들어가요.</p><button id="tasterNext" class="primary" data-taster-action="next">첫 주문으로</button><div class="taster-action-pair"><button data-taster-action="restart">다시 만들기</button><button data-taster-action="replay">세 박 들어 보기</button></div></section>
+    <footer class="taster-footer"><button data-taster-action="exit">처음으로 · 건너뛰기</button><span id="tasterStorageNotice"></span></footer>
+  </main>
   <section id="screen" class="screen" lang="ko" tabindex="-1" aria-label="박자표 피자 화덕"></section>
   <dialog id="rulebookDialog" class="rulebook-dialog" aria-labelledby="rulebookTitle">
     <div class="rulebook-top"><div><span class="rulebook-kicker">PIZZA OVEN GUIDE</span><h2 id="rulebookTitle">피자 화덕 룰북</h2></div><button id="closeRulebook" type="button" aria-label="룰북 닫기">닫기</button></div>

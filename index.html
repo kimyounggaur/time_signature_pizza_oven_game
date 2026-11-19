@@ -28,6 +28,10 @@ body[data-motion="reduced"] *,body[data-motion="reduced"] *::before,body[data-mo
 .book-trigger{border-color:#9b4936;color:#812d1d}.title-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;color:var(--sauce);font-weight:800}.title-header button{padding:0 16px;min-width:58px}.rulebook-dialog{width:min(760px,calc(100% - 24px));max-width:760px;height:min(880px,calc(100dvh - 24px));max-height:calc(100dvh - 24px);padding:0;overflow:auto;overscroll-behavior:contain;background:#fbf6e9;border:1px solid #d7c5a9;border-radius:22px;color:#27342b}.rulebook-dialog::backdrop{background:#1c2622a8}.rulebook-top{position:sticky;z-index:5;top:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#fffcf4f5;border-bottom:1px solid #e6dbc7;backdrop-filter:blur(10px)}.rulebook-top h2{margin:0;font-size:20px;line-height:1.2}.rulebook-top button{min-width:56px;padding:0 12px;background:#fff;border-color:#cdbda6}.rulebook-kicker{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;color:#a8321c}.screen-head [data-rulebook]{color:#812d1d;border-color:#c9aa98}.title-header [data-rulebook]{color:#812d1d;border-color:#c9aa98}
 @media(max-width:419px){.hud:has(.book-trigger) .dots{gap:2px}.hud:has(.book-trigger) .dot{width:7px;height:7px;border-width:1px}.hud:has(.book-trigger){gap:3px}.hud:has(.book-trigger) .chipbtn{padding:0 6px}.hud .book-trigger{min-width:44px}.screen-head{gap:5px}.screen-head [data-rulebook],.screen-head [data-settings]{padding:0 8px;font-size:12px}.screen-head .eyebrow{letter-spacing:.06em}}
 #rulebookBody{padding:18px}.rulebook-content .rb-links button{min-height:44px}.rulebook-content .rb-section{scroll-margin-top:80px}@media(max-width:520px){.rulebook-content .rb-grid:has(.pizza-board){grid-template-columns:1fr}.rulebook-content .rb-figure .pizza-board{max-width:256px}.rulebook-content .rb-section-head{gap:8px}}
+/* 진도와 분리된 첫 한 마디 맛보기 */
+.visually-hidden{position:absolute!important;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}.taster-screen{height:100dvh;overflow-y:auto;overscroll-behavior:contain;max-width:640px;margin:0 auto;padding:8px 16px 20px;background:#fffaf0}.taster-header{display:flex;align-items:center;justify-content:space-between;gap:4px;min-height:44px}.taster-header>strong{font-size:13px;white-space:nowrap}.taster-header nav{display:flex;gap:6px}.taster-header button{min-width:44px;padding:0 8px;font-size:12px}.taster-intro{text-align:center;margin-top:7px}.taster-label{font-size:12px;color:var(--sauce);font-weight:800}.taster-intro h1{font-size:25px;line-height:1.25;margin:3px 0 5px}.taster-intro p{font-size:14px;line-height:1.4;margin:0}.taster-board{height:clamp(166px,51vw,246px);max-width:340px;margin:6px auto}.taster-board>svg{width:100%;height:100%;display:block}.taster-beats{display:flex;gap:8px;max-width:440px;margin:0 auto}.taster-beats>span{flex:1;border:1px dashed #88765d;border-radius:10px;min-height:44px;text-align:center;display:flex;gap:7px;align-items:center;justify-content:center;background:#f4ecdc}.taster-beats>span:first-child{border:3px solid #49382d}.taster-beats small{font-size:12px}.taster-beats b{font-size:21px}.taster-beats .filled{border-style:solid;background:#c8e3bc}.taster-beats .current{box-shadow:inset 0 0 0 3px var(--sauce);background:#ffdc73}.taster-status{margin:7px 0;min-height:40px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:700;line-height:1.4}.taster-actions{display:grid;gap:8px}.taster-actions>.primary{width:100%;min-height:52px}.taster-actions small{font-size:12px;margin-left:5px;font-weight:500}.taster-action-pair{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}.taster-action-pair button{padding:5px 8px;min-height:44px;font-size:13px}.taster-screen button:disabled{opacity:.4}.taster-footer{margin-top:8px;text-align:center}.taster-footer button{background:transparent;border:0;padding:5px 12px;font-size:12px;min-height:44px}.taster-footer span{display:block;font-size:12px;color:var(--ink-2)}.taster-comparison{background:#edf4e6;border-radius:14px;padding:12px;margin-top:8px}.taster-comparison-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}.taster-comparison-cards>div{background:#fffefa;border:1px solid var(--line);border-radius:10px;padding:8px;font-size:13px}.taster-comparison-cards svg{width:34px;height:34px}.taster-comparison p{font-size:13px;line-height:1.6;margin:12px 0}.taster-comparison>.primary{width:100%;margin-bottom:8px}.taster-board .lab text{font-size:18px}.taster-screen[data-playing=true] .slice{transition:none}html[data-taster=true] #rotate{display:none!important}html[data-taster=true] .skip-link{display:none}
+@media(max-height:620px){.taster-label{display:none}.taster-intro{margin-top:4px}.taster-intro h1{font-size:23px}.taster-board{height:166px;margin:4px auto}.taster-status{min-height:36px;margin:5px 0}.taster-actions{gap:6px}}
+@media(min-width:600px) and (min-height:720px){.taster-screen{padding:20px 32px}.taster-intro h1{font-size:32px}.taster-board{height:260px}.taster-status{font-size:16px;margin:14px 0}}
 </style>
 </head>
 <body>
@@ -71,6 +75,18 @@ body[data-motion="reduced"] *,body[data-motion="reduced"] *::before,body[data-mo
       <div id="act-serve" class="a3" hidden><button id="again" type="button">다시 듣기</button><button id="other" type="button">다른 조합</button><button id="next" type="button" class="primary">다음 주문</button></div>
       <div id="act-scene" class="a2" hidden><button id="sceneHear" type="button">들어 보기</button><button id="sceneNext" type="button" class="primary">알겠어요</button></div>
     </div>
+  </main>
+  <main id="taster" class="taster-screen" aria-labelledby="tasterTitle" hidden>
+    <header class="taster-header"><strong>박자표 피자 화덕</strong><nav aria-label="맛보기 메뉴"><button data-taster-action="map">지도</button><button data-taster-action="rulebook" aria-haspopup="dialog" aria-controls="rulebookDialog">룰북</button><button data-taster-action="settings" aria-haspopup="dialog" aria-controls="settingsDialog">설정</button></nav></header>
+    <div class="taster-intro"><span class="taster-label">같은 조각으로 한 박 더</span><h1 id="tasterTitle" tabindex="-1">두 박 피자를 만들어요</h1><p id="tasterLead">한 자리에 한 박. 빈자리를 채워요.</p></div>
+    <div id="tasterBoard" class="taster-board"></div>
+    <p id="tasterSummary" class="visually-hidden"></p>
+    <div id="tasterBeats" class="taster-beats" aria-hidden="true"><span data-beat="0"><b>①</b><small>첫 박</small></span><span data-beat="1"><b>②</b><small>둘째 박</small></span><span data-beat="2"><b>③</b><small>셋째 박</small></span></div>
+    <p id="tasterStatus" class="taster-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="tasterActions" class="taster-actions"><button id="tasterAdd" class="primary" data-taster-action="add">한 박 조각 올리기 <small>4분음표</small></button><div class="taster-action-pair"><button id="tasterUndo" data-taster-action="undo">하나 빼기</button><button id="tasterBake" data-taster-action="bake">한 마디 구워 듣기</button></div></div>
+    <div id="tasterPlayback" class="taster-action-pair" hidden><button data-taster-action="stop">멈추기</button><button id="tasterSkipCompare" class="primary" data-taster-action="compare">바로 비교</button></div>
+    <section id="tasterComparison" class="taster-comparison" aria-label="두 박과 세 박 비교" hidden><div class="taster-comparison-cards"><div><strong>2/4 · 두 박</strong><div id="tasterTwoUnits"></div></div><div><strong>3/4 · 세 박</strong><div id="tasterThreeUnits"></div></div></div><p><b>아래 숫자 4:</b> 4분음표가 기준이에요.<br><b>위 숫자 2와 3:</b> 그 기준이 한 마디에 두 개, 세 개 들어가요.</p><button id="tasterNext" class="primary" data-taster-action="next">첫 주문으로</button><div class="taster-action-pair"><button data-taster-action="restart">다시 만들기</button><button data-taster-action="replay">세 박 들어 보기</button></div></section>
+    <footer class="taster-footer"><button data-taster-action="exit">처음으로 · 건너뛰기</button><span id="tasterStorageNotice"></span></footer>
   </main>
   <section id="screen" class="screen" lang="ko" tabindex="-1" aria-label="박자표 피자 화덕"></section>
   <dialog id="rulebookDialog" class="rulebook-dialog" aria-labelledby="rulebookTitle">
@@ -479,7 +495,7 @@ const knownScenes = new Set(DAYS.flatMap(day => day.items.filter(item => item.st
 function freshSave() {
   return {
     version: 1,
-    settings: { volume: 0.8, muted: false, slow: false, subs: true, motion: 'system', soundChecked: false, tips: [] },
+    settings: { volume: 0.8, muted: false, slow: false, subs: true, motion: 'system', soundChecked: false, tasterSeenV1: false, tips: [] },
     days: Object.fromEntries(DAYS.map(day => [day.id, { passed: false, runs: 0, best: 0 }])),
     menu: {}, shelf: {}, scenes: [], stats: { orders: 0, clean: 0, bakes: 0 }, active: null,
   };
@@ -518,7 +534,7 @@ function cleanActive(active) {
 function normalizeSave(source) {
   const save = freshSave(), settings = record(source.settings) ? source.settings : {};
   if (typeof settings.volume === 'number' && Number.isFinite(settings.volume)) save.settings.volume = Math.min(1, Math.max(0, settings.volume));
-  for (const key of ['muted', 'slow', 'subs', 'soundChecked']) if (typeof settings[key] === 'boolean') save.settings[key] = settings[key];
+  for (const key of ['muted', 'slow', 'subs', 'soundChecked', 'tasterSeenV1']) if (typeof settings[key] === 'boolean') save.settings[key] = settings[key];
   if (['system', 'reduced', 'full'].includes(settings.motion)) save.settings.motion = settings.motion;
   save.settings.tips = strings(settings.tips);
   for (const day of DAYS) {
@@ -884,6 +900,18 @@ function createAudioPlan(spec, options = {}) {
   return { events, lead, capS, len, parts, slot: !!spec.slot, end: lead + 2 * capS + .2, capA: num(angle(len, spec.turn || TURN)) };
 }
 
+/** One bar only. Taster timing is separate from regular preparation/repetition. */
+function createTasterPlan(spec, options = {}) {
+  const meter = spec.meter || spec.m;
+  const groups = spec.groups || spec.g || defaultGroups(meter);
+  const len = capacity(meter), fill = spec.fill || [], parts = spans(fill);
+  const e8 = options.slow ? .45 : .3, capS = toSec(len, e8);
+  const beats = clicks(meter, groups).filter(x => x.level < 2).map((x, beatIndex) => ({ time: toSec(x.t, e8), level: x.level, beatIndex }));
+  const events = beats.map(x => ({ type: 'click', time: x.time, level: x.level }));
+  for (const { s, note } of parts) events.push({ type: 'tone', midi: 72, time: toSec(s, e8), duration: toSec(dur(note), e8) });
+  return { events, beats, parts, len, lead: 0, end: capS, capS, slot: false, capA: num(angle(len, spec.turn || TURN)) };
+}
+
 class AudioEngine {
   constructor({ onState = () => {}, onFrame = () => {}, onInterrupt = () => {} } = {}) {
     this.ctx = null;
@@ -892,6 +920,7 @@ class AudioEngine {
     this.nodes = new Set();
     this.run = null;
     this.raf = 0;
+    this.generation = 0;
     this.volume = .8;
     this.muted = false;
     this.onState = onState;
@@ -918,7 +947,10 @@ class AudioEngine {
         for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
         this.ctx.addEventListener('statechange', () => {
           this.onState(this.available);
-          if (this.ctx.state !== 'running' && this.run && !this.run.perf) this._interrupt('context');
+          if (this.ctx.state !== 'running' && this.run && !this.run.perf) {
+            if (this.run.owner === 'taster' && !(typeof document !== 'undefined' && document.hidden)) this._fallbackTasterClock();
+            else this._interrupt('context');
+          }
         });
       }
       if (this.ctx.state !== 'running') this.ctx.resume().catch(() => this.onState(false));
@@ -1011,6 +1043,73 @@ class AudioEngine {
     return this.run;
   }
 
+  /** Called by a trusted play button, never while adding or removing pieces.
+   * We request audio activation but never await it. A late resume cannot add
+   * notes to the visual-only run, nor can it revive a canceled run.
+   */
+  playTaster(spec, options = {}) {
+    this.stop();
+    if (options.volume !== undefined || options.muted !== undefined) this.setVolume(options.volume ?? this.volume, options.muted ?? this.muted);
+    const ctx = !this.muted && this.volume > 0 ? this._ensureAudio() : this.ctx;
+    const ready = !!ctx && ctx.state === 'running' && !this.muted && this.volume > 0;
+    const plan = createTasterPlan(spec, options), wall = performance.now();
+    // Short scheduling headroom is not a musical preparation bar. Visual-only
+    // starts immediately; audible visuals use the same scheduled t0 and latency.
+    const headroom = ready ? .04 : 0;
+    const run = this.run = { ...plan, owner: 'taster', kind: 'taster', requestId: options.requestId, visual: true, perf: !ready,
+      t0: ready ? ctx.currentTime + headroom : wall / 1000, wallT0: wall / 1000 + headroom,
+      onEnd: options.onEnd, p0: wall, lastAt: wall, lastNow: null, lastElapsed: 0, ctx0: ctx?.currentTime || 0 };
+    if (ready) {
+      try {
+        for (const event of plan.events) {
+          if (event.type === 'tone') this._tone(event.midi, run.t0 + event.time, event.duration);
+          else this._click(run.t0 + event.time, event.level);
+        }
+      } catch { this._fallbackTasterClock(); }
+    }
+    this._frameTaster();
+    return run;
+  }
+
+  _fallbackTasterClock() {
+    const run = this.run;
+    if (!run || run.owner !== 'taster' || run.perf) return;
+    this._silence();
+    const now = performance.now() / 1000;
+    const elapsed = Math.max(0, run.lastElapsed, now - run.wallT0);
+    run.perf = true;
+    run.t0 = now - elapsed;
+    this.onState(false);
+  }
+
+  _frameTaster(expectedRun = this.run) {
+    const run = this.run;
+    if (!run || run !== expectedRun || run.owner !== 'taster') return;
+    const wall = performance.now();
+    if (!run.perf) {
+      const current = this.ctx.currentTime;
+      if (current !== run.lastNow) { run.lastNow = current; run.lastAt = wall; }
+      else if (wall - run.lastAt > 800) this._fallbackTasterClock();
+    }
+    const now = run.perf ? wall / 1000 : this.ctx.currentTime - (this.ctx.outputLatency || this.ctx.baseLatency || 0);
+    const started = now >= run.t0;
+    const elapsed = Math.max(0, now - run.t0);
+    run.lastElapsed = Math.max(run.lastElapsed, elapsed);
+    if (elapsed >= run.end) {
+      const after = run.onEnd;
+      this.stop();
+      after?.();
+      return;
+    }
+    const musical = elapsed / run.capS * num(run.len);
+    const noteIndex = started ? run.parts.findIndex(x => num(x.s) <= musical + 1e-9 && musical < num(x.e) - 1e-9) : -1;
+    let beatIndex = -1;
+    if (started) for (const beat of run.beats) if (beat.time <= elapsed + 1e-9) beatIndex = beat.beatIndex;
+    this.onFrame({ owner: 'taster', requestId: run.requestId, angle: run.capA * elapsed / run.capS, index: noteIndex, noteIndex, beatIndex,
+      all: false, preparing: false, visible: true, elapsed, duration: run.capS });
+    if (this.run === run) this.raf = requestAnimationFrame(() => this._frameTaster(run));
+  }
+
   _frame() {
     const r = this.run;
     if (!r) return;
@@ -1047,25 +1146,31 @@ class AudioEngine {
   }
 
   stop() {
+    this.generation++;
+    const previous = this.run;
     if (this.raf) cancelAnimationFrame(this.raf);
     this.raf = 0;
     this._silence();
     this.run = null;
-    this.onFrame({ angle: 0, index: -1, all: false, preparing: false, visible: false });
+    this.onFrame({ ...(previous?.owner === 'taster' ? { owner: 'taster', requestId: previous.requestId, noteIndex: -1, beatIndex: -1 } : {}), angle: 0, index: -1, all: false, preparing: false, visible: false });
   }
 
   _interrupt(reason) {
     if (!this.run) return;
+    const owner = this.run.owner;
     this.stop();
     this.onState(this.available);
-    this.onInterrupt(reason, ABORT_TEXT);
+    this.onInterrupt(reason, ABORT_TEXT, owner);
   }
 
   /** Tutorial sound check, started only by a learner's button press. */
   async testTone() {
+    this.stop();
+    const generation = this.generation;
     const ok = await this.unlock();
-    if (ok) this._tone(72, this.ctx.currentTime + .05, .45);
-    return ok;
+    if (!ok || generation !== this.generation || (typeof document !== 'undefined' && document.hidden)) return false;
+    this._tone(72, this.ctx.currentTime + .05, .45);
+    return true;
   }
 
   destroy() {
@@ -1075,7 +1180,128 @@ class AudioEngine {
   }
 }
 
-return {CLICK,ABORT_TEXT,createAudioPlan,AudioEngine};
+return {CLICK,ABORT_TEXT,createAudioPlan,createTasterPlan,AudioEngine};
+})();
+__modules.taster=(()=>{
+const { N, M, capacity, dur, div, num, lengthIn } = __modules.engine;
+const { DAYS } = __modules.seeds;
+// Rollback switch affects entry and replay only; existing learning records stay intact.
+const TASTER_ENABLED = true;
+const copyFill = fill => fill.map(note => ({ ...note }));
+const result = (state, effects = []) => ({ state, effects });
+
+/** Separate from Game: no score, queue, clock, storage or audio is owned here. */
+function initialTaster() {
+  return { phase: 'two', two: [], three: [], playing: false, token: 0, completed: false, exited: false };
+}
+
+function cancel(state) {
+  return { ...state, phase: state.phase === 'playTwo' ? 'two' : state.phase, playing: false, token: state.token + 1 };
+}
+
+function enterThree(state) {
+  return { ...state, phase: 'three', three: copyFill(state.two), playing: false, token: state.token + 1 };
+}
+
+/**
+ * Events: ADD, UNDO, BAKE, END({token}), SKIP_TO_COMPARE, STOP,
+ * OPEN_DIALOG, VISIBILITY_HIDDEN, EXIT({screen}), RESTART.
+ * Effects are declarative: play, cancel, seen, exit. END must carry its play token.
+ */
+function reduceTaster(state, input) {
+  const event = typeof input === 'string' ? { type: input } : input;
+  if (!event || typeof event.type !== 'string') return result(state);
+  if (event.type === 'RESTART') {
+    return result({ ...initialTaster(), token: state.token + 1, completed: state.completed }, [{ type: 'cancel' }]);
+  }
+  if (state.exited) return result(state);
+  if (event.type === 'EXIT') {
+    const effects = [{ type: 'cancel' }];
+    if (!state.completed) effects.push({ type: 'seen' });
+    effects.push({ type: 'exit', screen: event.screen === 'map' ? 'map' : 'title' });
+    return result({ ...cancel(state), completed: true, exited: true }, effects);
+  }
+  if (['STOP', 'OPEN_DIALOG', 'VISIBILITY_HIDDEN'].includes(event.type)) {
+    return result(cancel(state), [{ type: 'cancel' }]);
+  }
+  if (event.type === 'END') {
+    if (!state.playing || event.token !== state.token) return result(state);
+    return result(state.phase === 'playTwo' ? enterThree(state) : { ...state, playing: false, token: state.token + 1 });
+  }
+  if (event.type === 'SKIP_TO_COMPARE') {
+    if ((state.phase !== 'two' && state.phase !== 'playTwo') || state.two.length !== 2) return result(state);
+    return result(enterThree(state), [{ type: 'cancel' }]);
+  }
+  // A click still arriving during playback must not add or remove a piece.
+  if (state.playing) return result(state);
+  if (event.type === 'ADD') {
+    if (state.phase === 'two' && state.two.length < 2) return result({ ...state, two: [...state.two, N(4)] });
+    if (state.phase === 'three' && state.three.length < 3) {
+      const three = [...state.three, N(4)];
+      if (three.length === 3) return result({ ...state, three, phase: 'compare', completed: true }, state.completed ? [] : [{ type: 'seen' }]);
+      return result({ ...state, three });
+    }
+    return result(state);
+  }
+  if (event.type === 'UNDO') {
+    if (state.phase === 'two' && state.two.length) return result({ ...state, two: state.two.slice(0, -1) });
+    if (['three', 'compare'].includes(state.phase) && state.three.length) return result({ ...state, phase: 'three', three: state.three.slice(0, -1) });
+    return result(state);
+  }
+  if (event.type === 'BAKE') {
+    const view = tasterView(state);
+    if (!view.canBake) return result(state);
+    const next = { ...state, playing: true, phase: state.phase === 'two' ? 'playTwo' : 'compare', token: state.token + 1 };
+    return result(next, [{ type: 'play', token: next.token, meter: view.meter, fill: copyFill(view.fill) }]);
+  }
+  return result(state);
+}
+
+/** All amounts are derived from the exact same fractions used by regular orders. */
+function tasterView(state) {
+  const isTwo = ['two', 'playTwo'].includes(state.phase), meter = M(isTwo ? 2 : 3, 4);
+  const fill = isTwo ? state.two : state.three, length = lengthIn(capacity(meter), fill);
+  const remaining = num(div(length.diff, dur(N(4)))), count = fill.length, slots = meter.num;
+  const complete = state.phase === 'compare';
+  const message = complete ? '같은 4분음표로 2박에서 3박이 됐어요.' : state.phase === 'playTwo' ? '첫 박, 둘째 박을 한 마디만 들어요.' : isTwo ? count === 0 ? '한 자리에 한 박. 빈자리를 채워요.' : count === 1 ? '한 박 놓았어요. 1박 남았어요.' : '2박, 꽉 찼어요.' : count === 2 ? '같은 조각을 하나 더 올려 볼까요?' : `한 자리에 한 박. ${remaining}박 남았어요.`;
+  return {
+    phase: state.phase, meter, fill: copyFill(fill), count, slots, remaining,
+    twoFill: copyFill(state.two), threeFill: copyFill(state.three),
+    playing: state.playing, complete,
+    canAdd: !state.playing && !state.exited && !complete && length.state === 'short',
+    canUndo: !state.playing && !state.exited && count > 0,
+    canBake: !state.playing && !state.exited && (state.phase === 'two' || complete) && length.state === 'exact',
+    title: complete ? '같은 조각, 한 박 더!' : isTwo ? '두 박 피자를 만들어요' : '세 박 피자로 바꿔요',
+    message,
+    summary: `4분의 ${meter.num}박자, ${slots}자리 중 ${count}자리 채움`,
+  };
+}
+
+function validActive(active) {
+  if (!active || typeof active !== 'object') return false;
+  const day = DAYS.find(day => day.id === active.day);
+  if (!day || !Array.isArray(active.queue) || !active.queue.length || active.queue.length > day.items.length * 2 || !Number.isInteger(active.idx) || active.idx < 0 || active.idx >= active.queue.length) return false;
+  return active.queue.every(entry => entry && Number.isInteger(entry.i) && entry.i >= 0 && entry.i < day.items.length && typeof entry.redo === 'boolean' && (!entry.redo || (!day.items[entry.i].states && !day.items[entry.i].final)));
+}
+
+function hasLearningHistory(save) {
+  if (!save || typeof save !== 'object') return false;
+  const settings = save.settings || {};
+  if (validActive(save.active) || settings.tasterSeenV1 === true || settings.soundChecked === true || (Array.isArray(settings.tips) && settings.tips.some(tip => typeof tip === 'string' && tip.length))) return true;
+  if (DAYS.some(day => { const record = save.days?.[day.id]; return record && (record.passed === true || record.runs > 0 || record.best > 0); })) return true;
+  if (['orders', 'clean', 'bakes'].some(key => save.stats?.[key] > 0)) return true;
+  if (Array.isArray(save.scenes) && save.scenes.length) return true;
+  return ['menu', 'shelf'].some(key => save[key] && typeof save[key] === 'object' && Object.values(save[key]).some(list => Array.isArray(list) && list.length));
+}
+
+/** Called once at boot, never as a render-time redirect. save should be normalized. */
+function resolveLanding(hash, save, { enabled = TASTER_ENABLED } = {}) {
+  if (hash === '#test') return { screen: 'test' };
+  if (/^#d[0-4]$/.test(hash)) return { screen: 'shift', day: hash.slice(1) };
+  return { screen: !enabled || hasLearningHistory(save) ? 'title' : 'taster' };
+}
+
+return {TASTER_ENABLED,initialTaster,reduceTaster,tasterView,hasLearningHistory,resolveLanding};
 })();
 __modules.selftest=(()=>{
 // Browser-safe verification suite: core theory, every curriculum path, storage,
@@ -1084,8 +1310,9 @@ const E = __modules.engine;
 const O = __modules.orders;
 const { DAYS } = __modules.seeds;
 const { Game } = __modules.game;
-const { SAVE_KEY, BACKUP_KEY, freshSave, loadSave, writeSave } = __modules.storage;
-const { createAudioPlan, AudioEngine, CLICK } = __modules.audio;
+const { SAVE_KEY, BACKUP_KEY, freshSave, normalizeSave, loadSave, writeSave } = __modules.storage;
+const { createAudioPlan, createTasterPlan, AudioEngine, CLICK } = __modules.audio;
+const { initialTaster, reduceTaster, tasterView, resolveLanding } = __modules.taster;
 const fail = message => { throw new Error(message || '검사 값이 일치하지 않아요.'); };
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
 const assert = {
@@ -1765,6 +1992,101 @@ check('fresh saves do not share mutable arrays or objects', () => {
     assert.equal(createAudioPlan(spec, { subs: false, kind: 'hear' }).events.filter(event => event.type === 'click').length, 18);
     assert.equal(createAudioPlan(spec, { subs: false, kind: 'listen' }).events.filter(event => event.type === 'click').length, 9);
   });
+  category = 'TA';
+  check('TA-01 new taster accepts exactly two independent quarter-note additions', () => {
+    const initial = initialTaster(), step = (s, type) => reduceTaster(s, type).state;
+    assert.equal(tasterView(initial).remaining, 2);
+    assert.equal(tasterView(initial).canBake, false);
+    const one = step(initial, 'ADD'), empty = step(one, 'UNDO'), full = step(one, 'ADD');
+    assert.equal(tasterView(one).remaining, 1);
+    assert.equal(tasterView(empty).count, 0);
+    assert.equal(tasterView(full).remaining, 0);
+    assert.equal(tasterView(full).canBake, true);
+    assert.equal(step(full, 'ADD'), full);
+    assert.equal(initial.two.length, 0);
+  });
+  check('TA-02 two to three keeps exact quarter-note size and copies both pieces', () => {
+    let s = initialTaster(); s = reduceTaster(s, 'ADD').state; s = reduceTaster(s, 'ADD').state;
+    const three = reduceTaster(s, 'SKIP_TO_COMPARE').state;
+    assert.deepEqual(three.two, three.three);
+    assert.ok(three.two !== three.three && three.two[0] !== three.three[0]);
+    assert.equal(tasterView(three).remaining, 1);
+    assert.deepEqual(E.angle(E.dur(E.N(4))), E.F(90));
+    assert.deepEqual(E.angle(E.capacity(E.M(2, 4))), E.F(180));
+    assert.deepEqual(E.angle(E.capacity(E.M(3, 4))), E.F(270));
+    assert.equal(reduceTaster(three, 'ADD').state.phase, 'compare');
+  });
+  check('TA-03 a stopped or dialog-cancelled taster cannot accept stale playback completion', () => {
+    let s = initialTaster(); s = reduceTaster(s, 'ADD').state; s = reduceTaster(s, 'ADD').state;
+    const started = reduceTaster(s, 'BAKE');
+    assert.equal(started.state.phase, 'playTwo');
+    assert.equal(started.effects[0].type, 'play');
+    for (const type of ['STOP', 'OPEN_DIALOG', 'VISIBILITY_HIDDEN']) {
+      const cancelled = reduceTaster(started.state, type);
+      assert.equal(cancelled.state.phase, 'two');
+      assert.equal(cancelled.state.two.length, 2);
+      assert.equal(cancelled.effects[0].type, 'cancel');
+      assert.equal(reduceTaster(cancelled.state, { type: 'END', token: started.state.token }).state, cancelled.state);
+    }
+  });
+  check('TA-04 comparison records seen once, supports undo and replays without regular scoring', () => {
+    let s = initialTaster(); for (const type of ['ADD', 'ADD', 'SKIP_TO_COMPARE']) s = reduceTaster(s, type).state;
+    const completed = reduceTaster(s, 'ADD');
+    assert.deepEqual(completed.effects, [{ type: 'seen' }]);
+    const undone = reduceTaster(completed.state, 'UNDO').state;
+    const rebuilt = reduceTaster(undone, 'ADD');
+    assert.equal(undone.phase, 'three'); assert.equal(undone.three.length, 2);
+    assert.deepEqual(rebuilt.effects, []);
+    const replay = reduceTaster(rebuilt.state, 'BAKE');
+    assert.equal(replay.state.phase, 'compare');
+    assert.equal(replay.effects[0].fill.length, 3);
+    assert.equal(reduceTaster(replay.state, { type: 'END', token: replay.state.token }).state.phase, 'compare');
+  });
+  check('TA-05 hashes, resumable progress and prior traces take precedence over a new landing', () => {
+    const save = freshSave();
+    assert.deepEqual(resolveLanding('', save), { screen: 'taster' });
+    assert.deepEqual(resolveLanding('#test', save), { screen: 'test' });
+    for (let i = 0; i <= 4; i++) assert.deepEqual(resolveLanding('#d' + i, save), { screen: 'shift', day: 'd' + i });
+    save.active = { day: 'd1', queue: [{ i: 0, redo: false }, { i: 1, redo: false }], idx: 1 };
+    assert.deepEqual(resolveLanding('', save), { screen: 'title' });
+    save.active = null; save.menu = { '2/4': ['4 4'] };
+    assert.deepEqual(resolveLanding('', save), { screen: 'title' });
+    assert.deepEqual(resolveLanding('', freshSave(), { enabled: false }), { screen: 'title' });
+  });
+  check('TA-06 optional seen boolean normalizes without altering regular learning records', () => {
+    const save = freshSave(); save.days.d0 = { best: 2, runs: 1, passed: false };
+    save.menu = { '2/4': ['4 4'] }; save.shelf = { '2/4': ['8 4 8'] }; save.scenes = ['S1'];
+    const before = { days: save.days, menu: save.menu, shelf: save.shelf, scenes: save.scenes, stats: save.stats, active: save.active };
+    save.settings.tasterSeenV1 = true; save.settings.tips = [];
+    const restored = normalizeSave(save);
+    assert.equal(restored.settings.tasterSeenV1, true);
+    assert.equal(restored.settings.soundChecked, false);
+    assert.equal(restored.version, 1);
+    assert.deepEqual({ days: restored.days, menu: restored.menu, shelf: restored.shelf, scenes: restored.scenes, stats: restored.stats, active: restored.active }, before);
+    assert.equal(normalizeSave({ version: 1, settings: { tasterSeenV1: 'true' } }).settings.tasterSeenV1, false);
+  });
+  check('TA-07 taster schedule is one bar without preparation, repetition or terminal sound', () => {
+    for (const beats of [2, 3]) {
+      const spec = { meter: E.M(beats, 4), fill: Array.from({ length: beats }, () => E.N(4)) };
+      for (const slow of [false, true]) {
+        const plan = createTasterPlan(spec, { slow }), beatSec = slow ? .9 : .6;
+        const tones = plan.events.filter(e => e.type === 'tone'), clicks = plan.events.filter(e => e.type === 'click');
+        assert.equal(plan.lead, 0); assert.equal(tones.length, beats); assert.equal(clicks.length, beats);
+        assert.ok(Math.abs(plan.end - beats * beatSec) < 1e-9);
+        tones.forEach((e, i) => assert.ok(Math.abs(e.time - i * beatSec) < 1e-9));
+        assert.deepEqual(clicks.map(e => e.level), Array.from({ length: beats }, (_, i) => i === 0 ? 0 : 1));
+        assert.ok(plan.events.every(e => e.time < plan.end));
+      }
+    }
+  });
+  check('TA-08 taster plan keeps note spans separate from quarter-note beat positions', () => {
+    const plan = createTasterPlan({ meter: E.M(2, 4), fill: [E.N(2)] });
+    assert.equal(plan.parts.length, 1);
+    assert.equal(plan.beats.length, 2);
+    assert.deepEqual(plan.beats.map(beat => beat.beatIndex), [0, 1]);
+    assert.equal(plan.events.filter(e => e.type === 'tone').length, 1);
+    assert.ok(Math.abs(plan.events.find(e => e.type === 'tone').duration - plan.end) < 1e-9);
+  });
   // Restore the fallback snapshot after fake-storage tests; never write to the device.
   writeSave(originalMemory, null);
   const groupMap = {};
@@ -1839,19 +2161,22 @@ const { boardSVG, rhythmSVG, traySVG, doughSVG, timerSVG, ovenSceneSVG, stampSVG
 const { AudioEngine } = __modules.audio;
 const { selfTests } = __modules.selftest;
 const { rulebookHTML } = __modules.rulebook;
+const { TASTER_ENABLED, initialTaster, reduceTaster, tasterView, resolveLanding } = __modules.taster;
 const $=id=>document.getElementById(id), esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const loaded=loadSave();let persistent=loaded.persistent, boardKey='', stripKey='', cardKey='', screenKey='', menuTab=0, replayScene=false, inRender=false, activeIndex=-1, menuRun=false,playRequest=0;
 const store=save=>{persistent=writeSave(save)&&persistent;};
 const game=new Game(loaded.save,()=>render(),store), tests=selfTests();
 window.__tests=tests;
+let tasterState=initialTaster(),tasterBoardKey='',fromTasterOrder=false,tasterWasPlaying=false;
 const audio=new AudioEngine({onState:()=>updateSound(),onFrame:frame=>{
+  if(frame.owner==='taster'){tasterFrame(frame);return;}
   const s=game.state;
   if(s.playing==='hear')return;
   const hand=$('hand');if(hand){hand.setAttribute('visibility',frame.visible===false?'hidden':'visible');hand.setAttribute('transform',`rotate(${frame.angle} 170 170)`);}
-  if(activeIndex!==frame.index||frame.all){document.querySelectorAll('.slice,.sn').forEach(el=>el.classList.toggle('on',frame.all||Number(el.dataset.i)===frame.index));activeIndex=frame.index;}
-},onInterrupt:(reason,message)=>{if(menuRun){menuRun=false;menuRender();}else{game.stopBake(true);game.setState({playing:'',msg:{tone:'warn',text:message||'소리가 멈춰서 중단했어요. 소리를 켜고 다시 해 주세요.'}});updateSound();}}});
+  if(activeIndex!==frame.index||frame.all){$('app').querySelectorAll('.slice,.sn').forEach(el=>el.classList.toggle('on',frame.all||Number(el.dataset.i)===frame.index));activeIndex=frame.index;}
+},onInterrupt:(reason,message,owner)=>{if(owner==='taster'){tasterAction('STOP');return;}if(menuRun){menuRun=false;menuRender();}else{game.stopBake(true);game.setState({playing:'',msg:{tone:'warn',text:message||'소리가 멈춰서 중단했어요. 소리를 켜고 다시 해 주세요.'}});updateSound();}}});
 const soundSpec=()=>{const it=game.item();if(it.kind==='scene'){const st=it.states[game.state.st];return {...st,meter:st.m,groups:st.g};}return {...it,meter:it.m,groups:it.g,fill:game.state.playing==='hear'?it.target:game.state.fill};};
-function clearVisual(){const hand=$('hand');if(hand)hand.setAttribute('visibility','hidden');document.querySelectorAll('.on').forEach(el=>el.classList.remove('on'));activeIndex=-1;}
+function clearVisual(){const hand=$('hand');if(hand)hand.setAttribute('visibility','hidden');$('app').querySelectorAll('.on').forEach(el=>el.classList.remove('on'));activeIndex=-1;}
 function stopAudio(){playRequest++;audio.stop();menuRun=false;clearVisual();}
 function updateSound(){if($('sound')){$('sound').hidden=audio.available&&!game.save.settings.muted;$('sound').textContent=game.save.settings.muted?'소리 꺼짐':'소리 켜기';}}
 async function unlock(){const ok=await audio.unlock();if(!ok)game.setState({msg:{tone:'warn',text:'소리를 쓰기 어려워요. 화면으로 이어갈 수 있어요.'}});updateSound();return ok;}
@@ -1862,8 +2187,8 @@ async function play(kind='bake') {
   audio.play(soundSpec(),options);
 }
 async function bake(){const result=game.bakePress();if(result?.play)await play();}
-function go(screen){if(location.hash==='#test')history.replaceState(null,'',location.pathname);stopAudio();if(game.state.screen==='shift'&&!replayScene){if(game.state.phase==='bake')game.stopBake(true);game.checkpoint();}replayScene=false;game.setState({screen,playing:''});$('screen').focus();}
-function start(id){stopAudio();replayScene=false;game.startDay(id);if(id==='d0'&&!game.save.settings.soundChecked)soundCheck();}
+function go(screen){if(game.state.screen==='taster'){tasterAction({type:'EXIT',screen});return;}if(location.hash==='#test')history.replaceState(null,'',location.pathname);stopAudio();if(game.state.screen==='shift'&&!replayScene){if(game.state.phase==='bake')game.stopBake(true);game.checkpoint();}replayScene=false;game.setState({screen,playing:''});$('screen').focus();}
+function start(id,{fromTaster=false}={}){stopAudio();fromTasterOrder=fromTaster;replayScene=false;game.startDay(id);if(id==='d0'&&!fromTaster&&!game.save.settings.soundChecked)soundCheck();}
 
 // Keep the board and the six tray controls alive throughout playback.
 function boardView(){
@@ -1889,7 +2214,7 @@ function gameRender(){
   if(cardKey!==ck){cardKey=ck;
     $('scoreCard').hidden=true;$('card').classList.toggle('free-card',free);
     if(free){setText('tag','자유 화덕');$('order').innerHTML=METERS.map((m,i)=>`<button data-meter="${i}" aria-label="${meterKo(m)}" aria-pressed="${eq(capacity(m),it.len)&&meterKey(m)===meterKey(it.m)}">${m.num}<span class="meter-line"></span>${m.den}</button>`).join('');}
-    else{setText('tag',scene?'발견 장면':tagKo(it,game.entry().redo));setText('order',scene?it.title:orderText(it));if(it.ask==='score'){$('scoreCard').hidden=false;$('scoreCard').innerHTML=rhythmSVG({fill:it.target,meter:it.m,width:150,height:34,plain:true,label:scoreAlt(it)});}}
+    else{setText('tag',scene?'발견 장면':tagKo(it,game.entry().redo));setText('order',scene?it.title:it.id==='d0-01'&&!game.entry().redo?(fromTasterOrder?'방금은 한 마디, 이번엔 2분음표 자리 길이만큼 채워요.':'이 자리 길이를 작은 조각 두 개로 맞춰요.'):orderText(it));if(it.ask==='score'){$('scoreCard').hidden=false;$('scoreCard').innerHTML=rhythmSVG({fill:it.target,meter:it.m,width:150,height:34,plain:true,label:scoreAlt(it)});}}
   }
   renderBoard();
   const build=s.phase==='build',pick=s.phase==='pick',strip=['bake','serve'].includes(s.phase);
@@ -1908,14 +2233,15 @@ function gameRender(){
 }
 function shellScreen(html,key){$('app').hidden=true;$('screen').hidden=false;if(screenKey!==key){screenKey=key;$('screen').innerHTML=html;}}
 const header=(name,subtitle='')=>`<header class="screen-head"><button data-go="title" class="icon-button" aria-label="처음으로">←</button><div><p class="eyebrow">똑딱 화덕</p><h1 class="screen-title">${name}</h1></div><button data-rulebook class="icon-button" aria-haspopup="dialog" aria-controls="rulebookDialog">룰북</button><button data-settings class="icon-button" aria-label="설정">설정</button></header>${subtitle?`<p class="lead">${subtitle}</p>`:''}`;
-function titleRender(){const save=game.save,count=Object.values(save.menu).reduce((n,a)=>n+a.length,0);shellScreen(`<div class="title-screen"><header class="title-header"><span>똑딱 화덕</span><button data-rulebook aria-haspopup="dialog" aria-controls="rulebookDialog">룰북</button></header><p class="eyebrow">한 조각씩, 박자가 들려요</p><h1>박자표<br><span>피자 화덕</span></h1><div class="hero">${ovenSceneSVG()}</div><p class="lead">같은 크기의 조각, 서로 다른 리듬.<br>피자를 만들며 박자표를 배워요.</p><div class="title-actions">${save.active?'<button class="primary" data-resume>이어서 영업</button>':''}<button class="${save.active?'secondary':'primary'}" data-go="map">영업일 지도</button><div class="two-actions"><button data-free>자유 화덕</button><button data-go="menu">메뉴판 <small>${count}/69</small></button></div></div><p class="caption">재촉하지 않아요. 만들고, 듣고, 다시 해 봐요.</p><button class="quiet" data-settings>소리와 화면 설정</button></div>`,'title'+JSON.stringify(save));}
+function titleRender(){const save=game.save,count=Object.values(save.menu).reduce((n,a)=>n+a.length,0);shellScreen(`<div class="title-screen"><header class="title-header"><span>똑딱 화덕</span><button data-rulebook aria-haspopup="dialog" aria-controls="rulebookDialog">룰북</button></header><p class="eyebrow">한 조각씩, 박자가 들려요</p><h1>박자표<br><span>피자 화덕</span></h1><div class="hero">${ovenSceneSVG()}</div><p class="lead">같은 크기의 조각, 서로 다른 리듬.<br>피자를 만들며 박자표를 배워요.</p><div class="title-actions">${save.active?'<button class="primary" data-resume>이어서 영업</button>':''}<button class="${save.active?'secondary':'primary'}" data-go="map">영업일 지도</button><div class="two-actions"><button data-free>자유 화덕</button><button data-go="menu">메뉴판 <small>${count}/69</small></button></div></div><p class="caption">재촉하지 않아요. 만들고, 듣고, 다시 해 봐요.</p><button class="quiet" data-settings>소리와 화면 설정</button>${TASTER_ENABLED?'<button class="quiet wide" data-taster-start>30초 맛보기 다시 하기</button>':''}</div>`,'title'+JSON.stringify(save));}
 function mapRender(){shellScreen(header('영업일 지도','도장을 모으며 새로운 주문을 만나 봐요.')+`<div class="day-list">${DAYS.map((d,i)=>{const unlocked=i===0||game.save.days[DAYS[i-1].id].passed,r=game.save.days[d.id],n=d.items.filter(x=>!x.states).length;return `<button class="day-card ${unlocked?'':'locked'}" data-day="${d.id}" ${unlocked?'':'aria-disabled="true"'}><span class="day-num">${i}</span><span><strong>${d.name}</strong><small>${unlocked?`주문 ${n}개 · ● ${r.best}/${n}`:'앞 영업일을 통과하면 열려요.'}</small></span><span class="stamp">${r.passed?stampSVG(i):unlocked?'→':'잠김'}</span></button>`;}).join('')}</div><button class="secondary wide" data-free>수업에서 자유롭게 · 자유 화덕</button>`,'map'+JSON.stringify(game.save.days));}
 function menuRender(){const m=METERS[menuTab],mk=meterKey(m),have=game.state.menu[mk]||[],keys=menuKeys(m),shelf=game.state.shelf[mk]||[],scenes=DAYS.flatMap(d=>d.items.filter(i=>i.states&&game.save.scenes.includes(i.id)));shellScreen(header('나의 메뉴판',`묶음이 보이는 리듬을 모아요. ${Object.values(game.state.menu).reduce((n,a)=>n+a.length,0)}/69칸을 찾았어요.`)+`<nav class="menu-tabs" aria-label="박자표">${METERS.map((x,i)=>`<button data-tab="${i}" aria-pressed="${i===menuTab}">${meterKey(x)}<small>${(game.state.menu[meterKey(x)]||[]).length}/${menuKeys(x).length}</small></button>`).join('')}</nav><div class="menu-grid">${keys.map((k,i)=>have.includes(k)?`<button class="recipe" data-recipe="${esc(k)}" data-mk="${menuTab}" aria-label="리듬 ${i+1} 듣기: ${parseFill(k).map(noteKo).join(', ')}">${rhythmSVG({fill:parseFill(k),meter:m,width:190,height:70})}<small>${menuRun?'다른 리듬 듣기':'듣기'}</small></button>`:`<div class="recipe unknown" aria-label="아직 찾지 않은 리듬">${i+1}<small>새 리듬을 찾아요</small></div>`).join('')}</div><section class="shelf"><h2>엇박 선반</h2><p>박 경계를 걸친 리듬도 소중하게 모아요.</p>${shelf.length?shelf.map(k=>`<button class="recipe" data-recipe="${esc(k)}" data-mk="${menuTab}">${rhythmSVG({fill:parseFill(k),meter:m,width:280,height:68})}<small>듣기</small></button>`).join(''):'<p class="caption">조각 음과 큰 박이 어긋나는 소리를 찾아보세요.</p>'}</section><section><h2>다시 보는 발견</h2>${scenes.length?scenes.map(sc=>`<button class="scene-link" data-scene="${sc.id}">${sc.title} →</button>`).join(''):'<p class="caption">영업 중 만난 발견 장면이 여기에 모여요.</p>'}</section><button class="secondary wide" data-free>자유 화덕에서 새 리듬 찾기</button>${menuRun?'<button class="primary floating-stop" data-menu-stop>멈추기</button>':''}`,'menu'+menuTab+JSON.stringify(game.state.menu)+JSON.stringify(game.state.shelf)+menuRun+game.save.scenes.join());}
 function closeRender(){const s=game.state,clean=s.results.filter(r=>r.recipe==='full').length,pass=clean>=passNeed(s.results.length);shellScreen(header('오늘의 영업 마감')+`<div class="close-stat">${pass?stampSVG(Number(s.day.slice(1))):timerSVG('calm')}<h2>${pass?'도장을 받았어요':'한 번 더 익혀 봐요'}</h2><p>${closeText(clean,s.results.length)}</p>${s.fresh||s.freshShelf?`<p>${newText(s.fresh,s.freshShelf)}</p>`:''}</div><div class="title-actions"><button class="primary" data-go="map">영업일 지도로</button><div class="two-actions"><button data-day="${s.day}">다시 영업하기</button><button data-go="menu">메뉴판 보기</button></div></div><h2>주문 기록</h2><div class="records">${s.results.map(r=>`<p class="record"><span>${r.recipe==='full'?'●':'◐'}</span><span>${esc(r.text)}${r.recipe==='half'?'<small>안내를 받고 맞힘'+(r.again==='full'?' · 다시 내서는 한 번에 맞힘':'')+'</small>':''}</span></p>`).join('')}</div>`,'close'+JSON.stringify(s.results));}
-function render(){if(inRender)return;inRender=true;try{const s=game.state;document.documentElement.dataset.motion=game.save.settings.motion;const gaming=['shift','free'].includes(s.screen);if(!gaming){boardKey='';cardKey='';}if(gaming)gameRender();else if(s.screen==='map')mapRender();else if(s.screen==='menu')menuRender();else if(s.screen==='close')closeRender();else titleRender();}finally{inRender=false;}}
+function render(){if(inRender)return;inRender=true;try{const s=game.state;document.documentElement.dataset.motion=game.save.settings.motion;document.documentElement.dataset.taster=String(s.screen==='taster');$('taster').hidden=s.screen!=='taster';const gaming=['shift','free'].includes(s.screen);if(!gaming){boardKey='';cardKey='';}if(s.screen==='taster')renderTaster();else if(gaming)gameRender();else if(s.screen==='map')mapRender();else if(s.screen==='menu')menuRender();else if(s.screen==='close')closeRender();else titleRender();}finally{inRender=false;}}
 
 function markTip(name){if(!game.save.settings.tips.includes(name)){game.save.settings.tips.push(name);store(game.save);}}
 function inlineTip(){document.querySelectorAll('.tutorial-point').forEach(el=>el.classList.remove('tutorial-point'));const s=game.state,o=game.item();if(s.screen!=='shift'||!o||o.kind!=='order')return '';const tips=game.save.settings.tips,point=(id)=>$(id)?.classList.add('tutorial-point');
+  if(o.id==='d0-01'&&!game.entry().redo&&s.phase==='build'){const count=s.fill.length;point(count<2?'tray':'bake');return count===0?'① 4분음표 조각을 올려요.':count===1?'② 같은 조각을 한 번 더 올려요.':'두 조각으로 자리 길이를 맞췄어요. 굽기를 눌러요.';}
   if(o.id==='d0-01'&&s.phase==='build'){if(!s.fill.length&&!tips.includes('tray'))point('tray');else if(s.fill.length)markTip('tray');if(lengthIn(o.len,s.fill).state==='exact'&&!tips.includes('bake'))point('bake');}
   if(o.id==='d0-02'&&s.phase==='build'&&s.fill.length&&!tips.includes('remove')){point('boardwrap');return '조각을 누르면 빠져요.';}
   if(o.id==='d1-01'&&s.phase==='build'&&!tips.includes('groups')){point('boardwrap');return '큰 점이 박, 작은 점이 박을 나눈 자리예요.';}
@@ -1923,11 +2249,11 @@ function inlineTip(){document.querySelectorAll('.tutorial-point').forEach(el=>el
   if(s.day==='d2'&&s.phase==='serve'&&!tips.includes('other')){point('other');return '다른 리듬을 찾으면 메뉴판에 올라가요.';}return '';
 }
 function openRulebook(){
-  const wasMenu=menuRun;stopAudio();if(game.state.phase==='bake')game.stopBake();else if(game.state.playing)game.setState({playing:''});if(wasMenu)render();
+  const wasMenu=menuRun;if(game.state.screen==='taster')tasterAction('OPEN_DIALOG');else stopAudio();if(game.state.screen!=='taster'&&game.state.phase==='bake')game.stopBake();else if(game.state.screen!=='taster'&&game.state.playing)game.setState({playing:''});if(wasMenu)render();
   const dialog=$('rulebookDialog');if(!$('rulebookBody').hasChildNodes())$('rulebookBody').innerHTML=rulebookHTML();
   if(!dialog.open)dialog.showModal();
 }
-function settings(){stopAudio();if(game.state.phase==='bake')game.stopBake(true);else if(game.state.playing)game.setState({playing:''});const set=game.save.settings;
+function settings(){if(game.state.screen==='taster')tasterAction('OPEN_DIALOG');else stopAudio();if(game.state.screen!=='taster'&&game.state.phase==='bake')game.stopBake(true);else if(game.state.screen!=='taster'&&game.state.playing)game.setState({playing:''});const set=game.save.settings;
   $('settingsBody').innerHTML=`<p class="eyebrow">편안하게 배워요</p><h2>소리와 화면</h2><label class="setting-row"><span>전체 음량</span><input id="volume" type="range" min="0" max="1" step="0.05" value="${set.volume}" aria-label="전체 음량"></label>${[['muted','소리 끄기'],['slow','느리게 듣기'],['subs','분할 클릭 듣기']].map(([key,label])=>`<label class="setting-row"><span>${label}</span><input type="checkbox" data-setting="${key}" ${set[key]?'checked':''}></label>`).join('')}<label class="setting-row"><span>움직임</span><select id="motion"><option value="system">기기 설정 따르기</option><option value="reduced">줄이기</option><option value="full">모두 보기</option></select></label><button data-tips class="secondary wide">조작 안내 다시 보기</button><button data-soundcheck class="secondary wide">소리 확인하기</button><p class="caption">${persistent?'이 기기에 학습 기록을 저장해요.':'이 기기에서는 기록이 저장되지 않아요.'}</p><p class="caption">자가검사 ${tests.passed}/${tests.total} · <a href="#test">결과 보기</a></p><p class="caption">키보드: 숫자 1~6 조각 · Backspace 하나 빼기 · Enter 굽기/확정 · 0 전체화면</p>`;$('motion').value=set.motion;$('settingsDialog').showModal();
 }
 async function soundCheck(){stopAudio();$('tipBody').innerHTML=`${timerSVG('happy')}<h2>소리가 들리나요?</h2><p>기기의 음량과 무음 설정을 확인해 주세요.</p><button data-check-play class="secondary wide">음 하나 다시 듣기</button><div class="two-actions"><button data-check-yes class="primary">들려요</button><button data-check-no>안 들려요</button></div><p id="soundHelp" class="caption"></p>`;$('tipNext').textContent='지금은 건너뛰기';$('tipDialog').showModal();await checkTone();}
@@ -1945,18 +2271,64 @@ $('undo').onclick=()=>{markTip('remove');game.removeAt(game.state.fill.length-1)
 $('confirm').onclick=()=>{stopAudio();if(game.state.playing)game.setState({playing:''});const result=game.confirmPick();if(result?.play)play();};$('stop').onclick=()=>{stopAudio();game.stopBake();};
 $('hear').onclick=()=>game.state.playing?(stopAudio(),game.setState({playing:''})):play('hear');$('again').onclick=()=>game.state.playing?(stopAudio(),game.setState({playing:''})):play('listen');
 $('other').onclick=()=>{stopAudio();markTip('other');game.otherFill();};$('next').onclick=()=>{stopAudio();if(game.state.day==='d2'&&game.state.phase==='serve')markTip('other');game.nextItem();};$('sceneHear').onclick=()=>game.state.playing?(stopAudio(),game.setState({playing:''})):play('scene');$('sceneNext').onclick=()=>{stopAudio();if(replayScene)go('menu');else game.nextItem();};
-$('screen').onclick=async e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.go)go(b.dataset.go);else if(b.hasAttribute('data-resume')){stopAudio();game.resume();}else if(b.hasAttribute('data-free')){stopAudio();replayScene=false;game.startFree();}else if(b.dataset.day){const i=DAYS.findIndex(d=>d.id===b.dataset.day);if(i===0||game.save.days[DAYS[i-1].id].passed)start(b.dataset.day);else{b.setAttribute('aria-label','앞 영업일을 통과하면 열려요.');}}else if(b.hasAttribute('data-settings'))settings();else if(b.hasAttribute('data-rulebook'))openRulebook();else if(b.dataset.tab){stopAudio();menuTab=Number(b.dataset.tab);render();}else if(b.dataset.recipe){stopAudio();const request=playRequest;await unlock();if(request!==playRequest)return;menuRun=true;const m=METERS[Number(b.dataset.mk)];audio.play({meter:m,fill:parseFill(b.dataset.recipe)},{...game.save.settings,kind:'listen',onEnd:()=>{menuRun=false;render();}});render();}else if(b.hasAttribute('data-menu-stop')){stopAudio();render();}else if(b.dataset.scene){const day=DAYS.find(d=>d.items.some(i=>i.id===b.dataset.scene));game.loadDay(day.id);replayScene=true;const index=game.dayItems.findIndex(i=>i.id===b.dataset.scene);game.enter(0,{screen:'shift',day:day.id,queue:[{i:index,redo:false}]});}};
+$('screen').onclick=async e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-taster-start'))startTaster();else if(b.dataset.go)go(b.dataset.go);else if(b.hasAttribute('data-resume')){stopAudio();game.resume();}else if(b.hasAttribute('data-free')){stopAudio();replayScene=false;game.startFree();}else if(b.dataset.day){const i=DAYS.findIndex(d=>d.id===b.dataset.day);if(i===0||game.save.days[DAYS[i-1].id].passed)start(b.dataset.day);else{b.setAttribute('aria-label','앞 영업일을 통과하면 열려요.');}}else if(b.hasAttribute('data-settings'))settings();else if(b.hasAttribute('data-rulebook'))openRulebook();else if(b.dataset.tab){stopAudio();menuTab=Number(b.dataset.tab);render();}else if(b.dataset.recipe){stopAudio();const request=playRequest;await unlock();if(request!==playRequest)return;menuRun=true;const m=METERS[Number(b.dataset.mk)];audio.play({meter:m,fill:parseFill(b.dataset.recipe)},{...game.save.settings,kind:'listen',onEnd:()=>{menuRun=false;render();}});render();}else if(b.hasAttribute('data-menu-stop')){stopAudio();render();}else if(b.dataset.scene){const day=DAYS.find(d=>d.items.some(i=>i.id===b.dataset.scene));game.loadDay(day.id);replayScene=true;const index=game.dayItems.findIndex(i=>i.id===b.dataset.scene);game.enter(0,{screen:'shift',day:day.id,queue:[{i:index,redo:false}]});}};
 $('rulebookBody').onclick=e=>{const jump=e.target.closest('[data-rule-jump]');if(!jump)return;const id=jump.dataset.ruleJump;if(/^rb-\d+$/.test(id))$('rulebookBody').querySelector('#'+id)?.scrollIntoView({block:'start',behavior:'auto'});};
 $('closeSettings').onclick=()=>$('settingsDialog').close();$('settingsDialog').onchange=e=>{const t=e.target,s=game.save.settings;if(t.dataset.setting)s[t.dataset.setting]=t.checked;else if(t.id==='volume')s.volume=Number(t.value);else if(t.id==='motion')s.motion=t.value;audio.setVolume(s.volume,s.muted);store(game.save);render();};
 $('settingsDialog').onclick=e=>{if(e.target.closest('[data-tips]')){game.save.settings.tips=[];store(game.save);$('settingsDialog').close();render();}if(e.target.closest('[data-soundcheck]')){$('settingsDialog').close();soundCheck();}};
 $('tipNext').onclick=()=>endSoundCheck(false);$('tipDialog').onclick=e=>{if(e.target.closest('[data-check-play]'))checkTone();if(e.target.closest('[data-check-yes]'))endSoundCheck(true);if(e.target.closest('[data-check-no]')){setText('soundHelp','음량을 올리고 무음 설정을 풀어 주세요. 다시 듣거나 건너뛸 수 있어요.');checkTone();}};
 $('tipDialog').addEventListener('cancel',()=>stopAudio());$('settingsDialog').addEventListener('cancel',()=>render());
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&audio.playing){stopAudio();game.stopBake(true);}});
-window.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||document.querySelector('dialog[open]')||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;const s=game.state;if(e.key==='0'){e.preventDefault();if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>{});return;}if(!['shift','free'].includes(s.screen))return;if(/^[1-6]$/.test(e.key)){e.preventDefault();const i=Number(e.key)-1;if(s.phase==='build')game.place(PIECES[i]);else if(s.phase==='pick')game.choose(i);}else if(e.key==='Backspace'&&s.phase==='build'){e.preventDefault();game.removeAt(s.fill.length-1);}else if(e.key==='Enter'&&e.target===document.body){e.preventDefault();if(s.phase==='build')bake();else if(s.phase==='pick')$('confirm').click();else if(['serve','scene'].includes(s.phase))$('next').click();}else if(e.key==='Escape'&&s.playing){stopAudio();game.stopBake();}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;if(game.state.screen==='taster')tasterAction('VISIBILITY_HIDDEN');else{const running=audio.playing;stopAudio();if(running||game.state.playing)game.stopBake(true);}});
+window.addEventListener('keydown',e=>{if(e.repeat){if(!['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))e.preventDefault();return;}if(e.altKey||e.ctrlKey||e.metaKey||document.querySelector('dialog[open]')||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;const s=game.state;if(e.key==='0'){e.preventDefault();if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>{});return;}if(s.screen==='taster'){if(e.key==='5'){e.preventDefault();tasterAction('ADD');}else if(e.key==='Backspace'){e.preventDefault();tasterAction('UNDO');}else if(e.key==='Escape'){e.preventDefault();tasterAction('STOP');}return;}if(!['shift','free'].includes(s.screen))return;if(/^[1-6]$/.test(e.key)){e.preventDefault();const i=Number(e.key)-1;if(s.phase==='build')game.place(PIECES[i]);else if(s.phase==='pick')game.choose(i);}else if(e.key==='Backspace'&&s.phase==='build'){e.preventDefault();game.removeAt(s.fill.length-1);}else if(e.key==='Enter'&&e.target===document.body){e.preventDefault();if(s.phase==='build')bake();else if(s.phase==='pick')$('confirm').click();else if(['serve','scene'].includes(s.phase))$('next').click();}else if(e.key==='Escape'&&s.playing){stopAudio();game.stopBake();}});
 window.addEventListener('error',e=>{console.error(e.error||e.message);$('fatal').hidden=false;});window.addEventListener('unhandledrejection',e=>{console.error(e.reason);$('fatal').hidden=false;});
-function testScreen(){stopAudio();$('settingsDialog').close();$('tipDialog').close();game.setState({screen:'test',playing:''});$('app').hidden=true;$('screen').hidden=false;$('screen').innerHTML=header('자가검사')+`<p class="lead">${tests.passed}/${tests.total} 통과</p>${tests.groups.map(g=>`<section><h2>${g.name} · ${g.passed}/${g.total}</h2>${g.results.filter(r=>!r.ok).map(r=>`<p>${esc(r.name)}: ${esc(r.error)}</p>`).join('')}</section>`).join('')}<p class="caption">실기기 청취·강사·학습자 검수는 별도 확인이 필요해요.</p>`;window.__state=()=>structuredClone(game.state);window.__item=()=>game.item();window.__t={game,audio,startDay:id=>start(id),solutions:undefined};}
+function testScreen(){if(game.state.screen==='taster')tasterAction('OPEN_DIALOG');stopAudio();$('taster').hidden=true;document.documentElement.dataset.taster='false';$('settingsDialog').close();$('tipDialog').close();game.setState({screen:'test',playing:''});$('app').hidden=true;$('screen').hidden=false;$('screen').innerHTML=header('자가검사')+`<p class="lead">${tests.passed}/${tests.total} 통과</p>${tests.groups.map(g=>`<section><h2>${g.name} · ${g.passed}/${g.total}</h2>${g.results.filter(r=>!r.ok).map(r=>`<p>${esc(r.name)}: ${esc(r.error)}</p>`).join('')}</section>`).join('')}<p class="caption">실기기 청취·강사·학습자 검수는 별도 확인이 필요해요.</p>`;window.__state=()=>structuredClone(game.state);window.__item=()=>game.item();window.__t={game,audio,startDay:id=>start(id),solutions:undefined};}
 window.addEventListener('hashchange',()=>{if(location.hash==='#test')testScreen();else {screenKey='';render();}});
-if(location.hash==='#test')testScreen();else if(/^#d[0-4]$/.test(location.hash))start(location.hash.slice(1));else render();
+const landing=resolveLanding(location.hash,game.save);if(landing.screen==='test')testScreen();else if(landing.screen==='shift')start(landing.day);else if(landing.screen==='taster')startTaster();else render();
+
+
+// Taste a single measure without changing the regular curriculum or its records.
+function startTaster(){if(!TASTER_ENABLED)return;stopAudio();tasterState=initialTaster();tasterBoardKey='';tasterWasPlaying=false;game.setState({screen:'taster',playing:''});$('tasterTitle').focus({preventScroll:true});}
+function tasterAction(input){
+  if(game.state.screen!=='taster')return;
+  const next=reduceTaster(tasterState,input);tasterState=next.state;
+  for(const effect of next.effects){
+    if(effect.type==='cancel')stopAudio();
+    else if(effect.type==='seen'&&!game.save.settings.tasterSeenV1){game.save.settings.tasterSeenV1=true;store(game.save);}
+    else if(effect.type==='play'){const request=++playRequest,token=effect.token;audio.playTaster({meter:effect.meter,fill:effect.fill},{...game.save.settings,requestId:request,onEnd:()=>{if(request===playRequest&&game.state.screen==='taster')tasterAction({type:'END',token});}});}
+    else if(effect.type==='exit'){game.setState({screen:effect.screen,playing:''});$('screen').focus();return;}
+  }
+  renderTaster();
+}
+function renderTaster(){
+  if(game.state.screen!=='taster')return;const view=tasterView(tasterState),root=$('taster'),focused=document.activeElement;
+  $('app').hidden=true;$('screen').hidden=true;root.hidden=false;root.dataset.playing=String(view.playing);
+  setText('tasterTitle',view.title);
+  // Korean text is shared between silent and audible paths.
+  setText('tasterLead',view.complete?'조각 크기는 그대로, 한 마디에 한 박 더 들어가요.':view.slots===3?'같은 두 조각을 두고, 하나만 더 올려요.':'한 자리에 한 박. 빈자리를 채워요.');
+  const key=view.slots+':'+view.count;if(key!==tasterBoardKey){tasterBoardKey=key;$('tasterBoard').innerHTML=boardSVG({meter:view.meter,fill:view.fill,interactive:false,handId:'taster-hand'});}
+  setText('tasterSummary',view.summary);$('tasterBoard').setAttribute('aria-label',view.summary);
+  [...$('tasterBeats').children].forEach((el,i)=>{el.hidden=i>=view.slots;el.classList.toggle('filled',i<view.count);el.classList.remove('current');});
+  setText('tasterStatus',view.message);$('tasterAdd').disabled=!view.canAdd;$('tasterUndo').disabled=!view.canUndo;$('tasterBake').disabled=!view.canBake;
+  setText('tasterBake',view.complete?'세 박 들어 보기':'한 마디 구워 듣기');$('tasterActions').hidden=view.playing;$('tasterAdd').hidden=view.complete;$('tasterPlayback').hidden=!view.playing;$('tasterSkipCompare').hidden=view.phase!=='playTwo';$('tasterComparison').hidden=!view.complete;
+  if(view.complete){const unit=traySVG(N(4));$('tasterTwoUnits').innerHTML=unit+unit;$('tasterThreeUnits').innerHTML=unit+unit+unit;}
+  setText('tasterNext',game.save.active?'이어서 영업':'첫 주문으로');setText('tasterStorageNotice',!persistent?'이 기기에서는 기록이 저장되지 않아요.':loaded.recovered?'저장 기록을 복구해 처음부터 시작해요. 원본은 백업했어요.':'');
+  if(view.playing&&!tasterWasPlaying&&(focused?.closest('#tasterActions')||focused?.dataset?.tasterAction==='replay')){(view.phase==='playTwo'?$('tasterSkipCompare'):$('tasterPlayback').querySelector('button')).focus({preventScroll:true});}
+  if(!view.playing&&tasterWasPlaying&&focused?.closest('#tasterPlayback')){(view.complete?$('tasterNext'):view.canAdd?$('tasterAdd'):$('tasterBake')).focus({preventScroll:true});}
+  tasterWasPlaying=view.playing;
+  if(focused===$('tasterAdd')&&!view.canAdd&&!view.playing){(view.complete?$('tasterNext'):$('tasterBake')).focus({preventScroll:true});}
+}
+function tasterFrame(frame){
+  if(game.state.screen!=='taster')return;const root=$('taster'),visible=frame.visible!==false;
+  root.querySelectorAll('[data-beat]').forEach((el,i)=>el.classList.toggle('current',visible&&i===frame.beatIndex));
+  $('tasterBoard').querySelectorAll('.slice').forEach(el=>el.classList.toggle('on',visible&&Number(el.dataset.i)===frame.noteIndex));
+  const hand=$('taster-hand'),reduced=game.save.settings.motion==='reduced'||(game.save.settings.motion==='system'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if(hand){hand.setAttribute('visibility',visible&&!reduced?'visible':'hidden');hand.setAttribute('transform',`rotate(${frame.angle||0} 170 170)`);}
+}
+$('taster').onclick=e=>{const button=e.target.closest('[data-taster-action]');if(!button||button.disabled)return;const action=button.dataset.tasterAction;
+  if(action==='rulebook'){openRulebook();return;}if(action==='settings'){settings();return;}
+  if(action==='map'||action==='exit'){tasterAction({type:'EXIT',screen:action==='map'?'map':'title'});return;}
+  if(action==='next'){tasterAction('OPEN_DIALOG');if(game.save.active){game.resume();}else start('d0',{fromTaster:true});const phase=game.state.phase;(phase==='pick'?$('choices').querySelector('button'):phase==='scene'?$('sceneNext'):$('tray').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});return;}
+  tasterAction(({add:'ADD',undo:'UNDO',bake:'BAKE',compare:'SKIP_TO_COMPARE',stop:'STOP',restart:'RESTART',replay:'BAKE'})[action]);
+};
 
 return {};
 })();

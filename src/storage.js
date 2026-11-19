@@ -16,7 +16,7 @@ const knownScenes = new Set(DAYS.flatMap(day => day.items.filter(item => item.st
 export function freshSave() {
   return {
     version: 1,
-    settings: { volume: 0.8, muted: false, slow: false, subs: true, motion: 'system', soundChecked: false, tips: [] },
+    settings: { volume: 0.8, muted: false, slow: false, subs: true, motion: 'system', soundChecked: false, tasterSeenV1: false, tips: [] },
     days: Object.fromEntries(DAYS.map(day => [day.id, { passed: false, runs: 0, best: 0 }])),
     menu: {}, shelf: {}, scenes: [], stats: { orders: 0, clean: 0, bakes: 0 }, active: null,
   };
@@ -55,7 +55,7 @@ function cleanActive(active) {
 export function normalizeSave(source) {
   const save = freshSave(), settings = record(source.settings) ? source.settings : {};
   if (typeof settings.volume === 'number' && Number.isFinite(settings.volume)) save.settings.volume = Math.min(1, Math.max(0, settings.volume));
-  for (const key of ['muted', 'slow', 'subs', 'soundChecked']) if (typeof settings[key] === 'boolean') save.settings[key] = settings[key];
+  for (const key of ['muted', 'slow', 'subs', 'soundChecked', 'tasterSeenV1']) if (typeof settings[key] === 'boolean') save.settings[key] = settings[key];
   if (['system', 'reduced', 'full'].includes(settings.motion)) save.settings.motion = settings.motion;
   save.settings.tips = strings(settings.tips);
   for (const day of DAYS) {
